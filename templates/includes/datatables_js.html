@@ -1,0 +1,52 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+<script src="{% static 'plugins/select2/js/select2.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'plugins/select2/css/select2.min.js' %}">
+<style>
+    .btn-datatables {
+      height: 35px;
+      font-size: small;
+    
+    }
+    </style>
+
+
+<script>
+  $(function () {
+    $('#dataTable').DataTable({
+        dom: 'lBfrtip',
+        responsive: true,
+        buttons: {
+            buttons: [
+
+         
+                { extend: 'selectAll', className: 'btn-datatables' },
+                { extend: 'selectNone', className: 'btn-datatables' },
+                { extend: 'copy', className: 'btn-datatables'},
+                { extend: 'csv', className: 'btn-datatables' },
+                { extend: 'excel', className: 'btn-datatables' },
+                { extend: 'print', className: 'btn-datatables' },
+            ],
+        },
+        'columnDefs': [{
+            'targets': 0,
+            'orderable': false,
+            'className': 'select-checkbox',
+            'checkboxes': {
+                'selectRow': true
+            }
+        }],
+        'select': {
+          'style': 'multi',
+      },
+        'order': [
+            [1, 'asc']
+        ]
+    });
+});
+
+$(document).ready(function() {
+   // $('select').select2({theme:"bootstrap4"});
+});
+  </script>
+       
