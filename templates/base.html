@@ -14,7 +14,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {% include "includes/adminlte_css.html" %}
+  {% include "static_includes/adminlte_css.html" %}
 
 
   <title> {% block title %} {% endblock %}</title>
@@ -41,12 +41,12 @@
       <h5 style="margin-left: 10px;margin-top: 5px;">Management  Information  System</h5>
 
  <!----------------------------------------------------------------- Right navbar links --------------------------------------------------->
-                            {% include "includes/right_navbar.html" %}
+                            {% include "static_includes/right_navbar.html" %}
  <!----------------------------------------------------------------- Right navbar links --------------------------------------------------->
 
 
     <!-- Main Sidebar Container -->
-    {% include 'includes/include_admin/admin_sidebar.html'%}
+    {% include 'static_includes/include_admin/admin_sidebar.html'%}
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -96,16 +96,16 @@
 
 
   <!----------For AdminLTE bootstrap js link--------------->
-  {% include "includes/adminlte_jquery.html" %}
+  {% include "static_includes/adminlte_jquery.html" %}
   <!--------------for datatables---------------------->
-  {% include "includes/datatables_design_link.html" %}
+  {% include "static_includes/datatables_design_link.html" %}
   <!--for datatables csv pdf -- code --------------->
-  {% include "includes/datatables_js.html" %}
+  {% include "static_includes/datatables_js.html" %}
   <!-------------for calendar static------------------>
-  <!-- {% include "static_includes/fullcalendar_base.html" %} -->
+  <!-- {% include "static_static_includes/fullcalendar_base.html" %} -->
   
   <!-----------------fullcalendar cdn---------------->
-  <!-- {% include "static_includes/fullcalendar_cdn.html" %} -->
+  <!-- {% include "static_static_includes/fullcalendar_cdn.html" %} -->
   <!-- <link rel="stylesheet" type="text/css" href="{% static 'shared/toolbar.css' %}"/>
   <link rel="stylesheet" type="text/css" href="{% static 'shared/pdf_viewer.css' %}"/> -->
   <!-- Annotation for pdf js viewer  -->

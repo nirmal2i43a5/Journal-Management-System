@@ -6,8 +6,6 @@ migrations/
 
 # ignore sqlite file
 db.sqlite3
-db1.sqlite3
-db2.sqlite3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -20,7 +18,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-local_env/
 student_ms/
 build/
 develop-eggs/
@@ -110,4 +107,3 @@ media/
 
 #custom_.ig
 notes/
-error_with_this_apps
