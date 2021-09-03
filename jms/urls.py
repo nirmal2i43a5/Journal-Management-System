@@ -15,10 +15,11 @@ Including another URLconf
 """
 from os import name
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from jms.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/',dashboard, name = 'home')
+    path('home/',dashboard, name = 'home'),
+     path('user/',include('apps.user.urls',namespace='user')),
 ]

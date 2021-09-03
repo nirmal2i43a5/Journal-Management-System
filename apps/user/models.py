@@ -7,7 +7,7 @@ from apps.permissions.models import CustomUser
 
 
 
-class User(models.Model):
+class NormalUser(models.Model):
     
     gender_choice = (
     ('Male', 'Male'),
@@ -16,7 +16,7 @@ class User(models.Model):
 )
 
 
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    normal_user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     full_name = models.CharField(max_length = 250, blank=True)
     email = models.EmailField()
     dob = models.DateField(null=True, blank=True)
@@ -24,18 +24,18 @@ class User(models.Model):
         max_length=20, choices=gender_choice, default='Male', blank=True)
     contact = models.CharField(max_length=30, blank=True)
     address = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(upload_to='admin_images', null=True, blank=True)
+    image = models.ImageField(upload_to='user_images', null=True, blank=True)
     status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
-        db_table = 'tbl_User'
-        verbose_name = _("user")
-        verbose_name_plural = _("users")
+        db_table = 'tbl_normal_user'
+        verbose_name = _("normal_user")
+        verbose_name_plural = _("normal_user")
 
     def __str__(self):
-        return self.user_type
+        return self.full_name
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
