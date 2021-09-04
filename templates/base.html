@@ -18,7 +18,6 @@
 
 
   <title> {% block title %} {% endblock %}</title>
-  <link rel="icon" type="images/jpg" href="{% static 'image/pathshala-logo.png' %}"> 
 
   {% block head_css %}
   {% endblock head_css%}
@@ -38,7 +37,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars" style="background-color: black;"></i></a>
         </li>
       </ul>
-      <h5 style="margin-left: 10px;margin-top: 5px;">Management  Information  System</h5>
+      <h5 style="margin-left: 10px;margin-top: 5px;">Journal Management  System</h5>
 
  <!----------------------------------------------------------------- Right navbar links --------------------------------------------------->
                             {% include "static_includes/right_navbar.html" %}
@@ -46,7 +45,7 @@
 
 
     <!-- Main Sidebar Container -->
-    {% include 'static_includes/include_admin/admin_sidebar.html'%}
+    {% include 'sidebar/admin_sidebar.html'%}
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -102,12 +101,7 @@
   <!--for datatables csv pdf -- code --------------->
   {% include "static_includes/datatables_js.html" %}
   <!-------------for calendar static------------------>
-  <!-- {% include "static_static_includes/fullcalendar_base.html" %} -->
-  
-  <!-----------------fullcalendar cdn---------------->
-  <!-- {% include "static_static_includes/fullcalendar_cdn.html" %} -->
-  <!-- <link rel="stylesheet" type="text/css" href="{% static 'shared/toolbar.css' %}"/>
-  <link rel="stylesheet" type="text/css" href="{% static 'shared/pdf_viewer.css' %}"/> -->
+
   <!-- Annotation for pdf js viewer  -->
 
 <!-- <script src="{% static 'shared/pdf.js' %}"></script>

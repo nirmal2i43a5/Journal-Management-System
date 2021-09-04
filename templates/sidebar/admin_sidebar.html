@@ -1,0 +1,150 @@
+{% load static %}
+
+{% load auth_extras %}
+
+<!------------------------------------------- Main Sidebar Container------------------------------------------------- -->
+<link rel="stylesheet" href="{% static 'main_dashboard/css/dashboard.css' %}">
+<aside class="main-sidebar sidebar-light elevation-4 text-white" style="background-color: #094089;">
+  <!-- style="background-color: #094089;">-->
+  <!-- Brand Logo -->
+  <a href="{% url 'home' %}">
+    <div class="user-panel ml-3 pb-1 mr-2 mt-1 d-flex">
+      <img src="https://4m4you.com/wp-content/uploads/2020/06/logo-placeholder.png" style="width:191px;height:65px;" class="img-rectangle ">
+      <span class="brand-text font-weight-light  ml-1 text-white">{{ detail.site_title }}</span>
+    </div>
+  </a>
+
+  <!-----------------------------------------------Sidebar ----------------------------------------------->
+
+  <div class="sidebar">
+
+    <div class="user-panel mt-1 pb-3 mb-1 d-flex">
+      <div class="image">
+
+        <img src="{% static 'image/admin.png' %}" class="img-circle elevation-2" alt="User Image">
+
+      </div>
+
+      <div class="info">
+
+        {% if request.user|has_group:'User' %}
+
+        <a href="" class="d-block">{{ request.user.username }}</a>
+
+
+       
+
+        
+
+        {% endif %}
+
+      </div>
+    </div>
+
+    <!-- -----------------------------------------------Sidebar Menu------------------------------------------------ -->
+
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column nav-design" data-widget="treeview" role="menu"
+        data-accordion="false">
+        <li class="nav-item">
+          <a href="{% url 'home' %}" class="nav-link">
+            <i class="fas  fa-tachometer-alt mr-1"></i>
+            <p>
+              Dashboard
+
+            </p>
+          </a>
+        </li>
+
+        <!-----------------------------------User Sidebar------------------------------------------>
+        {% if request.user|has_group:'Admin' or request.user.is_superuser %}
+
+     
+
+        <!-----------------------------------Role_Permission Sidebar------------------------------------------>
+
+  
+
+
+     
+
+        <!-- <li class="nav-item has-treeview">
+          <a href="https://cbt.gci.edu.np/admin/login" class="nav-link">
+            <p>
+              <i class="fas  fa-th"></i>  GCI CBT
+
+
+
+            </p>
+          </a>
+        </li> -->
+        
+        
+        
+
+
+   
+    
+
+
+
+    
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas  fa-bus-alt mr-1"></i>
+            <p>
+              Transport
+
+              <i class="fas fa-angle-left right"></i>
+
+
+            </p>
+          </a>
+
+          <ul class="nav nav-treeview">
+            <li class="nav-item ml-3">
+              <a href="" class="nav-link">
+                <i class="fas  fa-bus"></i>
+                <p>
+                  Transport
+
+                </p>
+              </a>
+            </li>
+
+
+          </ul>
+
+        </li>
+
+
+        <!-----------------------------------For student Sidebar------------------------------------------>
+        {% elif request.user|has_group:'User' %}
+
+
+
+           <!-----------------------------------For parent Sidebar------------------------------------------>
+        {% elif request.user|has_group:'Reviewer' %}
+
+        {% endif %}
+
+      </ul>
+      </li>
+      </li>
+
+
+
+
+
+
+
+
+
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+
+</aside>

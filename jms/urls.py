@@ -21,5 +21,6 @@ from jms.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/',dashboard, name = 'home'),
-     path('user/',include('apps.user.urls',namespace='user')),
+     path('user/',include('apps.user.urls')),
+     
 ]

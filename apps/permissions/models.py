@@ -9,8 +9,8 @@ from django.contrib.auth.models import Group
 class CustomUser(AbstractUser):
     
     user_type = models.ForeignKey(Group, on_delete=models.CASCADE, null=True)
-    password = models.CharField(_('Password'), max_length=128, null = True)
-    confirm_password = models.CharField(_('Confirm password'), max_length=128, null = True)
+    password1 = models.CharField(_('Password'), max_length=128, null = True)
+    password2 = models.CharField(_('Password Confirm'), max_length=128, null = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

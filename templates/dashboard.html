@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-
+{% load auth_extras %}
 
 {% block title %}
 Dashboard
@@ -24,11 +24,11 @@ Dashboard
       <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box border border-info">
           <span class="info-box-icon bg-info elevation-1">
-            <a href="{% url 'admin_app:manage_student' %}"> <i class="fas fa-1x fa-user-graduate"></i></a>
+            <a href=""> <i class="fas fa-1x fa-user-graduate"></i></a>
           </span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Students</span>
+            <span class="info-box-text"></span>
             <span class="info-box-number">
               {{students_count}}
             </span>
@@ -41,11 +41,11 @@ Dashboard
       <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box mb-3 border border-primary">
           <span class="info-box-icon elevation-1" style="background-color: #3A988D;">
-            <a href="{% url 'admin_app:manage_staff' %}" class="text-white"> <i class="fas fa-1x fa-chalkboard-teacher"></i></a>
+            <a href="" class="text-white"> <i class="fas fa-1x fa-chalkboard-teacher"></i></a>
           </span>
 
           <div class="info-box-content ">
-            <span class="info-box-text">Teachers</span>
+            <span class="info-box-text"></span>
             <span class="info-box-number">{{teachers_count}}</span>
           </div>
           <!-- /.info-box-content -->
@@ -60,11 +60,11 @@ Dashboard
       <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box mb-3 border border-primary">
           <span class="info-box-icon bg-primary elevation-1">
-            <a href="{% url 'admin_app:manage_subject' %}"> <i class="fas fa-1x fa-book-open"></i></a>
+            <a href=""> <i class="fas fa-1x fa-book-open"></i></a>
           </span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Subjects</span>
+            <span class="info-box-text"></span>
             <span class="info-box-number">{{subjects_count}}</span>
           </div>
           <!-- /.info-box-content -->
@@ -77,7 +77,7 @@ Dashboard
           <span class="info-box-icon bg-success elevation-1"> <i class="fas fa-1x fa-book-open"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Optional Subjects</span>
+            <span class="info-box-text"></span>
             <span class="info-box-number"></span>
           </div>
         </div>
@@ -107,11 +107,8 @@ Dashboard
         </figure>
       </div>
     </div>
-    {% include "includes/include_admin/charts/barchart/student_optional_subject/bar.html" %}
 
-    {% include "includes/include_admin/charts/piechart/users_total/pie_chart.html" %}
     <!-- ------------------------------------------Hight chart end------------------------------------------------- -->
-    {% include "includes/calendar.html" %}
 
 </section>
 
@@ -122,12 +119,8 @@ Dashboard
 
 <!---------------------------------------------Student dashboard start----------------------------------------------------------------->
 
-{% elif request.user|has_group:'Student' %}
+{% if request.user|has_group:'User' %}
 
-{% include "includes/include_admin/include_dashboard/student_dashboard.html" %}
-{% include "includes/calendar.html" %}
-
-{% include "includes/include_admin/notice.html" %}
 
 
 {% endif %}
@@ -141,12 +134,5 @@ Dashboard
 
 {% block custom_js %}
 
-{% include "fullcalendar_script.html" %}
 
-<script type="text/javascript">
-  $(window).on('load', function() {
-      $('#noticeModal').modal('show');
-  });
-</script>
-  
 {% endblock custom_js %}

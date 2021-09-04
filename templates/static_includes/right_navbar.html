@@ -9,7 +9,7 @@
 
   <!----------------------------------------------------------------- Right navbar links --------------------------------------------------->
   <!-- ------------------Notifications Dropdown Menu----------------------- -->
-  <li class="nav-item dropdown">
+  <!-- <li class="nav-item dropdown">
 
 
     <a class="nav-link mt-1" data-toggle="dropdown" href="#" id="notification">
@@ -25,11 +25,7 @@
 
     <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
       <span class="dropdown-item dropdown-header">
-        <!-- {% if notify_count == 1 %}
-        {{notify_count}} Notification</span>
-      {% else %}
-      {{notify_count}} Notifications</span>
-      {% endif %} -->
+   
 
       <div class="dropdown-divider"></div>
 
@@ -44,19 +40,19 @@
           {% if notify.notification_type == 1 %}
 
           {% if notify.type == "notice" %}
-          <a href="{% url 'notifications:notification_detail' notify.pk %}">{{notify.post|striptags}} notice is added</a>
+          <a href="">{{notify.post|striptags}} notice is added</a>
 
           {% elif notify.type == "assignment" %}
-          <a href="{% url 'notifications:notification_detail' notify.pk %}"> {{notify.post|striptags}} assignment is added.</a>
+          <a href=""> {{notify.post|striptags}} assignment is added.</a>
 
           {% elif notify.type == "event" %}
-          <a href='{% url 'notifications:notification_detail' notify.pk %}'> {{notify.post|striptags}} event is added.</a>
+          <a href=''> {{notify.post|striptags}} event is added.</a>
           {% endif %}
 
           {% endif %}
 
           {% if notify.notification_type == 2 %}
-          <a href="{% url 'notifications:notification_detail' notify.pk %}">{{notify.post|striptags}}is Updated</a>
+          <a href="">{{notify.post|striptags}}is Updated</a>
 
           {% elif notify.notification_type == 3 %}
           <p class="fas fa-briefcase mr-2">A new vacancy <b>" {{notify.post|striptags}} "</b>is created</p>
@@ -80,12 +76,12 @@
 
       
     
-        <a href="{% url 'notifications:show-notifications' %}" class="dropdown-item dropdown-footer">See All
+        <a href="" class="dropdown-item dropdown-footer">See All
           Notifications</a>
         
    
     </div>
-  </li>
+  </li> -->
 
   <!-- --------------------Notification close---------------------- -->
 
@@ -121,29 +117,21 @@
 
       <li class="user-footer">
         <div class="float-left">
-          {% if request.user|has_group:'Student' %}
-          <a href="{% url 'student_profile_update' %}" class="btn btn-sm btn-default btn-flat">Profile</a>
-          <a href="{% url 'change_password' %}" class="btn btn-sm ml-2  btn-default btn-flat">Reset Password</a>
-          {% elif request.user|has_group:'Teacher' %}
-          <a href="{% url 'teacher_profile_update' %}" class="btn btn-sm  btn-default btn-flat">Profile</a>
-          <a href="{% url 'change_password' %}" class="btn btn-sm  ml-2  btn-default btn-flat">Reset Password</a>
-          {% elif request.user|has_group:'Parent' %}
-          <a href="{% url 'parent_profile_update' %}" class="btn btn-sm  btn-default btn-flat">Profile</a>
-          <a href="{% url 'change_password' %}" class="btn btn-sm  ml-2  btn-default btn-flat">Reset Password</a>
-          {% elif request.user|has_group:'Admin' or request.user.is_superuser %}
-          <a href="{% url 'admin_profile_update' %}" class="btn btn-sm  btn-default btn-flat">Profile</a>
-          <a href="{% url 'change_password' %}" class="btn btn-sm  ml-2  btn-default btn-flat">Reset Password</a>
+          {% if request.user|has_group:'User' %}
+          <a href="" class="btn btn-sm btn-default btn-flat">Profile</a>
+          <a href="" class="btn btn-sm ml-2  btn-default btn-flat">Reset Password</a>
+         
 
           {% endif %}
         </div>
         <!-- <div class="float-left ml-3">
-      <a href="{% url 'setting_app:general_setting' %}" class="btn btn-default btn-flat">Settings</a>
+      <a href="" class="btn btn-default btn-flat">Settings</a>
     </div> -->
         <div class="float-right">
 
 
           {% if request.user.is_authenticated %}
-          <a class="btn btn-sm  btn-default btn-flat" href="{% url 'logout' %}">
+          <a class="btn btn-sm  btn-default btn-flat" href="">
             Sign out
           </a>
           {% else %}
