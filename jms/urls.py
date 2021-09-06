@@ -20,7 +20,9 @@ from jms.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     path('accounts/login/', user_login, name='login'),
+    path('logout/', user_logout, name='logout'),
     path('home/',dashboard, name = 'home'),
-     path('user/',include('apps.user.urls')),
+     path('user/',include('apps.user.urls',namespace='user')),
      
 ]

@@ -52,6 +52,7 @@ CUSTOM_APPS = [
 THIRD_PARTY_APPS = [
      'crispy_forms',
     'django_countries',
+    'django_extensions'
     
 ]
 
@@ -163,10 +164,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-# LOGIN_URL = '/accounts/login/'
-# LOGIN_REDIRECT_URL = '/home/'
-# LOGIN_EXEMPT_URLS = (
-#     r'^logout/$',
-#     r'^password/reset/.*$',
-#     r'^reset/.*$',
-# )
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/home/'
+LOGIN_EXEMPT_URLS = (
+    r'^logout/$',
+      r'^user/register/$',
+    # r'^password/reset/.*$',
+    # r'^reset/.*$',
+)

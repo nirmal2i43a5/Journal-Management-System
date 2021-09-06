@@ -20,7 +20,7 @@ class CustomUser(AbstractUser):
         verbose_name_plural = _("customusers")
 
     def __str__(self):
-        return self.user_type
+        return '{}'.format(self.user_type)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

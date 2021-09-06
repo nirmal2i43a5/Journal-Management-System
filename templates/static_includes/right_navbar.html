@@ -131,7 +131,7 @@
 
 
           {% if request.user.is_authenticated %}
-          <a class="btn btn-sm  btn-default btn-flat" href="">
+          <a class="btn btn-sm  btn-default btn-flat" href="{% url 'logout' %}">
             Sign out
           </a>
           {% else %}

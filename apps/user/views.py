@@ -3,7 +3,6 @@ from .forms import *
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, permission_required  
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -26,6 +25,7 @@ def user_register(request):
             username = auth_form.cleaned_data["username"]
             password1 = auth_form.cleaned_data["password1"]
             password2 = auth_form.cleaned_data["password2"]
+            print(password1,password2)
             
             if request.FILES.get('image'):
                 image_url = request.FILES['image']
@@ -37,9 +37,9 @@ def user_register(request):
             
             if password1 == password2:
                 user = CustomUser.objects.create_user(
-                    username=username, password1=password1, password2 = password2,
+                    username=username, password=password2,
                     user_type=group)
-                
+                print(user,"---------------------------------")
             
         
                 user.normaluser.full_name = user_form.cleaned_data['full_name']
@@ -54,42 +54,14 @@ def user_register(request):
 
                 user.save()
                 user.groups.add(group)#adding user to particular group.ie role
+                print(user,"-----group----")
                 
                     
-                messages.success(request, "Successfully Added Parent")
-                return redirect('user:register')
+                messages.success(request, "Successfully Created User")
+                return redirect('login')
             else:
                 messages.error(request,'Password does not match.Please, check it properly.')
         
     return render(request,'users/registers.html',context)
 
 
-
-def user_login(request):
-    
-	form = LoginForm()
-
-	if request.method == "POST":
-		username = request.POST.get("username")
-		password = request.POST.get("password")
-		user = authenticate(request, username=username, password=password)
-
-		if user is not None:
-
-			login(request, user)
-			group = None
-
-			if request.user.groups.exists():
-				group = request.user.groups.all()[0].name
-
-			if group or request.user.is_superuser:
-				return redirect('home')
-			else:
-				messages.error(request, "Invalid User")
-				return redirect('login')
-		else:
-			# in case of username and password error
-			messages.error(request, "Invalid Login Details")
-			return redirect('login')
-
-	return render(request, 'users/login.html', {'form': form})

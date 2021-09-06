@@ -42,11 +42,11 @@ class LoginForm(forms.ModelForm):
      
     username = forms.CharField(widget=forms.TextInput(
         attrs={"placeholder": " Enter Username", }))
-    password = forms.CharField(widget=forms.PasswordInput(
+    password1 = forms.CharField(label = 'Password', widget=forms.PasswordInput(
         attrs={"placeholder": " Enter Password", }))
     # user_type = forms.ModelChoiceField(
     #     empty_label="Select roles ", queryset=Group.objects.all())
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'password',)
+        fields = ('username', 'password1',)
