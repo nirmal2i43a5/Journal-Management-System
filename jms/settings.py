@@ -65,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'jms.middleware.LoginRequiredMiddleware'
 ]
 
 ROOT_URLCONF = 'jms.urls'
@@ -159,3 +160,13 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# LOGIN_URL = '/accounts/login/'
+# LOGIN_REDIRECT_URL = '/home/'
+# LOGIN_EXEMPT_URLS = (
+#     r'^logout/$',
+#     r'^password/reset/.*$',
+#     r'^reset/.*$',
+# )
