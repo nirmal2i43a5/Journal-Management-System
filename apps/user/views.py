@@ -39,7 +39,6 @@ def user_register(request):
                 user = CustomUser.objects.create_user(
                     username=username, password=password2,
                     user_type=group)
-                print(user,"---------------------------------")
             
         
                 user.normaluser.full_name = user_form.cleaned_data['full_name']
@@ -65,3 +64,17 @@ def user_register(request):
     return render(request,'users/registers.html',context)
 
 
+
+
+def upload_journal(request):
+    form = PaperUploadForm()
+    context = {
+        'title':'Upload Paper',
+        'form':form
+    }
+    return render(request,'users/paper_upload.html',context)
+
+
+
+def user_article_list(request):
+    pass

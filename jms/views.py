@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from apps.user.forms import LoginForm
+from .forms import LoginForm
 
 
 def dashboard(request):
