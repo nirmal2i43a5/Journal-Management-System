@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{title}}
+{% endblock title %}
+
+
+
+{% block main_content %}
+
+<!-- Main content -->
+
+<section class="content">
+    
+    
+    <div class="container-fluid">
+
+        {% include "messages.html" %}
+
+        <div class="row">
+
+          
+
+            <div class="col-md-12">
+
+                <iframe src="/viewer/viewer.html?file={{article.file.url}}" width="100%"
+                    height="700px" frameborder="0"></iframe>
+           
+                <!-- <iframe id = "pdf-annotate2" src="/viewer/pdf_annotation2/index.html?documentId={{article.file.url}}" width="100%"
+                height="700px" frameborder="0"></iframe> -->
+                
+            </div>
+           
+        </div>
+
+     
+
+
+    </div>
+    </div>
+</section>
+
+
+<style>
+    #magazineContainer,
+    #magazine {
+        background-color: #094089;
+    }
+</style>
+
+{% endblock main_content %}
+
+{% block javascript %}
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    let isFound = false;
+    $("#filter_div *").filter(function() {
+      if($(this).find('.card-body').text().toLowerCase().includes(value)){
+        isFound = true;
+      }
+      $(this).closest('.card').toggle(isFound);
+    });
+  });
+});
+</script>
+{% endblock %}

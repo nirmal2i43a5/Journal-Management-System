@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+  {{title}}
+{% endblock title %}
+  
+
+{% block main_content %}
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+   
+    {% include "messages.html" %}
+
+    <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card">
+
+          {% include 'override_table/header.html' with card_title='Add Reviewer' %}
+
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-body">
+
+              {% csrf_token %}
+                {{ auth_form|crispy }}
+
+                {{ reviewer_user|crispy }}
+
+
+              <button type="submit" class="btn btn-sm btn-success ">Submit</button>
+            </div>
+            <hr>
+            <!-- /.card-body -->
+  
+             
+          </form>
+        </div>
+        <!-- /.card -->
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /.content -->
+{% endblock main_content %}
+
+{% block custom_js %}
+
+
+<script>
+ 
+/*For email validation*/
+  $("#id_email").keyup(function(){
+      var email=$(this).val();
+
+     if(email!=""){
+          $.ajax({
+              url:"",
+              type:'POST',
+              data:{email:email},
+              success: function(response){
+                console.log(response)
+                var filter = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                  if(response=="True"){
+                      $(".email_error").remove();
+                      $("<span class='email_error' style='padding: 5px;color: red;font-weight: bold;'>This email is already exists</span>").insertAfter("#id_email");
+                  }
+                  else if(filter.test(email)){//for email 
+                      $(".email_error").remove();
+                      $("<span class='email_error' style='padding: 5px;color: green;font-weight: bold;'>This email is available</span>").insertAfter("#id_email");
+                  }
+                  else{
+                    $(".email_error").remove();//form email @ check
+                    $("<span class='email_error' style='padding: 5px;color: red;font-weight: bold;'>Enter a valid email address.</span>").insertAfter("#id_email");
+
+                  }
+              }
+              ,
+              error: function(){
+                console.log("failed")
+              }
+           
+          })
+         
+      }
+      else{
+        $(".email_error").remove();
+      }
+
+  });
+</script>
+
+{% endblock custom_js %}
+
+<!-- 
+  <script>
+  $(document).ready(function(){
+
+    $("#id_contact, #id_father_phone, #id_mother_phone").on("blur", function(){
+      var mobile_number = $(this).val();
+      var filter = /^\d*(?:\.\d{1,2})?$/;
+
+        if (filter.test(mobile_number)) {
+          if(mobile_number.length==10){
+            $(".contact_number_error").remove();
+            $("<span class='contact_number_error' style='padding: 5px;color: green;font-weight: bold;'>Number is Validate</span>").insertAfter("#id_contact, #id_father_phone, #id_mother_phone");
+           
+           } else if(mobile_number.length!==10) {
+            $(".contact_number_error").remove();
+            $("<span class='contact_number_error' style='padding: 5px;color: red;font-weight: bold;'>Please,Enter Number with 10 digits..</span>").insertAfter("#id_contact, #id_father_phone, #id_mother_phone");
+
+            }
+          }
+        })
+        //-------
+        $(" #id_father_phone").on("blur", function(){
+          var mobile_number = $(this).val();
+          var filter = /^\d*(?:\.\d{1,2})?$/;
+    
+            if (filter.test(mobile_number)) {
+              if(mobile_number.length==10){
+                $(".contact_number_error").remove();
+                $("<span class='contact_number_error' style='padding: 5px;color: green;font-weight: bold;'>Number is Validate</span>").insertAfter(" #id_father_phone");
+               
+               } else if(mobile_number.length!==10) {
+                $(".contact_number_error").remove();
+                $("<span class='contact_number_error' style='padding: 5px;color: red;font-weight: bold;'>Please,Enter Number with 10 digits..</span>").insertAfter(" #id_father_phone");
+    
+                }
+              }
+            })
+            //----------
+            $(" #id_mother_phone").on("blur", function(){
+              var mobile_number = $(this).val();
+              var filter = /^\d*(?:\.\d{1,2})?$/;
+        
+                if (filter.test(mobile_number)) {
+                  if(mobile_number.length==10){
+                    $(".contact_number_error").remove();
+                    $("<span class='contact_number_error' style='padding: 5px;color: green;font-weight: bold;'>Number is Validate</span>").insertAfter(" #id_mother_phone");
+                   
+                   } else if(mobile_number.length!==10) {
+                    $(".contact_number_error").remove();
+                    $("<span class='contact_number_error' style='padding: 5px;color: red;font-weight: bold;'>Please,Enter Number with 10 digits..</span>").insertAfter(" #id_mother_phone");
+        
+                    }
+                  }
+                })
+                //---
+  })
+  
+  
+ -->
+

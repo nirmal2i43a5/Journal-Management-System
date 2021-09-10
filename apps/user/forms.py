@@ -2,10 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from apps.permissions.models import CustomUser
 from .models import *
-from django.contrib.auth import (
-    authenticate, get_user_model, password_validation,
-)
-from django.core.exceptions import ValidationError
+
 
 class CustomUserForm(forms.ModelForm):
     # password1 = forms.CharField(required = False, widget=forms.PasswordInput())
@@ -35,10 +32,11 @@ class UserRegisterForm(forms.ModelForm):
     dob = forms.DateField(required = False, label = 'Date of Birth', widget=forms.DateInput(attrs={'type': 'date', }))
     class Meta:
         model = NormalUser
-        exclude = ('status','normal_user','image',)
+        exclude = ('status','normal_user',)
         
         
 class PaperUploadForm(forms.ModelForm):
     class Meta:
-        model = Journal
+        model = Article
+        exclude = ['user','status']
         fields = '__all__'

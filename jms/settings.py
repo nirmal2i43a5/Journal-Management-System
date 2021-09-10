@@ -43,7 +43,7 @@ CUSTOM_APPS = [
     'apps.admin_user.apps.AdminUserConfig',
     'apps.user.apps.UserConfig',
     'apps.reviewer.apps.ReviewerConfig',
-    'apps.viewer.apps.ViewerConfig',
+    'viewer.apps.ViewerConfig',
     'apps.permissions.apps.PermissionsConfig',
     
     
@@ -66,7 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'jms.middleware.LoginRequiredMiddleware'
+    'jms.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'jms.urls'
@@ -140,7 +140,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-
 AUTH_USER_MODEL = "permissions.CustomUser"
 
 STATIC_URL = '/static/'
@@ -172,3 +171,5 @@ LOGIN_EXEMPT_URLS = (
     # r'^password/reset/.*$',
     # r'^reset/.*$',
 )
+# for pdf viewer
+# X_FRAME_OPTIONS = 'SAMEORIGIN'

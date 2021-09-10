@@ -4,7 +4,6 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, permission_required  
 from django.contrib import messages
 
-# Create your views here.
 
 def user_register(request):
     auth_form = CustomUserForm()
@@ -66,8 +65,16 @@ def user_register(request):
 
 
 
-def upload_journal(request):
+def upload_article(request):
     form = PaperUploadForm()
+    if request.method == 'POST':
+        form = PaperUploadForm(request.POST,request.FILES)
+        form = form.save(commit=False)
+        form.user = request.user
+        form.save()
+        messages.success(request, "Successfully Uploaded Article.")
+        return redirect('user:article-list')
+        
     context = {
         'title':'Upload Paper',
         'form':form
@@ -76,5 +83,20 @@ def upload_journal(request):
 
 
 
-def user_article_list(request):
-    pass
+
+def article_list(request):
+    articles = Article.objects.all()
+    context = {
+        'title':'Upload Paper',
+        'articles':articles
+    }
+    return render(request,'users/article-list.html',context)
+
+
+def article_view(request,pk):
+    article = get_object_or_404(Article, pk = pk)
+    context = {
+        'title':'Upload Paper',
+        'article':article
+    }
+    return render(request,'users/article-view.html',context)
