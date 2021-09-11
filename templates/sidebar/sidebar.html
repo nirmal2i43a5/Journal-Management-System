@@ -100,7 +100,7 @@
 
            <!-----------------------------------For parent Sidebar------------------------------------------>
         {% elif request.user|has_group:'Reviewer' %}
-
+        {% include 'sidebar/reviewer_sidebar.html' %}
         {% endif %}
 
       </ul>

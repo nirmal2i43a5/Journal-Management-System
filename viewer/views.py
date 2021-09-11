@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
+from apps.user.models import Article
 
 
 
@@ -24,32 +25,25 @@ def annotation_iframe(request):
 def annotation2_iframe(request):
     return render(request,'pdf_annotation2/index.html')
 
-# @csrf_exempt
-# def receive_pdf(request):
-#     try:
-#         print("in request.files")
-#         # print(list(request.FILES.items()))
-#     except:
-#         print("NOT IN FILES")
+@csrf_exempt
+def receive_pdf(request):
+    try:
+        print("in request.files")
+    except:
+        print("NOT IN FILES")
     
-#     # print('item \t type \t size')
-#     # for item in list(request.FILES.items()):
-#     #     print(item[1],'\t' ,item[1].content_type,'\t' , item[1].size)
+    # print('item \t type \t size')
+    # for item in list(request.FILES.items()):
+    #     print(item[1],'\t' ,item[1].content_type,'\t' , item[1].size)
 
-#     files = list(request.FILES.items())
-#     # print(files)
-#     # print(files[0][1])
+    files = list(request.FILES.items())
     
-#     file_to_upload = files[0][1]
-#     file_to_upload._set_name(request.POST['fileName']+'.pdf')
+    file_to_upload = files[0][1]
+    file_to_upload._set_name(request.POST['fileName']+'.pdf')
+    print(request.POST['userId'])
+    user = Article.objects.get(user__pk=request.POST['userId'])
+    article = Article.objects.get(user=user)                                   
+    article.file = file_to_upload
+    article.save()
 
-#     answer_object = AnswerSheet.objects.get(student=Student.objects.get(student_user__username=request.POST['studentId']),
-#                                             exam=Exams.objects.get(exam_id=request.POST['examId']))
-#     # print(answer_object)
-#     # print(request.POST['studentId'])
-#     # print(request.POST['examId'])
-
-#     answer_object.answer_upload = file_to_upload
-#     answer_object.save()
-
-#     return JsonResponse({'a':'b'})
+    return JsonResponse({'a':'b'})

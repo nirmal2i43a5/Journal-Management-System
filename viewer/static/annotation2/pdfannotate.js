@@ -205,7 +205,8 @@ PDFAnnotate.prototype.deleteSelectedObject = function () {
 	}
 }
 
-PDFAnnotate.prototype.savePdf = function (fileName, studentId, examId) {
+PDFAnnotate.prototype.savePdf = function (fileName, userId) {
+	console.log("User ID::::",userId)
 	var inst = this;
 	var doc = new jspdf.jsPDF();
 	if (typeof fileName === 'undefined') {
@@ -242,8 +243,7 @@ PDFAnnotate.prototype.savePdf = function (fileName, studentId, examId) {
 
 			form_data.append('data',pdf_blob);
 			form_data.append('fileName',fileName);
-			form_data.append('studentId', studentId);
-			form_data.append('examId', examId)
+			form_data.append('userId', userId);
 			console.log(Array.from(form_data));
 			sendFormData(form_data);
 

@@ -61,10 +61,10 @@ class NormalUser(models.Model):
         
 class Article(models.Model):
     file = models.FileField(upload_to='Journal_papers', null=True)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE,null=True,blank = True)
     new_category = models.CharField(help_text = 'Only add new Category if you do not see your wise category in Category Choice list.',max_length=100,null=True, blank=True)
-    # status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=STATUS_UNSUBMITTED)
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES)
     description = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

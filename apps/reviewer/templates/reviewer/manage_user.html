@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  {{title}}
+{% endblock title %}
+{% load crispy_forms_tags %}
+{% block main_content %}
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+  <!-- /.card-header -->
+
+  {% include "messages.html" %}
+  
+    <div class="row">
+      <div class="col-12">
+
+
+        <div class="card">
+          
+          <div class="card-header" style="background-color: #094089;color:white;">
+            <span>{{title}}</span>
+
+           
+            </form>
+          </div>
+         
+          <!-- /.card-header -->
+          <div class="card-body table-responsive">
+            
+            {% url '' as button_url %}
+          
+                 
+            <table id="dataTable" class="table table-sm  table-striped table-bordered table-hover  text-nowrap  dataTable no-footer">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>ID</th>
+                  <th>Image</th>
+                  <th>Full Name</th>
+                  <th>Username</th>
+                  <th>Total Article</th>
+                  <th>Accepted</th>
+                  <th>Rejected</th>
+                    <th>Action</th>
+                
+                
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                <tr>
+                  <td></td>
+                  <td>{{ forloop.counter }}</td>
+                  <td>
+                    {% if user.image %}
+
+                 <a href="{{ user.image.url }}">   <img src="{{ user.image.url }}" alt="" style="width:35px;height:35px;" class="img-circle" /></a>
+
+                    {% else %}
+                    <img src="{% static 'image/default_profile.png' %}" alt="" style="width:35px;height:35px;" class="img-circle" />
+                    {% endif %}
+                    </td>
+                  <td>{{ user.full_name }}</td>
+
+                  <td>{{ user.normal_user.username }}</td>
+                  <td></td>
+               <td></td>
+                <td></td>
+                <td>
+                    <a href="{% url 'reviewer:view_user_articles' user.normal_user.pk %}" class="btn btn-xs btn-success">View articles</a>
+                </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /.content -->
+
+{% endblock main_content %}
+
+{% block custom_js %}
+
+<script>
+  
+  $(document).ready(function () {
+
+    $('#subjectTable').DataTable({
+
+      dom: 'lBfrtip',//if i use buttons then entries goes away
+      pagingType: "full_numbers",
+      
+      buttons: [
+        {
+          'extend': 'copy',
+          'text': '<i class="fas  fa-copy" aria-hidden="true"></i> Copy',
+          
+          className: '<div class = "btn btn-info"></div>',//button css does not work
+
+        },
+        {
+          extend: 'excel',
+          text: '<i class="fas  fa-file-excel" aria-hidden="true"></i> Excel',
+
+
+        },
+        {
+          extend: 'csv',
+          text: '<i class="fas  fa-file-csv" aria-hidden="true"></i> Csv',
+
+
+        },
+        {
+          extend: 'pdf',
+          text: '<i class="fas  fa-file-pdf" aria-hidden="true"></i> Pdf',
+
+
+        },
+        {
+          extend: 'print',
+          text: '<i class="fas  fa-print" aria-hidden="true"></i> Print',
+
+
+        }
+
+      ],
+    });
+  });
+</script>
+
+{% endblock custom_js %}

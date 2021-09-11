@@ -1,79 +1,86 @@
-
-
 {% extends 'base.html' %}
 
 {% load static %}
 
 {% block title %}
-    {{title}}
+{{title}}
 {% endblock title %}
-    
+
 
 {% block main_content %}
 
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
-  <!-- /.card-header -->
-{% include "messages.html" %}
+    <!-- /.card-header -->
+    {% include "messages.html" %}
     <div class="row">
       <div class="col-12">
 
 
         <div class=" card-info">
-          
+
           {% include 'override_table/header.html' with card_title='Manage Article' %}
-         
+
           <!-- /.card-header -->
           <div class="card-body table-responsive">
             {% url 'admin_app:add_parent' as button_url %}
 
-            <a href="{% url 'user:upload-article' %}" class="btn btn-xs float-right text-white" style="background-color: #3A988D;"  >
-                <span><i class="fas fa-sm fa-plus">&nbsp;</i> <strong> Upload Article</strong></span>
+            <a href="{% url 'user:upload-article' %}" class="btn btn-xs float-right text-white"
+              style="background-color: #3A988D;">
+              <span><i class="fas fa-sm fa-plus">&nbsp;</i> <strong> Upload Article</strong></span>
             </a>
-        <br><hr>
-
-        
-
-              <input class="form-control my-2" id="myInput" type="text" placeholder="Search with Category..">
-
-            
-              <div class="row" id="filter_div">
-                {% for article in articles %}
+            <br>
+            <hr>
 
 
-                <div class="col-md-3">
-               <a href="{% url 'user:article-view' article.pk %}">
+
+            <input class="form-control my-2" id="myInput" type="text" placeholder="Search with Category..">
+
+
+            <div class="row" id="filter_div">
+              {% for article in articles %}
+
+
+              <div class="col-md-3">
+                <a href="{% url 'user:article-view' article.pk %}">
 
                   <div class="card">
                     <div class="card-body">
 
-                      <img src="{% static 'image/document_static.png' %}" style = " width:100%" alt="">
+                      <img src="{% static 'image/document_static.png' %}" style=" width:100%" alt="">
                       <hr>
                       <div class="d-flex flex-column bd-highlight">
-                        <div class="p-2 bd-highlight"><strong> Category : </strong> <div class="badge badge-info" >{{article.new_category}}</div></div>
-                        <div class="p-2 bd-highlight"> <strong>Created At : </strong>{{article.created_at|date:'d M, Y'}}</div>
-                        <div class="p-2 bd-highlight"> <strong>Status: </strong></div>
+                        <div class="p-2 bd-highlight"><strong> Category : </strong>
+                          <div class="badge badge-info">{{article.new_category}}</div>
+                        </div>
+                        <div class="p-2 bd-highlight"> <strong>Created At : </strong>{{article.created_at|date:'d M,
+                          Y'}}</div>
+                        <div class="p-2 bd-highlight">
+                          <strong>Status:
+                            <span class="btn btn-sm btn-info">{{article.status}}</span>
+                          </strong>
+                        </div>
                       </div>
-                   
-                    
-                
+
+
+
                     </div>
                   </div>
-               </a>
+                </a>
 
-                </div>
-                {% empty %}
-                <p class="mx-auto">No Articles Available.</p>
-                {% endfor %}
-                </div>
-            
-        
-            
+              </div>
+              {% empty %}
+              <p class="mx-auto">No Articles Available.</p>
+              {% endfor %}
+            </div>
+
+
+
           </div>
-          
-          </div>
-          <!-- /.card-body -->
+
+        </div>
+        <!-- /.card-body -->
         <!-- /.card -->
       </div>
     </div>
@@ -85,17 +92,17 @@
 
 {% block custom_js %}
 <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    let isFound = false;
-    $("#filter_div *").filter(function() {
-      if($(this).find('.card-body').text().toLowerCase().includes(value)){
-        isFound = true;
-      }
-      $(this).closest('.card').toggle(isFound);
+  $(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      let isFound = false;
+      $("#filter_div *").filter(function () {
+        if ($(this).find('.card-body').text().toLowerCase().includes(value)) {
+          isFound = true;
+        }
+        $(this).closest('.card').toggle(isFound);
+      });
     });
   });
-});
 </script>
 {% endblock %}

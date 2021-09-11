@@ -20,3 +20,6 @@ def reviewer_index(request):
         'reviewers':reviewers
     }
     return render(request,'admin/manage_reviewer.html',context)
+
+
+

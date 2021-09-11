@@ -71,6 +71,7 @@ def upload_article(request):
         form = PaperUploadForm(request.POST,request.FILES)
         form = form.save(commit=False)
         form.user = request.user
+        form.status = STATUS_UNDER_REVIEW
         form.save()
         messages.success(request, "Successfully Uploaded Article.")
         return redirect('user:article-list')

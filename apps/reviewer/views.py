@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from django.contrib.auth.models import Group
+from apps.user.models import NormalUser
 from django.contrib.auth.decorators import login_required, permission_required  
 from django.contrib import messages
+from apps.user.models import Article
 
 
 
@@ -57,3 +59,36 @@ def add_reviewer(request):
          
         
     return render(request,'reviewer/add.html',context)
+
+
+
+def normal_user_index(request):
+    users = NormalUser.objects.all()
+    context = {
+        'title':'Manage User',
+        'users':users
+    }
+    return render(request,'reviewer/manage_user.html',context)
+
+
+def view_user_articles(request,pk):
+    articles_under_review = Article.objects.filter(status = STATUS_UNDER_REVIEW,user__pk = pk)
+    # rejected_articles
+    # accepted_articles
+    #
+    
+    context = {
+        'title':'Articles',
+        'articles_under_review':articles_under_review
+    }
+    return render(request,'reviewer/article-view.html',context)
+
+
+
+def check_user_article(request,pk):
+    article = get_object_or_404(Article, pk = pk)
+    context = {
+        'title':'Article Check',
+        'article':article
+    }
+    return render(request,'reviewer/check-user-article.html',context)
