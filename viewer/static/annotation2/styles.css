@@ -1,16 +1,16 @@
 body {
-    background-color: rgb(82, 86, 89);
+    background-color: #094089;
 }
 
 canvas, .canvas-container {
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: #094089;
+    -moz-box-shadow: #094089;
+    box-shadow: #094089;
 }
 
 .toolbar {
     width: 100%;
-    background-color: rgb(50, 54, 57);
+    background-color:#3A988D;
     height: 50px;
     position: fixed;
     top: 0;

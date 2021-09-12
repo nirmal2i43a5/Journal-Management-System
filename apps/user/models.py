@@ -73,3 +73,6 @@ class Article(models.Model):
         db_table = 'tbl_article'
         verbose_name = _("article")
         verbose_name_plural = _("articles")
+        
+        
+
