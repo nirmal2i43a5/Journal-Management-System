@@ -12,5 +12,6 @@ urlpatterns = [
     path('user/index/',normal_user_index,name='normal-user-index'),
     path('user-articles/<pk>/',view_user_articles,name='view_user_articles'),
       path('check-article/<pk>/',check_user_article,name='check_user_article'),
+        path('feedback',article_feedback,name='article_feedback'),
     
 ]

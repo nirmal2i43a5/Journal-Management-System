@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields import BooleanField
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
 from apps.permissions.models import CustomUser
@@ -76,3 +77,8 @@ class Article(models.Model):
         
         
 
+class Feedback(models.Model):
+    feedback = models.TextField(null=True, blank=True)
+    article = models.ForeignKey(Article,on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True,blank = True)
+    status = BooleanField(default = False)#for review status check only

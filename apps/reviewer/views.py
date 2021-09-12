@@ -4,7 +4,8 @@ from django.contrib.auth.models import Group
 from apps.user.models import NormalUser
 from django.contrib.auth.decorators import login_required, permission_required  
 from django.contrib import messages
-from apps.user.models import Article
+from apps.user.models import Article,Feedback
+
 
 
 
@@ -73,13 +74,24 @@ def normal_user_index(request):
 
 def view_user_articles(request,pk):
     articles_under_review = Article.objects.filter(status = STATUS_UNDER_REVIEW,user__pk = pk)
+    user = get_object_or_404(CustomUser, pk = pk)
+    articles = user.article_set.all()
+    checked_articles = []
+    for article in articles:
+        article_obj = get_object_or_404(Article, pk = article.pk)
+        article_feedback = article_obj.feedback_set.all()
+        if article_feedback:
+            checked_articles.append(article_obj)
     # rejected_articles
     # accepted_articles
     #
-    
+    print(checked_articles)
     context = {
         'title':'Articles',
-        'articles_under_review':articles_under_review
+        'articles_under_review':articles_under_review,
+        # 'articles_review_feedback':zip(articles_under_review,checked_articles),
+        # 'checked_articles':checked_articles,
+        
     }
     return render(request,'reviewer/article-view.html',context)
 
@@ -92,3 +104,18 @@ def check_user_article(request,pk):
         'article':article
     }
     return render(request,'reviewer/check-user-article.html',context)
+
+
+
+def article_feedback(request):
+    userId = request.POST['userId']
+    articleId = request.POST['articleId']
+    feedback = request.POST['feedback']
+    print(userId, articleId, feedback)
+    feedback = Feedback(feedback = feedback)
+    feedback.user = get_object_or_404(CustomUser,pk = userId)
+    feedback.article = get_object_or_404(Article,pk = articleId)
+    # feedback.status = True
+    feedback.save()
+    messages.success(request,"Successfully Review Paper")
+    return redirect('reviewer:view_user_articles',userId)
