@@ -40,9 +40,10 @@ def receive_pdf(request):
     
     file_to_upload = files[0][1]
     file_to_upload._set_name(request.POST['fileName']+'.pdf')
-    print(request.POST['userId'])
-    user = Article.objects.get(user__pk=request.POST['userId'])
-    article = Article.objects.get(user=user)                                   
+    
+    print(request.POST['articleId'])
+    # user = Article.objects.filter(user__pk=request.POST['userId']).first()
+    article = Article.objects.get(pk = request.POST['articleId'],user__pk=request.POST['userId'])                                   
     article.file = file_to_upload
     article.save()
 

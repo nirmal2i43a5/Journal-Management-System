@@ -3,9 +3,9 @@ var document_file_path, documentId;
 let params = new URLSearchParams(location.search);
 // console.log(params)
 documentId=params.getAll('documentId')[0]
-studentId=params.get('studentId')
-examId=params.get('examId')
-file_name = examId+"_"+studentId
+userId=params.get('userId')
+articleId=params.get('articleId')
+file_name = userId
 
 var pdf = new PDFAnnotate("pdf-container",documentId, {
     onPageUpdated(page, oldData, newData) {
@@ -77,7 +77,7 @@ function deleteSelectedObject(event) {
 
 function savePDF() {
     // pdf.savePdf();
-    pdf.savePdf(file_name, studentId, examId); // save with given file name
+    pdf.savePdf(file_name, userId, articleId); // save with given file name
 }
 
 function clearPage() {

@@ -86,7 +86,7 @@ def upload_article(request):
 
 
 def article_list(request):
-    articles = Article.objects.all()
+    articles = Article.objects.filter(user = request.user)
     context = {
         'title':'Upload Paper',
         'articles':articles
