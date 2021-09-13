@@ -40,3 +40,10 @@ class PaperUploadForm(forms.ModelForm):
         model = Article
         exclude = ['user','status']
         fields = '__all__'
+        
+        
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        exclude = ['user','article']

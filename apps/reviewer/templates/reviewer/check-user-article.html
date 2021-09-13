@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% load crispy_forms_tags %}
+
 {% block title %}
 {{title}}
 {% endblock title %}
@@ -40,7 +43,7 @@
                         <input type="hidden" name = "articleId" value="{{article.pk}}">
                         <input type="hidden" name = "userId" value="{{article.user.pk}}">
        
-                       <textarea  name="feedback" rows="4" cols="33" placeholder="Enter Feedback"></textarea><br><br>
+                       {{ form|crispy }}
                        <input type="submit" name="" value="Submit" style="background-color: #094089;color:white;">
                        
                       </form>

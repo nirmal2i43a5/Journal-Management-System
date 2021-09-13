@@ -78,7 +78,10 @@ class Article(models.Model):
         
 
 class Feedback(models.Model):
+    status = (
+        ('Accepted','Accepted'),('Rejected','Rejected')
+    )
+    status = models.CharField(max_length=50,choices = status, null=True, blank=True)
     feedback = models.TextField(null=True, blank=True)
     article = models.ForeignKey(Article,on_delete=models.CASCADE,null=True)
     user = models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True,blank = True)
-    status = BooleanField(default = False)#for review status check only
