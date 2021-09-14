@@ -75,6 +75,8 @@ def normal_user_index(request):
 
 def view_user_articles(request,pk):
     articles_under_review = Article.objects.filter(status = STATUS_UNDER_REVIEW,user__pk = pk)
+    rejected_articles = Article.objects.filter(status = STATUS_REJECTED,user__pk = pk)
+    accepted_articles = Article.objects.filter(status = STATUS_ACCEPTED,user__pk = pk)
     user = get_object_or_404(CustomUser, pk = pk)
     # articles = user.article_set.all()
     # checked_articles = []
@@ -84,8 +86,7 @@ def view_user_articles(request,pk):
     #     if article_feedback:
     #         checked_articles.append(article_obj)
             
-    rejected_articles = Article.objects.filter(status = STATUS_REJECTED,user__pk = pk)
-    accepted_articles = Article.objects.filter(status = STATUS_ACCEPTED,user__pk = pk)
+   
     #
     context = {
         'title':'Articles',
