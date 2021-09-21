@@ -40,16 +40,18 @@
                   <th>Image</th>
                   <th>Full Name</th>
                   <th>Username</th>
-                  <th>Total Article</th>
+                  <th>Total Articles</th>
+                  <th>Articles under review</th>
                   <th>Accepted</th>
                   <th>Rejected</th>
+                  <th>Published To Admin</th>
                     <th>Action</th>
                 
                 
                 </tr>
               </thead>
               <tbody>
-                {% for user in users %}
+                {% for user,article in users %}
                 <tr>
                   <td></td>
                   <td>{{ forloop.counter }}</td>
@@ -65,9 +67,12 @@
                   <td>{{ user.full_name }}</td>
 
                   <td>{{ user.normal_user.username }}</td>
-                  <td></td>
-               <td></td>
-                <td></td>
+                  <td>{{article.total_articles}}</td>
+                <td>{{article.article_under_review_count}}</td>
+
+               <td>{{article.accepted_articles_count}}</td>
+                <td>{{article.rejected_articles_count}}</td>
+                <td>{{article.article_publish_to_admin}}</td>
                 <td>
                   <div class="btn-group">
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

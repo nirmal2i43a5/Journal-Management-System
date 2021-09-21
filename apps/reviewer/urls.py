@@ -13,6 +13,7 @@ urlpatterns = [
      path('user-accepted/<pk>/',view_user_accepted_articles,name='user-accepted-articles'),
        path('user-rejected/<pk>/',view_user_rejected_articles,name='user-rejected-articles'),
       path('check-article/<pk>/',check_user_article,name='check_user_article'),
-        path('feedback',article_feedback,name='article_feedback'),
+        path('feedback/',article_feedback,name='article_feedback'),
+            path('publish_to_admin/<user_id>/<article_id>/',publish_to_admin,name='publish_to_admin'),
     
 ]

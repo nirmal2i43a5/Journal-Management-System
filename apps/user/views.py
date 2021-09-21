@@ -74,7 +74,7 @@ def upload_article(request):
         form.status = STATUS_UNDER_REVIEW
         form.save()
         messages.success(request, "Successfully Uploaded Article.")
-        return redirect('user:article-list')
+        return redirect('user:article-under-review')
         
     context = {
         'title':'Upload Paper',

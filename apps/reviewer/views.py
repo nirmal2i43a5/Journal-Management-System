@@ -66,9 +66,33 @@ def add_reviewer(request):
 
 def normal_user_index(request):
     users = NormalUser.objects.all()
+    
+    total_articles = []
+    rejected_articles = []
+    accepted_articles = []
+    articles_under_review = []
+    for user in users:
+        user_object = get_object_or_404(CustomUser,id = user.normal_user.id )
+        articles = user_object.article_set.all()
+        accepted_articles = user_object.article_set.filter(status = STATUS_ACCEPTED)
+        rejected_articles = user_object.article_set.filter(status = STATUS_REJECTED)
+        article_under_review = user_object.article_set.filter(status = STATUS_UNDER_REVIEW)
+        article_publish_to_admin = user_object.article_set.filter(status = STATUS_PUBLISHED)
+        total_articles_count = articles.count()
+        accepted_articles_count = accepted_articles.count()
+        rejected_articles_count = rejected_articles.count()
+        article_under_review_count = article_under_review.count()
+        article_publish_to_admin_count = article_publish_to_admin.count()
+        
+        total_articles.append({'total_articles':total_articles_count,'accepted_articles_count':accepted_articles_count,
+                               'rejected_articles_count':rejected_articles_count,'article_under_review_count':article_under_review_count,
+                               'article_publish_to_admin':article_publish_to_admin_count})
+    # print(total_articles)
+        
+    print(total_articles)
     context = {
         'title':'Manage User',
-        'users':users
+        'users':zip(users,total_articles)
     }
     return render(request,'reviewer/manage_user.html',context)
 
@@ -166,3 +190,12 @@ def article_feedback(request):
     
     messages.success(request,"Successfully Review Paper")
     return redirect('reviewer:user-under-review-articles',userId)
+
+
+def publish_to_admin(request,user_id,article_id):
+    article = Article.objects.filter(user__id = user_id, pk = article_id).first()
+    article.status = STATUS_PUBLISHED
+    article.save()
+    messages.success(request,"Article Successfully Published to Admin")
+    return redirect('reviewer:user-accepted-articles',user_id)
+    

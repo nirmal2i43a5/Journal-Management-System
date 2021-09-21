@@ -13,6 +13,14 @@
                   <div class="badge badge-info">{{article.new_category}}</div>
                 </div>
                 <div class="p-2 bd-highlight"> <strong>Created At : </strong>{{article.created_at|date:'d M, Y'}}</div>
+
+                
+                {% if accepted_articles %}
+                <hr>
+
+          <a href="{% url 'reviewer:publish_to_admin' article.user.id article.pk %}" class="btn btn-info">Publish to Admin</a>                  
+                {% endif %}
+                  
                
               </div>
   
