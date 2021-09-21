@@ -69,7 +69,16 @@
                <td></td>
                 <td></td>
                 <td>
-                    <a href="{% url 'reviewer:view_user_articles' user.normal_user.pk %}" class="btn btn-xs btn-success">View articles</a>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <strong>Action</strong>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'reviewer:user-under-review-articles' user.normal_user.pk %}">Under Review</a>
+                      <a class="dropdown-item" href="{% url 'reviewer:user-accepted-articles' user.normal_user.pk %}">Accepted Articles</a>
+                      <a class="dropdown-item" href="{% url 'reviewer:user-rejected-articles' user.normal_user.pk %}">Rejected Articles</a>
+                    </div>
+                  </div>
                 </td>
                 </tr>
                 {% endfor %}

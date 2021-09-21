@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load auth_extras %}
+{% load crispy_forms_tags %}
+{% block title %}
+{{title}}
+{% endblock title %}
+{% block main_content %}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- /.card-header -->
+        {% include "messages.html" %}
+
+        <div class="col-12">
+
+
+            <div class="card " style="background-color: rgb(247, 245, 245);">
+
+                <div class="card-header" style="background-color: #094089;color:white;">
+                    <span>Articles Under Review</span>
+
+
+                </div>
+
+                   
+            </div>
+            </li>
+
+            </ul>
+            <input class="form-control my-2" id="myInput" type="text" placeholder="Search with Category..">
+            <div class="row" id="filter_div">
+                {% for article in articles_under_review %}
+                {% include "users/includes/article-body.html" %}
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <!-- /.card-body -->
+
+
+</section>
+<!-- /.content -->
+
+<style>
+    .nav-custom>li>a:hover {
+        color: black;
+    }
+
+    .nav-custom>li>a {
+
+        font-weight: 600;
+        color: white;
+        padding: 8px 10px 8px 10px;
+        background-color: #094089;
+
+
+    }
+</style>
+{% endblock main_content %}
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            let isFound = false;
+            $("#filter_div *").filter(function () {
+                if ($(this).find('.card-body').text().toLowerCase().includes(value)) {
+                    isFound = true;
+                }
+                $(this).closest('.card').toggle(isFound);
+            });
+        });
+    });
+</script>
+{% endblock %}

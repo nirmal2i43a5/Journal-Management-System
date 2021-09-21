@@ -9,15 +9,64 @@
           </p>
         </a>
       </li>
-      <li class="nav-item">
-        <a href="{% url 'user:article-list' %}" class="nav-link">
-          <i class="fas fa-xs fa-list"></i>
-          <p>
-            View Your Papers
 
-          </p>
-        </a>
-      </li>
 
   
   </li>
+
+
+  <!-- ----- ------------------------------------------Article category---------------------------------------------------->
+<li class="nav-item has-treeview">
+  <a href="#" class="nav-link">
+    <i class="fas  fa-book mr-1"></i>
+    <p>
+  Article Category 
+
+      <i class="fas fa-angle-left right"></i>
+
+
+    </p>
+  </a>
+
+  <ul class="nav nav-treeview">
+    <li class="nav-item ml-3">
+      <a href="{% url 'user:article-under-review' %}" class="nav-link">
+        <i class="fas fa-xs fa-circle"></i>
+        <p>
+          Under Review
+
+        </p>
+      </a>
+    </li>
+
+
+  </ul>
+
+  <ul class="nav nav-treeview">
+    <li class="nav-item ml-3">
+      <a href="{% url 'user:article-accepted' %}" class="nav-link">
+        <i class="fas fa-xs fa-circle"></i>
+        <p>
+        Accepted Articles
+
+        </p>
+      </a>
+    </li>
+
+
+  </ul>
+  <ul class="nav nav-treeview">
+    <li class="nav-item ml-3">
+      <a href="{% url 'user:article-rejected' %}" class="nav-link">
+        <i class="fas fa-xs fa-circle"></i>
+        <p>
+        Rejected Articles
+
+        </p>
+      </a>
+    </li>
+
+
+  </ul>
+
+</li>

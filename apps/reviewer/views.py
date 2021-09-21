@@ -73,9 +73,20 @@ def normal_user_index(request):
     return render(request,'reviewer/manage_user.html',context)
 
 
-def view_user_articles(request,pk):
+def view_user_under_review_articles(request,pk):
     articles_under_review = Article.objects.filter(status = STATUS_UNDER_REVIEW,user__pk = pk)
-    rejected_articles = Article.objects.filter(status = STATUS_REJECTED,user__pk = pk)
+    user = get_object_or_404(CustomUser, pk = pk)
+
+    context = {
+        'title':'Articles',
+        'articles_under_review':articles_under_review,
+        # 'articles_review_feedback':zip(articles_under_review,checked_articles),
+        # 'checked_articles':checked_articles,
+        
+    }
+    return render(request,'reviewer/articles_under_review.html',context)
+
+def view_user_accepted_articles(request,pk):
     accepted_articles = Article.objects.filter(status = STATUS_ACCEPTED,user__pk = pk)
     user = get_object_or_404(CustomUser, pk = pk)
     # articles = user.article_set.all()
@@ -89,16 +100,36 @@ def view_user_articles(request,pk):
    
     #
     context = {
-        'title':'Articles',
-        'articles_under_review':articles_under_review,
-        'rejected_articles':rejected_articles,
+        'title':'Accepted Articles',
         'accepted_articles':accepted_articles
         # 'articles_review_feedback':zip(articles_under_review,checked_articles),
         # 'checked_articles':checked_articles,
         
     }
-    return render(request,'reviewer/article-view.html',context)
+    return render(request,'reviewer/accepted_articles.html',context)
 
+
+def view_user_rejected_articles(request,pk):
+    rejected_articles = Article.objects.filter(status = STATUS_REJECTED,user__pk = pk)
+    user = get_object_or_404(CustomUser, pk = pk)
+    # articles = user.article_set.all()
+    # checked_articles = []
+    # for article in articles:
+    #     article_obj = get_object_or_404(Article, pk = article.pk)
+    #     article_feedback = article_obj.feedback_set.all()
+    #     if article_feedback:
+    #         checked_articles.append(article_obj)
+            
+   
+    #
+    context = {
+        'title':'Rejected Articles',
+        'rejected_articles':rejected_articles,
+        # 'articles_review_feedback':zip(articles_under_review,checked_articles),
+        # 'checked_articles':checked_articles,
+        
+    }
+    return render(request,'reviewer/rejected_articles.html',context)
 
 
 def check_user_article(request,pk):
@@ -134,4 +165,4 @@ def article_feedback(request):
     feedback.save()
     
     messages.success(request,"Successfully Review Paper")
-    return redirect('reviewer:view_user_articles',userId)
+    return redirect('reviewer:user-under-review-articles',userId)

@@ -84,38 +84,59 @@ def upload_article(request):
 
 
 
-
-def article_list(request):
+# This is the article under review 
+def article_under_review(request):
     articles = Article.objects.filter(user = request.user)
     
     articles_under_review = Article.objects.filter(status = STATUS_UNDER_REVIEW,user = request.user)
-    rejected_articles = Article.objects.filter(status = STATUS_REJECTED,user = request.user)
-    accepted_articles = Article.objects.filter(status = STATUS_ACCEPTED,user = request.user)
     
-    accepted_feedback = []
-    rejected_feedback = []
-    for article in articles:
-        article_obj = get_object_or_404(Article, pk = article.pk)
-        article_feedback = article_obj.feedback_set.all()
-        for feedback in article_feedback:     
-            if feedback.status == 'Accepted':
-                print("--------------------")
-                accepted_feedback.append(feedback)
-            if feedback.status == 'Rejected':
-                rejected_feedback.append(feedback)
+
                 
-    print(accepted_feedback)
     # print(rejected_feedback)
     
     context = {
         'title':'View Paper',
         'articles_under_review':articles_under_review,
-        'rejected_articles':zip(rejected_articles,rejected_feedback),
-        'accepted_articles':zip(accepted_articles,accepted_feedback)
     }
     
-    return render(request,'users/article-list.html',context)
+    return render(request,'users/article-under-review.html',context)
 
+def accepted_article_list(request):
+    articles = Article.objects.filter(user = request.user)
+    accepted_articles = Article.objects.filter(status = STATUS_ACCEPTED,user = request.user)
+    accepted_feedback = []
+    for article in articles:
+        article_obj = get_object_or_404(Article, pk = article.pk)
+        article_feedback = article_obj.feedback_set.all()
+        for feedback in article_feedback:     
+            if feedback.status == 'Accepted':
+                accepted_feedback.append(feedback)
+           
+    
+    context = {
+        'title':'Accepted Paper',
+        'accepted_articles':zip(accepted_articles,accepted_feedback)
+    }
+    return render(request,'users/accepted_articles.html',context)
+
+def rejected_article_list(request):
+    articles = Article.objects.filter(user = request.user)
+    rejected_articles = Article.objects.filter(status = STATUS_REJECTED,user = request.user)
+    rejected_feedback = []
+    for article in articles:
+        article_obj = get_object_or_404(Article, pk = article.pk)
+        article_feedback = article_obj.feedback_set.all()
+        for feedback in article_feedback:     
+            if feedback.status == 'Rejected':
+                rejected_feedback.append(feedback)
+                
+    # print(rejected_feedback)
+    
+    context = {
+        'title':'Rejected Paper',
+        'rejected_articles':zip(rejected_articles,rejected_feedback),
+    }
+    return render(request,'users/rejected_articles.html',context)
 
 
 def article_view(request,pk):
