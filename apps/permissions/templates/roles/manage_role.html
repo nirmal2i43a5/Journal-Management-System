@@ -1,0 +1,68 @@
+{% extends 'admin_templates/base_admin.html' %}
+
+{% block main_content %}
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+
+  {% include "includes/messages.html" %}
+ 
+    <hr>
+    <div class="row">
+     
+
+      <div class="col-md-12">
+        <div class="card card-info">
+         
+  {% include 'override_table/header.html' with card_title=title %}
+
+          <!-- /.card-header -->
+          <div class="card-body table-responsive ">
+                     
+          
+                {% url 'role_app:add_role' as button_url %}
+              {% include 'override_table/header_button.html' with button_title='role' button_url=button_url %}
+            <table id="dataTable"
+              class="table table-sm table-striped table-bordered table-hover dataTable no-footer">
+              <thead>
+                <tr>
+                    <th></th>
+                  <th>#</th>
+                  <th>Role</th>
+                  <!-- <th>Created Date</th> -->
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for role in roles %}
+                <tr>
+                    <td></td>
+                  <td>{{ role.id }}</td>
+                  <td>{{ role.name }}</td>
+                  <!-- <td>{{ role.created_date }}</td> -->
+                  <td>
+                    <a href="{% url 'role_app:edit_role' role.id %}" class="btn btn-success btn-xs" data-placement="top"
+                      data-toggle="tooltip" title="Edit"><i class="fas fa-sm fa-edit"></i></a>
+                    <a href="" class="btn btn-danger btn-xs"    
+                    data-placement='top' data-toggle='tooltip' title='Delete'><i class="fas fa-sm fa-trash-alt"></i></a>
+                  
+                    <!-- <button  class="btn btn-danger btn-xs"  data-target='#deleteStudent-{{ student.student_user.id }}' data-toggle="modal"><i
+                      class="fas fa-sm fa-trash-alt"></i></button> -->
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+
+
+    </div>
+</section>
+<!-- /.content -->
+
+{% endblock main_content %}

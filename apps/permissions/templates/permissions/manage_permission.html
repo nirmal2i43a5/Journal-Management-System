@@ -1,0 +1,105 @@
+
+
+{% extends 'admin_templates/base_admin.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block main_content %}
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+
+    {% include "includes/messages.html" %}
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          {% include 'override_table/header.html' with card_title=title %}
+       
+  
+      {% if role %}
+      <div class="card">
+        <div class="card-body">
+   <span style="margin-left:40%;"><strong> Permission For :  {{ role_object }}</strong></span>
+    </div>
+  </div>
+    {% endif %}
+
+         
+          <div class="row">
+            <div class="col-md-8">
+              <form  method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+            
+              
+                  {{ role_form_search|crispy }}
+              
+                  <div class="input-group-btn mt-2 ml-4">
+                    
+                    {% if not role %}
+                    <!--Show this button before searching permission-->
+                    <button type="submit" name = "search_role_submit" style = "background-color:#094089;" class="btn  btn-sm btn-info"><strong>Search Permission</strong></button>
+                      
+                    {% endif %}
+                      
+              
+                  </div>
+                </div>
+              </form>
+           
+             </div>
+<!--   
+             <div class="col-md-4">
+              {% if role %}   <hr>
+              <h3 class="ml-2 float-right">Permissions for : <strong class="text-lg">{{ role_object.name }}</strong></h3>
+              {% endif %}
+             </div> -->
+          </div>
+
+         
+ 
+              
+          <form method="POST" action = "{% url 'role_app:save_permission' %}" >
+            {% csrf_token %}
+   
+          <!-- {% for p in permissions %} -->
+            <!-- <br /><input type="checkbox" name="{{ p.id }}" id = "permission_id" >{{ p.name }} -->
+            <!-- <br /><input type="checkbox" name="permission" value = "{{p.id}}"  >{{ p.name }} -->
+          <!-- {% endfor %} -->
+            <div class="row ml-2">
+              {{ permission_instance_form }}
+            </div>
+      <hr>
+       {% if role %}
+       <a href = "{% url 'role_app:manage_permission' %}" class = 'btn btn-sm btn-danger text-white ml-2 mt-2 mb-1'>Back</a>
+       <button type  = 'submit'  value = "{{ role }}" name = "role_id" class = 'btn btn-sm btn-success text-white ml-2 mt-2 mb-1'><strong>Update Permission</strong></button>
+       {% endif %}
+         
+          </form>
+      
+        </div>  
+
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "permissions/admin_static_link.html" %}
+
+{% endblock main_content %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'css/permissions/permission.css' %}">
+{% endblock custom_css %}
+
+
+{% block custom_js %}
+
+{% endblock custom_js %}
+  
+
+

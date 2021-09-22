@@ -39,9 +39,9 @@
                   <th>ID</th>
                   <th>Image</th>
                   <th>Full Name</th>
-                  <th>Username</th>
-                  <th>Address</th>
-
+                  <th>Total Accepted Articles</th>
+                  <th>Published</th>
+                  <th>Action</th>
                 
                 
                 </tr>
@@ -61,9 +61,20 @@
                     {% endif %}
                     </td>
                   <td>{{ user.full_name }}</td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <strong>Action</strong>
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="{% url 'reviewer:user-accepted-articles' user.normal_user.pk %}">UnPublished Articles</a>
+                          <a class="dropdown-item" href="{% url 'reviewer:user-rejected-articles' user.normal_user.pk %}">Published Articles</a>
+                        </div>
+                      </div>
+                  </td>
 
-                  <td>{{ user.normal_user.username }}</td>
-                  <td>{{ user.address }}</td>
                
                 
                 </tr>

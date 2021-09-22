@@ -1,0 +1,10 @@
+.selector > .selector-chosen > h2,
+.selector > .selector-available > h2{
+  padding:15px;
+  background-color: #094089;
+  color:white;
+}
+.help help-tooltip help-icon{
+  color:white;
+  
+}

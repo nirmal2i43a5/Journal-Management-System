@@ -28,7 +28,7 @@ urlpatterns = [
     path('home/',dashboard, name = 'home'),
      path('user/',include('apps.user.urls',namespace='user')),
        path('reviewer/',include('apps.reviewer.urls',namespace='reviewer')),
-            path('/',include('apps.admin_user.urls')),
+        path('',include('apps.admin_user.urls',namespace='admin_app')),
      
 ]
 if settings.DEBUG:

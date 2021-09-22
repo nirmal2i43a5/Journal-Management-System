@@ -13,12 +13,14 @@ STATUS_UNDER_REVIEW = 'Under Review'
 STATUS_REJECTED = 'Rejected'
 STATUS_ACCEPTED = 'Accepted'
 STATUS_PUBLISHED = 'Published'
+STATUS_ADMIN_PUBLISHED = 'Admin Published'
 STATUS_CHOICES = [
     (STATUS_UNSUBMITTED, 'Unsubmitted'),
     (STATUS_UNDER_REVIEW, 'Peer Review'),
     (STATUS_REJECTED, 'Rejected'),
     (STATUS_ACCEPTED, 'Accepted'),
     (STATUS_PUBLISHED, 'Published'),
+    (STATUS_ADMIN_PUBLISHED, 'Admin Published'),
 ]
 
 

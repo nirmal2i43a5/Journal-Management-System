@@ -1,0 +1,24 @@
+
+<!-- Modal -->
+<div class="modal fade" id="deleteExtraUser-{{ user.extra_user.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+            <form action="{% url 'admin_app:delete_user' user.extra_user.id %}" method="post">
+
+              {% csrf_token %}
+              <p>Are you sure you want to delete detail of  <strong>{{ user.extra_user.full_name }} </strong>?</p>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-danger">Confirm</button>
+          </div>
+          </form>
+
+    </div>
+  </div>
+</div>

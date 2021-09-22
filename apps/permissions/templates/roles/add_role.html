@@ -1,0 +1,71 @@
+{% extends 'admin_templates/base_admin.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+{% block title %}
+  {{title}}
+{% endblock title %}
+  
+
+
+{% block main_content %}
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+
+    {% include "includes/messages.html" %}
+
+    <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-info">
+           <!-- This include shows button for both add and update role -->
+           {% include 'override_table/add_edit_header.html' with edit_title='Update Role' add_title='Add Role' check_title=role %}
+          
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form role="form"  method="post"  class = "col-md-8">
+            {% csrf_token %}
+            <div class="card-body">
+              {{ form|crispy }}
+            </div>
+            <!-- /.card-body -->
+
+
+             <div class="card-footer">
+          {% if role %}
+          <a href = "{% url 'role_app:manage_role' %}" class = 'btn btn-sm btn-danger text-white ml-2 mt-2 mb-1'>Back</a>
+          <button type="submit" class = 'btn btn-sm btn-success text-white ml-2 mt-2 mb-1'>Update Role</button>
+          {% else %}
+          <a href = "{% url 'role_app:manage_role' %}" class = 'btn btn-sm btn-danger text-white ml-2 mt-2 mb-1'>Back</a>
+          <button type="submit" class = 'btn btn-sm btn-success text-white ml-2 mt-2 mb-1'>Add Role</button>
+          {% endif %}
+            </div> 
+            
+          </form>
+        </div>
+        <!-- /.card -->
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /.content -->
+
+
+{% include "permissions/admin_static_link.html" %}
+
+{% endblock main_content %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'css/permissions/permission.css' %}">
+
+{% endblock custom_css %}
+
+{% block custom_js %}
+{% endblock custom_js %}
+  
