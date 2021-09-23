@@ -1,3 +1,4 @@
+from apps.reviewer.models import Reviewer
 from django.db import models
 from django.db.models.fields import BooleanField
 from django.utils.translation import gettext_lazy as _
@@ -12,14 +13,14 @@ STATUS_UNSUBMITTED = 'Unsubmitted'
 STATUS_UNDER_REVIEW = 'Under Review'
 STATUS_REJECTED = 'Rejected'
 STATUS_ACCEPTED = 'Accepted'
-STATUS_PUBLISHED = 'Published'
+STATUS_REVIEWER_PUBLISHED = 'Reviewer Published'
 STATUS_ADMIN_PUBLISHED = 'Admin Published'
 STATUS_CHOICES = [
     (STATUS_UNSUBMITTED, 'Unsubmitted'),
     (STATUS_UNDER_REVIEW, 'Peer Review'),
     (STATUS_REJECTED, 'Rejected'),
     (STATUS_ACCEPTED, 'Accepted'),
-    (STATUS_PUBLISHED, 'Published'),
+    (STATUS_REVIEWER_PUBLISHED, 'Reviewer Published'),
     (STATUS_ADMIN_PUBLISHED, 'Admin Published'),
 ]
 
@@ -69,6 +70,7 @@ class Article(models.Model):
     new_category = models.CharField(help_text = 'Only add new Category if you do not see your wise category in Category Choice list.',max_length=100,null=True, blank=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES)
     description = models.TextField(null=True, blank=True)
+    reviewed_by = models.ForeignKey(Reviewer, on_delete=models.CASCADE,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

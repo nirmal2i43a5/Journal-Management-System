@@ -39,7 +39,7 @@
                   <th>ID</th>
                   <th>Image</th>
                   <th>Full Name</th>
-                  <th>Total Accepted Articles</th>
+                  <th>Accepted Articles</th>
                   <th>Published</th>
                   <th>Action</th>
                 
@@ -47,7 +47,7 @@
                 </tr>
               </thead>
               <tbody>
-                {% for user in users %}
+                {% for user,article in users %}
                 <tr>
                   <td></td>
                   <td>{{ forloop.counter }}</td>
@@ -61,16 +61,17 @@
                     {% endif %}
                     </td>
                   <td>{{ user.full_name }}</td>
-                  <td></td>
-                  <td></td>
+                  <td>{{ article.accepted_articles_count }}</td>
+
+                  <td>{{ article.articles_published_to_sites_count }}</td>
                   <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <strong>Action</strong>
                         </button>
                         <div class="dropdown-menu">
-                          <a class="dropdown-item" href="{% url 'reviewer:user-accepted-articles' user.normal_user.pk %}">UnPublished Articles</a>
-                          <a class="dropdown-item" href="{% url 'reviewer:user-rejected-articles' user.normal_user.pk %}">Published Articles</a>
+                          <a class="dropdown-item" href="{% url 'admin_app:unpublished-articles' user.normal_user.pk %}">UnPublished Articles</a>
+                          <a class="dropdown-item" href="{% url 'admin_app:published-articles' user.normal_user.pk %}">Published Articles</a>
                         </div>
                       </div>
                   </td>

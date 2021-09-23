@@ -1,9 +1,10 @@
 
     {% load static %}
     <div class="col-md-3">
-        <a href="{% url 'reviewer:check_user_article' article.pk %}">
   
           <div class="card">
+        <a href="{% url 'admin_app:article_view' article.pk %}">
+
             <div class="card-body">
   
               <img src="{% static 'image/document_static.png' %}" style=" width:100%" alt="">
@@ -13,22 +14,23 @@
                   <div class="badge badge-info">{{article.new_category}}</div>
                 </div>
                 <div class="p-2 bd-highlight"> <strong>Created At : </strong>{{article.created_at|date:'d M, Y'}}</div>
+                <div class="p-2 bd-highlight"> <strong>Reviewed By : </strong>{{article.reviewed_by}}</div>
 
                 
-                {% if accepted_articles %}
-                <hr>
-
-                    <a href="{% url 'reviewer:publish_to_admin' article.user.id article.pk %}" class="btn btn-info">Publish to Admin</a>                  
-                {% endif %}
-                  
+               
                
               </div>
   
   
   
             </div>
-          </div>
         </a>
+
+           
+              
+          </div>
+
+        
   
       </div>
-     
+  

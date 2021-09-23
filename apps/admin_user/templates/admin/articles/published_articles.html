@@ -19,7 +19,7 @@
             <div class="card " style="background-color: rgb(247, 245, 245);">
 
                 <div class="card-header" style="background-color: #094089;color:white;">
-                    <span>Accepted Articles</span>
+                    <span>Published Articles</span>
                    
 
                 </div>
@@ -31,8 +31,12 @@
             </ul>
             <input class="form-control my-2" id="myInput" type="text" placeholder="Search with Category..">
             <div class="row" id="filter_div">
-                {% for article in accepted_articles %}
-                {% include "reviewer/includes/article-body.html" %}
+                {% for article in published_articles %}
+                {% include "admin/articles/includes/article-body.html" %}
+
+
+                {% empty %}
+                <h1 style="text-align: center;">   <span> <strong>No Articles Found</strong></span></h1>
                 {% endfor %}
             </div>
         </div>

@@ -6,17 +6,20 @@ from apps.admin_user.models import Category
 
 
 
+
 STATUS_UNSUBMITTED = 'Unsubmitted'
 STATUS_UNDER_REVIEW = 'Under Review'
 STATUS_REJECTED = 'Rejected'
 STATUS_ACCEPTED = 'Accepted'
-STATUS_PUBLISHED = 'Published'
+STATUS_REVIEWER_PUBLISHED = 'Reviewer Published'
+STATUS_ADMIN_PUBLISHED = 'Admin Published'
 STATUS_CHOICES = [
     (STATUS_UNSUBMITTED, 'Unsubmitted'),
     (STATUS_UNDER_REVIEW, 'Peer Review'),
     (STATUS_REJECTED, 'Rejected'),
     (STATUS_ACCEPTED, 'Accepted'),
-    (STATUS_PUBLISHED, 'Published'),
+    (STATUS_REVIEWER_PUBLISHED, 'Reviewer Published'),
+    (STATUS_ADMIN_PUBLISHED, 'Admin Published'),
 ]
 
 

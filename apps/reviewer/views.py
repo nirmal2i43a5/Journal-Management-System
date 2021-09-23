@@ -77,7 +77,7 @@ def normal_user_index(request):
         accepted_articles = user_object.article_set.filter(status = STATUS_ACCEPTED)
         rejected_articles = user_object.article_set.filter(status = STATUS_REJECTED)
         article_under_review = user_object.article_set.filter(status = STATUS_UNDER_REVIEW)
-        article_publish_to_admin = user_object.article_set.filter(status = STATUS_PUBLISHED)
+        article_publish_to_admin = user_object.article_set.filter(status = STATUS_REVIEWER_PUBLISHED)
         total_articles_count = articles.count()
         accepted_articles_count = accepted_articles.count()
         rejected_articles_count = rejected_articles.count()
@@ -95,6 +95,7 @@ def normal_user_index(request):
         'users':zip(users,total_articles)
     }
     return render(request,'reviewer/manage_user.html',context)
+
 
 
 def view_user_under_review_articles(request,pk):
@@ -192,9 +193,13 @@ def article_feedback(request):
     return redirect('reviewer:user-under-review-articles',userId)
 
 
+
 def publish_to_admin(request,user_id,article_id):
-    article = Article.objects.filter(user__id = user_id, pk = article_id).first()
-    article.status = STATUS_PUBLISHED
+    reviewer_object = get_object_or_404(Reviewer, reviewer_user__pk = request.user.id)
+    print(reviewer_object.reviewer_user.username)
+    article = Article.objects.get(pk = article_id)
+    article.reviewed_by = reviewer_object
+    article.status = STATUS_REVIEWER_PUBLISHED
     article.save()
     messages.success(request,"Article Successfully Published to Admin")
     return redirect('reviewer:user-accepted-articles',user_id)
