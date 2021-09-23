@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from .forms import RoleForm, PermissionForm, UserPermissionSearch,ShowRolePermission
+from .forms import RoleForm, PermissionForm, UserPermissionSearch,ShowRolePermission,RoleEditForm
 from django.views.generic import CreateView, UpdateView, ListView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -38,7 +38,7 @@ class UserRoleCreate(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
 class UserRoleUpdate(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Group
     template_name = "roles/add_role.html"
-    form_class = RoleForm
+    form_class = RoleEditForm
     permission_required = 'auth.change_group'
     context_object_name = 'role'  # default context_object_name is object
     success_message = 'Role is Updated Successfully'
@@ -54,7 +54,7 @@ class UserRoleUpdate(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = 'Role'
+        context["title"] = 'Permission'
         return context
 
 class UserRoleMange(PermissionRequiredMixin, SuccessMessageMixin, ListView):

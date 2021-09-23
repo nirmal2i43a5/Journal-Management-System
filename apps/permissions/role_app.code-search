@@ -1,0 +1,57 @@
+# Query: role_app
+# Flags: CaseSensitive RegExp OpenEditors IgnoreExcludeSettings
+# Excluding: permission
+# ContextLines: 1
+
+12 results - 5 files
+
+apps/permissions/views.py:
+   24      def get_success_url(self, **kwargs):
+   25:         return reverse_lazy('permission:add_role')
+   26  
+
+   46      def get_success_url(self, **kwargs):
+   47:         return reverse_lazy('permission:edit_role', kwargs={'pk': self.object.pk})
+   48  
+
+   78      def get_success_url(self, **kwargs):
+   79:         return reverse_lazy('permission:add_permission')
+   80  
+
+  159              
+  160:             # return redirect('permission:manage_permission')
+  161              context = {
+
+apps/permissions/templates/permissions/add_permission.html:
+  36            {% if permission %}
+  37:           <a href = "{% url 'permission:manage_permission' %}" class = 'btn btn-sm btn-danger text-white ml-2 mt-2 mb-1'>Back</a>
+  38            <button type="submit"  class = 'btn btn-sm btn-success text-white ml-2 mt-2 mb-1'>Update Permission</button>
+  39            {% else %}
+  40:           <a href = "{% url 'permission:manage_permission' %}" class = 'btn btn-sm btn-danger text-white ml-2 mt-2 mb-1'>Back</a>
+  41            <button type="submit"  class = 'btn btn-sm btn-success text-white ml-2 mt-2 mb-1'>Add Permission</button>
+
+apps/permissions/templates/permissions/manage_permission.html:
+  62                
+  63:           <form method="POST" action = "{% url 'permission:save_permission' %}" >
+  64              {% csrf_token %}
+
+  74         {% if role %}
+  75:        <a href = "{% url 'permission:manage_permission' %}" class = 'btn btn-sm btn-danger text-white ml-2 mt-2 mb-1'>Back</a>
+  76         <button type  = 'submit'  value = "{{ role }}" name = "role_id" class = 'btn btn-sm btn-success text-white ml-2 mt-2 mb-1'><strong>Update Permission</strong></button>
+
+apps/permissions/templates/roles/add_role.html:
+  38            {% if role %}
+  39:           <a href = "{% url 'permission:manage_role' %}" class = 'btn btn-sm btn-danger text-white ml-2 mt-2 mb-1'>Back</a>
+  40            <button type="submit" class = 'btn btn-sm btn-success text-white ml-2 mt-2 mb-1'>Update Role</button>
+  41            {% else %}
+  42:           <a href = "{% url 'permission:manage_role' %}" class = 'btn btn-sm btn-danger text-white ml-2 mt-2 mb-1'>Back</a>
+  43            <button type="submit" class = 'btn btn-sm btn-success text-white ml-2 mt-2 mb-1'>Add Role</button>
+
+apps/permissions/templates/roles/manage_role.html:
+  23            
+  24:                 {% url 'permission:add_role' as button_url %}
+  25                {% include 'override_table/header_button.html' with button_title='role' button_url=button_url %}
+
+  44                    <td>
+  45:                     <a href="{% url 'permission:edit_role' role.id %}" class="btn btn-success btn-xs" data-placement="top"
+  46                        data-toggle="tooltip" title="Edit"><i class="fas fa-sm fa-edit"></i></a>

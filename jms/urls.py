@@ -29,6 +29,8 @@ urlpatterns = [
      path('user/',include('apps.user.urls',namespace='user')),
        path('reviewer/',include('apps.reviewer.urls',namespace='reviewer')),
         path('',include('apps.admin_user.urls',namespace='admin_app')),
+        #  path('authentication/',include('apps.authentication.urls',namespace='authentication')),
+        path('permission/',include('apps.permissions.urls',namespace='role_app')),
      
 ]
 if settings.DEBUG:
