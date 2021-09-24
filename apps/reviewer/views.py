@@ -6,12 +6,14 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from apps.user.models import Article,Feedback
 from apps.user.forms import FeedbackForm
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 
 
 
 
+@permission_required('reviewer.add_reviewer', raise_exception=True)
 def add_reviewer(request):
     auth_form = CustomUserForm()
     reviewer_user = ReviewerRegisterForm()
@@ -20,6 +22,7 @@ def add_reviewer(request):
         'auth_form':auth_form,
         'reviewer_user':reviewer_user
     }
+    
     if request.method == 'POST':
         auth_form = CustomUserForm(request.POST,request.FILES)
         reviewer_user = ReviewerRegisterForm(request.POST,request.FILES)
@@ -34,8 +37,6 @@ def add_reviewer(request):
                 image_url = None
            
             group = Group.objects.get(name = 'Reviewer')
-            
-            
             user = CustomUser.objects.create_user(
                 username=username, password="password",
                 user_type=group)
@@ -47,26 +48,20 @@ def add_reviewer(request):
             user.reviewer.gender = reviewer_user.cleaned_data['gender']
             user.reviewer.contact = reviewer_user.cleaned_data['contact']
             user.reviewer.address = reviewer_user.cleaned_data['address']
-
             if image_url != None:
                 user.reviewer.image = image_url
-
             user.save()
             user.groups.add(group)#adding user to particular group.ie role
-            print(user,"-----group----")
-            
-                
             messages.success(request, "Successfully Created Reviewer")
             return redirect('admin:reviewer_index')
          
-        
     return render(request,'reviewer/add.html',context)
 
 
 
+@permission_required('user.normal_user_view_by_reviewer', raise_exception=True)
 def normal_user_index(request):
     users = NormalUser.objects.all()
-    
     total_articles = []
     rejected_articles = []
     accepted_articles = []
@@ -87,13 +82,13 @@ def normal_user_index(request):
         total_articles.append({'total_articles':total_articles_count,'accepted_articles_count':accepted_articles_count,
                                'rejected_articles_count':rejected_articles_count,'article_under_review_count':article_under_review_count,
                                'article_publish_to_admin':article_publish_to_admin_count})
-    # print(total_articles)
         
     print(total_articles)
     context = {
         'title':'Manage User',
         'users':zip(users,total_articles)
     }
+    
     return render(request,'reviewer/manage_user.html',context)
 
 
@@ -110,6 +105,8 @@ def view_user_under_review_articles(request,pk):
         
     }
     return render(request,'reviewer/articles_under_review.html',context)
+
+
 
 def view_user_accepted_articles(request,pk):
     accepted_articles = Article.objects.filter(status = STATUS_ACCEPTED,user__pk = pk)
@@ -157,6 +154,7 @@ def view_user_rejected_articles(request,pk):
     return render(request,'reviewer/rejected_articles.html',context)
 
 
+
 def check_user_article(request,pk):
     article = get_object_or_404(Article, pk = pk)
     context = {
@@ -168,7 +166,9 @@ def check_user_article(request,pk):
 
 
 
+@permission_required('user.article_feedback_by_reviewer', raise_exception=True)
 def article_feedback(request):
+    
     userId = request.POST['userId']
     articleId = request.POST['articleId']
     feedback = request.POST['feedback']
@@ -180,10 +180,8 @@ def article_feedback(request):
         article_object.save(update_fields=['status'])
     elif status == 'Rejected':
         article_object.status = STATUS_REJECTED
-        article_object.save(update_fields=['status'])
-        
-        
-    print(userId, articleId, feedback,status)
+        article_object.save(update_fields=['status'])     
+           
     feedback = Feedback(feedback = feedback, status = status)
     feedback.user = get_object_or_404(CustomUser,pk = userId)
     feedback.article = article_object
@@ -194,6 +192,7 @@ def article_feedback(request):
 
 
 
+@permission_required('user.article_publish_to_admin_by_reviewer', raise_exception=True)
 def publish_to_admin(request,user_id,article_id):
     reviewer_object = get_object_or_404(Reviewer, reviewer_user__pk = request.user.id)
     print(reviewer_object.reviewer_user.username)

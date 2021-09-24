@@ -55,6 +55,10 @@ class NormalUser(models.Model):
         db_table = 'tbl_normal_user'
         verbose_name = _("normal_user")
         verbose_name_plural = _("normal_user")
+        permissions = (
+            ("normal_user_view_by_reviewer", "Can View Normal User of Reviewer Part"),
+         
+        )
 
     def __str__(self):
         return self.full_name
@@ -79,10 +83,12 @@ class Article(models.Model):
         verbose_name = _("article")
         verbose_name_plural = _("articles")
         permissions = (
-            ("view_publish_articles_to_sites", "Can View Published Articles To Sites"),
-            ("publish_articles_to_sites", "Can Published Articles To Sites"),
-            ("each_article_view", "Can  View Each Articles "),#for admin sides
-            ("view_unpublish_articles", "Can View UnPublished Articles"),#this is the accepted articles by reviewer which is yet unpublish by admin
+            ("view_publish_articles_to_sites", "Can view published articles to sites"),
+            ("publish_articles_to_sites", "Can Published articles to pites"),
+            ("article_feedback_by_reviewer", "Can give uer article geedback"),
+              ("article_publish_to_admin_by_reviewer", "Can publish  article to admin"),
+            ("each_article_view", "Can  view each articles "),#for admin sides
+            ("view_unpublish_articles", "Can view unPublished articles"),#this is the accepted articles by reviewer which is yet unpublish by admin
          
         )
         
