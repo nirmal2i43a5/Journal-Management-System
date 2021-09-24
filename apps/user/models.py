@@ -78,6 +78,13 @@ class Article(models.Model):
         db_table = 'tbl_article'
         verbose_name = _("article")
         verbose_name_plural = _("articles")
+        permissions = (
+            ("view_publish_articles_to_sites", "Can View Published Articles To Sites"),
+            ("publish_articles_to_sites", "Can Published Articles To Sites"),
+            ("each_article_view", "Can  View Each Articles "),#for admin sides
+            ("view_unpublish_articles", "Can View UnPublished Articles"),#this is the accepted articles by reviewer which is yet unpublish by admin
+         
+        )
         
         
 

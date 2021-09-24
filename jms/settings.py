@@ -45,6 +45,7 @@ CUSTOM_APPS = [
     'apps.reviewer.apps.ReviewerConfig',
     'viewer.apps.ViewerConfig',
     'apps.permissions.apps.PermissionsConfig',
+     'apps.authentication.apps.AuthenticationConfig',
     
     
 ]

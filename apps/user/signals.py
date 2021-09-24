@@ -17,7 +17,7 @@ def populate_models(sender, **kwargs):
     
 
 @receiver(post_save, sender=CustomUser)
-def create_user_profile(sender, instance, created, **kwargs):  # instance is CustomUser
+def create_authentication(sender, instance, created, **kwargs):  # instance is CustomUser
     if created:
         print("I am signal")
         group = populate_models(sender)
@@ -27,7 +27,7 @@ def create_user_profile(sender, instance, created, **kwargs):  # instance is Cus
                 Reviewer.objects.create(reviewer_user=instance)
     
 @receiver(post_save, sender=CustomUser)
-def save_user_profile(sender, instance, **kwargs):
+def save_authentication(sender, instance, **kwargs):
     print("I am signal 2")
     group = populate_models(sender)
     if instance.user_type == group[0]: 
