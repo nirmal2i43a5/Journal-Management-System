@@ -29,7 +29,9 @@
           <!-- /.card-header -->
           <div class="card-body table-responsive">
             
-            {% url '' as button_url %}
+            {% url 'reviewer:add_reviewer' as button_url %}
+
+            {% include 'override_table/header_button.html' with button_title='Add Reviewer' button_url=button_url %}
           
                  
             <table id="dataTable" class="table table-sm  table-striped table-bordered table-hover  text-nowrap  dataTable no-footer">

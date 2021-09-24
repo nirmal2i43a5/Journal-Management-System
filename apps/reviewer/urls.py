@@ -5,7 +5,7 @@ from django.urls import path
 app_name = 'reviewer'
 
 urlpatterns = [
-    path('add/',add_reviewer,name='add'),
+    path('add/',add_reviewer,name='add_reviewer'),
         path('upload-article/',upload_article,name='upload-article'),
         path('article-view/<pk>/',article_view,name='article-view'),
     path('user/index/',normal_user_index,name='normal-user-index'),
