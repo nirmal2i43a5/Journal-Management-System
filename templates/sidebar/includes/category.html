@@ -1,0 +1,42 @@
+<li class="nav-item has-treeview">
+    <a href="#" class="nav-link">
+      <i class="fas  fa-newspaper mr-1"></i>
+      <p>
+        Category Mangement
+  
+        <i class="fas fa-angle-left right"></i>
+  
+  
+      </p>
+    </a>
+  
+    <ul class="nav nav-treeview">
+      <li class="nav-item ml-3">
+        <a href="{% url 'admin_app:add_category' %}" class="nav-link">
+          <i class="fas fa-xs fa-circle"></i>
+          <p>
+            Create Category
+  
+          </p>
+        </a>
+      </li>
+  
+  
+    </ul>
+
+    <ul class="nav nav-treeview">
+        <li class="nav-item ml-3">
+          <a href="{% url 'admin_app:category_index' %}" class="nav-link">
+            <i class="fas fa-xs fa-circle"></i>
+            <p>
+              Manage Category
+    
+            </p>
+          </a>
+        </li>
+    
+    
+      </ul>
+  
+    
+  </li>

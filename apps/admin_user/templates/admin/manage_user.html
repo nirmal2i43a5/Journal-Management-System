@@ -41,6 +41,7 @@
                   <th>Full Name</th>
                   <th>Username</th>
                   <th>Address</th>
+                  <th>Created At</th>
 
                 
                 
@@ -65,7 +66,7 @@
                   <td>{{ user.normal_user.username }}</td>
                   <td>{{ user.address }}</td>
                
-                
+                  <td>{{ user.created_at }}</td>
                 </tr>
                 {% endfor %}
               </tbody>

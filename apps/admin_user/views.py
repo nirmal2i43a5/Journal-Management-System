@@ -1,10 +1,39 @@
+from apps.admin_user.models import Category
 from django.shortcuts import render,get_object_or_404,redirect
-
 from apps.user.models import STATUS_ACCEPTED, NormalUser,Article
 from apps.reviewer.models import STATUS_ADMIN_PUBLISHED, STATUS_REVIEWER_PUBLISHED, Reviewer
 from apps.permissions.models import CustomUser
+from .forms import ArticleCategoryForm
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import  permission_required
+
+
+
+@permission_required('admin_user.add_category', raise_exception=True)
+def add_category(request):
+    form = ArticleCategoryForm()
+    if request.method == 'POST':
+        form = ArticleCategoryForm(request.POST,request.FILES)
+        form.save()
+        messages.success(request, "Successfully Added Category.")
+        return redirect('admin_app:add_category')
+    
+    context = {
+        'form':form
+    }
+    return render(request,'admin/category/add.html',context)
+
+
+
+@permission_required('admin_user.view_category', raise_exception=True)
+def category_index(request):
+    categories = Category.objects.all()
+    context = {
+        'title':'Manage Category',
+        'categories':categories
+    }
+    return render(request,'admin/category/index.html',context)
+
 
 
 @permission_required('user.view_normaluser', raise_exception=True)
@@ -28,9 +57,11 @@ def reviewer_index(request):
     return render(request,'admin/manage_reviewer.html',context)
 
 
+
 '''Users list and their articles by Admin '''
 @permission_required('user.view_normaluser', raise_exception=True)
 def user_view(request):
+    
     users = NormalUser.objects.all()
     
     article_count_list = []
@@ -41,22 +72,20 @@ def user_view(request):
         user_object = get_object_or_404(CustomUser,id = user.normal_user.id)
         articles = user_object.article_set.all()
         accepted_articles = user_object.article_set.filter(status = STATUS_REVIEWER_PUBLISHED)
-        print(accepted_articles,"  accepted articel==============")
         articles_published_to_sites = user_object.article_set.filter(status = STATUS_ADMIN_PUBLISHED)
-        print(articles_published_to_sites,"publishded by admin")
         accepted_articles_count = accepted_articles.count()
         articles_published_to_sites_count = articles_published_to_sites.count()
-        article_count_list.append({'accepted_articles_count':accepted_articles_count,
+        article_count_list.append(
+                            {'accepted_articles_count':accepted_articles_count,
                            'articles_published_to_sites_count':articles_published_to_sites_count
                            })
-        
-    print(accepted_articles_count)
-    
+            
     context = {
-        'title':'View User',
+        'title':'Manage Users Article',
         'users':zip(users,article_count_list),
         
     }
+    
     return render(request,'admin/articles/user_view.html',context)
     
 
@@ -70,12 +99,9 @@ def unpublished_articles(request,user_id):
     context = {
         'title':'UnPublished Articles',
         'unpublished_articles':unpublished_articles,
-        # 'articles_review_feedback':zip(articles_under_review,checked_articles),
-        # 'checked_articles':checked_articles,
         
     }
     return render(request,'admin/articles/unpublished_articles.html',context)
-
 
 
 
@@ -87,8 +113,6 @@ def article_view(request,article_id):
     context = {
         'title':'Article View',
         'article':article,
-        # 'articles_review_feedback':zip(articles_under_review,checked_articles),
-        # 'checked_articles':checked_articles,
         
     }
     return render(request,'admin/articles/article-view.html',context)
@@ -103,6 +127,7 @@ def publish_articles_to_sites(request,article_id):
     article.save()
     messages.success(request,"Article Successfully Published")
     return redirect('admin_app:user-view')
+    
     
 
 @permission_required('user.view_publish_articles_to_sites', raise_exception=True)
