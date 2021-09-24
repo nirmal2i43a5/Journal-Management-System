@@ -1,7 +1,20 @@
 
-    <li class="nav-item">
+<li class="nav-item has-treeview">
+  <a href="#" class="nav-link">
+    <i class="fas  fa-newspaper mr-1"></i>
+    <p>
+      Article Mangement
+
+      <i class="fas fa-angle-left right"></i>
+
+
+    </p>
+  </a>
+
+  <ul class="nav nav-treeview">
+    <li class="nav-item ml-3">
       <a href="{% url 'reviewer:normal-user-index' %}" class="nav-link">
-        <i class="fas fa-xs fa-list"></i>
+        <i class="fas fa-xs fa-circle"></i>
         <p>
           View Articles
 
@@ -10,6 +23,19 @@
     </li>
 
 
+  </ul>
+
+  
+</li>
+{% include "sidebar/includes/authentication.html" %}
+<li class="nav-item">
+  <a href="{% url 'logout' %}" class="nav-link">
+    <i class="fas fa-sign-out-alt"></i>
+    <p>
+      Profile
+
+    </p>
+  </a>
 </li>
 <li class="nav-item">
   <a href="{% url 'logout' %}" class="nav-link">
