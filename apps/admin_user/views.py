@@ -25,6 +25,31 @@ def add_category(request):
 
 
 
+@permission_required('admin_user.change_category', raise_exception=True)
+def edit_category(request,pk):
+    instance = get_object_or_404(Category, pk = pk)
+    form = ArticleCategoryForm(instance = instance)
+    if request.method == 'POST':
+        form = ArticleCategoryForm(request.POST,request.FILES, instance = instance)
+        form.save()
+        messages.success(request, "Successfully Edited Category.")
+        return redirect('admin_app:category_index')
+    
+    context = {
+        'form':form,
+        'instance':instance
+    }
+    return render(request,'admin/category/add.html',context)
+
+
+@permission_required('admin_user.delete_category', raise_exception=True)
+def delete_category(request,pk):
+    instance = get_object_or_404(Category, pk = pk)
+    instance.delete()
+    messages.success(request, "Successfully Deleted Category.")
+    return redirect('admin_app:category_index')
+    
+
 @permission_required('admin_user.view_category', raise_exception=True)
 def category_index(request):
     categories = Category.objects.all()

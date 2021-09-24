@@ -18,7 +18,14 @@
       <div class="col-md-12">
         <!-- general form elements -->
         <div class="card">
+            
+            {% if instance %}
+          {% include 'override_table/header.html' with card_title='Edit Category' %}
+                {% else %}
           {% include 'override_table/header.html' with card_title='Add Category' %}
+
+            {% endif %}
+                
           <!-- /.card-header -->
           <!-- form start -->
           <form method="post" enctype="multipart/form-data">

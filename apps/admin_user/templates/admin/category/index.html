@@ -29,7 +29,9 @@
           <!-- /.card-header -->
           <div class="card-body table-responsive">
             
-          
+            {% url 'admin_app:add_category' as button_url %}
+
+            {% include 'override_table/header_button.html' with button_title='Add Category' button_url=button_url %}
                  
             <table id="dataTable" class="table table-sm  table-striped table-bordered table-hover  text-nowrap  dataTable no-footer">
               <thead>
@@ -54,11 +56,36 @@
                   <td>{{ category.description }}</td>
                   <td>{{ category.created_at }}</td>
                   <td>
-                    
+                    <a href="{% url 'admin_app:edit_category' category.pk %}" class="btn btn-xs btn-success"><i class="fas fa-xs fa-edit"></i> <strong>Edit</strong></a>
+                    <button  class="btn btn-danger btn-xs"  data-target='#deleteCategory-{{ category.id }}' data-toggle="modal"><i
+                      class="fas fa-sm fa-trash-alt"></i> <strong>Delete</strong></button>
                   </td>
                
                 
                 </tr>
+
+                <div class="modal fade" id="deleteCategory-{{ category.pk }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+            <form action="{% url 'admin_app:delete_category' category.pk %}" method="post">
+
+              {% csrf_token %}
+              <p>Are you sure you want to delete Category Detail?</p>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-danger">Confirm</button>
+          </div>
+          </form>
+
+    </div>
+  </div>
+</div>
                 {% endfor %}
               </tbody>
             </table>
@@ -71,7 +98,10 @@
   </div>
 </section>
 <!-- /.content -->
+<!-- Modal -->
+
 
 {% endblock main_content %}
+
 
 
