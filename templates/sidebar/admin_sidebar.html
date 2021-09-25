@@ -1,5 +1,10 @@
 
 <!-- ----- ------------------------------------------Article Management---------------------------------------------------->
+
+
+{% if perms.user.view_normaluser %}
+  
+  
 <li class="nav-item has-treeview">
   <a href="#" class="nav-link">
     <i class="fas  fa-newspaper mr-1"></i>
@@ -11,7 +16,7 @@
 
     </p>
   </a>
-
+  {% if perms.user.view_normaluser %}
   <ul class="nav nav-treeview">
     <li class="nav-item ml-3">
       <a href="{% url 'admin_app:user-view' %}" class="nav-link">
@@ -22,12 +27,13 @@
         </p>
       </a>
     </li>
-
-
   </ul>
+  {% endif %}
 
   
 </li>
+{% endif %}
+
 <!-- ----------------User management--------------------- -->
 <li class="nav-item has-treeview">
     <a href="#" class="nav-link">

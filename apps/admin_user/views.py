@@ -1,3 +1,4 @@
+import datetime
 from apps.admin_user.models import Category
 from django.shortcuts import render,get_object_or_404,redirect
 from apps.user.models import STATUS_ACCEPTED, NormalUser,Article
@@ -149,6 +150,7 @@ def article_view(request,article_id):
 def publish_articles_to_sites(request,article_id):
     article = Article.objects.get(pk = article_id)
     article.status = STATUS_ADMIN_PUBLISHED
+    # article.updated_at = datetime.date.today()
     article.save()
     messages.success(request,"Article Successfully Published")
     return redirect('admin_app:user-view')

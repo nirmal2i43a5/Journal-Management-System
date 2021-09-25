@@ -85,7 +85,6 @@ class Article(models.Model):
         permissions = (
             ("view_publish_articles_to_sites", "Can view published articles to sites"),
             ("publish_articles_to_sites", "Can Published articles to pites"),
-            ("article_feedback_by_reviewer", "Can give uer article geedback"),
               ("article_publish_to_admin_by_reviewer", "Can publish  article to admin"),
             ("each_article_view", "Can  view each articles "),#for admin sides
             ("view_unpublish_articles", "Can view unPublished articles"),#this is the accepted articles by reviewer which is yet unpublish by admin

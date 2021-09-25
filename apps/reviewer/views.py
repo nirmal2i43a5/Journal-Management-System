@@ -166,7 +166,7 @@ def check_user_article(request,pk):
 
 
 
-@permission_required('user.article_feedback_by_reviewer', raise_exception=True)
+@permission_required('user.add_feedback', raise_exception=True)
 def article_feedback(request):
     
     userId = request.POST['userId']
