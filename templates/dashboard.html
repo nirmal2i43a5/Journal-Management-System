@@ -20,11 +20,12 @@ Dashboard
 <section class="content">
   <div class="container-fluid">
     <!-- Small boxes (Stat box) -->
+    {% if request.user|has_group:'Admin' or request.user.is_superuser %}
     <div class="row">
       <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box border border-info">
           <span class="info-box-icon bg-info elevation-1">
-            <a href=""> <i class="fas fa-1x fa-user-graduate"></i></a>
+            <a href=""> <i class="fas fa-1x fa-users"></i></a>
           </span>
 
           <div class="info-box-content">
@@ -41,7 +42,7 @@ Dashboard
       <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box mb-3 border border-primary">
           <span class="info-box-icon elevation-1" style="background-color: #004de6;">
-            <a href="" class="text-white"> <i class="fas fa-1x fa-chalkboard-teacher"></i></a>
+            <a href="" class="text-white"> <i class="fas fa-1x fa-users"></i></a>
           </span>
 
           <div class="info-box-content ">
@@ -84,6 +85,145 @@ Dashboard
       </div>
       <!-- /.col -->
     </div>
+    {% elif request.user|has_group:'User'  %}
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box border border-info">
+          <span class="info-box-icon bg-info elevation-1">
+            <a href=""> <i class="fas fa-1x fa-newspaper"></i></a>
+          </span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Total Submitted articles</span>
+            <span class="info-box-number">
+              {{total_user_articles_submitted_count}}
+            </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+  
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3 border border-primary">
+          <span class="info-box-icon elevation-1" style="background-color: #004de6;">
+            <a href="" class="text-white"> <i class="fas fa-1x fa-newspaper"></i></a>
+          </span>
+
+          <div class="info-box-content ">
+            <span class="info-box-text">Total accepted</span>
+            <span class="info-box-number">{{total_user_article_accepted_count}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+
+      <!-- fix for small devices only -->
+      <div class="clearfix hidden-md-up"></div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3 border border-primary">
+          <span class="info-box-icon bg-primary elevation-1">
+            <a href=""> <i class="fas fa-1x fa-newspaper"></i></a>
+          </span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Total rejected</span>
+            <span class="info-box-number">{{total_user_article_rejected_count}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3 border border-success">
+          <span class="info-box-icon bg-success elevation-1"> <i class="fas fa-1x fa-newspaper"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Under review</span>
+            <span class="info-box-number">{{total_user_article_under_review_count}}</span>
+          </div>
+        </div>
+      </div>
+      <!-- /.col -->
+    </div>
+   
+    {% elif request.user|has_group:'Reviewer'  %}
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box border border-info">
+          <span class="info-box-icon bg-info elevation-1">
+            <a href=""> <i class="fas fa-1x fa-newspaper"></i></a>
+          </span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Today accepted</span>
+            <span class="info-box-number">
+              {{today_accepted_article_by_reviewer_count}}
+            </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+  
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3 border border-primary">
+          <span class="info-box-icon elevation-1" style="background-color: #004de6;">
+            <a href="" class="text-white"> <i class="fas fa-1x fa-newspaper"></i></a>
+          </span>
+
+          <div class="info-box-content ">
+            <span class="info-box-text">Today rejected</span>
+            <span class="info-box-number">{{today_rejected_article_by_reviewer_count}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+
+      <!-- fix for small devices only -->
+      <div class="clearfix hidden-md-up"></div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3 border border-primary">
+          <span class="info-box-icon bg-primary elevation-1">
+            <a href=""> <i class="fas fa-1x fa-newspaper"></i></a>
+          </span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Today Publish</span>
+            <span class="info-box-number">{{today_publish_article_to_admin_count}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3 border border-success">
+          <span class="info-box-icon bg-success elevation-1"> <i class="fas fa-1x fa-newspaper"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Under review</span>
+            <span class="info-box-number">{{article_under_review_count}}</span>
+          </div>
+        </div>
+      </div>
+      <!-- /.col -->
+    </div>
+ 
+    {% endif %}
+    
+      
+   
+      
     <!-- /.row -->
 
    
@@ -112,18 +252,6 @@ Dashboard
 
 </section>
 
-<!---------------------------------------------Admin dashboard end----------------------------------------------------------------->
-
-<div class="row">
-  <div class="col-md-6">
-
-<!---------------------------------------------Student dashboard start----------------------------------------------------------------->
-
-{% if request.user|has_group:'User' %}
-
-
-
-{% endif %}
 
 
 

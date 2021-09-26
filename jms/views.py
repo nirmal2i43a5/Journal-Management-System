@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import LoginForm
 from apps.user.models import STATUS_ADMIN_PUBLISHED, NormalUser,Article
-from apps.reviewer.models import STATUS_REVIEWER_PUBLISHED, Reviewer
+from apps.reviewer.models import STATUS_ACCEPTED, STATUS_REJECTED, STATUS_REVIEWER_PUBLISHED, STATUS_UNDER_REVIEW, Reviewer
 from datetime import datetime, timedelta, time
 
 
@@ -19,16 +19,43 @@ def dashboard(request):
     users = NormalUser.objects.all()
     reviewers = Reviewer.objects.all()
     unpublish_articles_by_admin = Article.objects.filter(status = STATUS_REVIEWER_PUBLISHED)
-    
+
     '''I am using datetimefield instead of datefield so filter in this way'''
     today_publish_by_admin = Article.objects.filter(status = STATUS_ADMIN_PUBLISHED,updated_at__gte = today_start).filter(updated_at__lte = today_end)
     
+    
+    # --------For normal user dashboard
+    total_user_articles_submitted = Article.objects.filter(user = request.user)
+    total_user_article_accepted = Article.objects.filter(user = request.user,status = STATUS_ADMIN_PUBLISHED)
+    total_user_article_rejected = Article.objects.filter(user = request.user,status = STATUS_REJECTED)
+    total_user_article_under_review = Article.objects.filter(user = request.user,status = STATUS_UNDER_REVIEW)
+    
+    # ----------------------for reviewer dashboard
+    today_accepted_article_by_reviewer = Article.objects.filter(status = STATUS_ACCEPTED,updated_at__gte = today_start).filter(updated_at__lte = today_end)
+    today_rejected_article_by_reviewer  = Article.objects.filter(status = STATUS_REJECTED,updated_at__gte = today_start).filter(updated_at__lte = today_end)
+    today_publish_article_to_admin = Article.objects.filter(status = STATUS_REVIEWER_PUBLISHED,updated_at__gte = today_start).filter(updated_at__lte = today_end)
+    article_under_review = Article.objects.filter(status = STATUS_UNDER_REVIEW)
+    
+
     context = {
         'title': 'Dashboard',
         'normaluser_count':users.count(),
         'reviewer_count':reviewers.count(),
         'unpublish_count':unpublish_articles_by_admin.count(),
-        'today_publish_count':today_publish_by_admin.count()
+        'today_publish_count':today_publish_by_admin.count(),
+        'total_user_articles_submitted_count':total_user_articles_submitted.count(),
+        'total_user_article_accepted_count':total_user_article_accepted.count(),
+        'total_user_article_rejected_count':total_user_article_rejected.count(),
+        'total_user_article_under_review_count':total_user_article_under_review.count(),
+        'today_accepted_article_by_reviewer_count':today_accepted_article_by_reviewer.count(),
+        'today_rejected_article_by_reviewer_count':today_rejected_article_by_reviewer.count(),
+        'today_publish_article_to_admin_count':today_publish_article_to_admin.count(),
+        'article_under_review_count':article_under_review.count()
+        
+        
+        
+        
+        
     }
     return render(request, 'dashboard.html', context)
 

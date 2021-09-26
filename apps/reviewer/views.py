@@ -177,10 +177,10 @@ def article_feedback(request):
     
     if status == 'Accepted':
         article_object.status = STATUS_ACCEPTED 
-        article_object.save(update_fields=['status'])
+        article_object.save()
     elif status == 'Rejected':
         article_object.status = STATUS_REJECTED
-        article_object.save(update_fields=['status'])     
+        article_object.save()     
            
     feedback = Feedback(feedback = feedback, status = status)
     feedback.user = get_object_or_404(CustomUser,pk = userId)
