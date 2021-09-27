@@ -1,0 +1,69 @@
+
+
+<script type="text/javascript">
+
+
+    Highcharts.chart('user_pie-container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: ''
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y}</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Total',
+            colorByPoint: true,
+            data: [
+            {
+                name: 'Today submitted',
+                y: {{total_user_articles_submitted_count}},
+                color:'#094089',
+                sliced: true,
+                selected: true
+            }, 
+            {
+                name: 'Today accepted',
+                y: {{total_user_article_accepted_count}},
+                color:'#31A2B8',
+                sliced: true,
+                selected: true
+            }, 
+            {
+                name: 'Today rejected',
+                color:'#9A9DFB',
+    
+                y: {{total_user_article_rejected_count}}
+            }, 
+            {
+                name: 'Under review',
+                color:'#95CDFC',
+    
+                y: {{total_user_article_under_review_count}}
+            }, 
+            ]
+        }]
+    });
+    </script>
+   
+    

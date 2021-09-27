@@ -175,6 +175,20 @@ Dashboard
       </div>
       <!-- /.col -->
     </div>
+      <!-- -------------------------------------------------------Hight chart start----------------------------------------------- -->
+  <div class="row">
+    <div class="col-md-12">
+      <figure class="user_pie-container">
+        <div id="user_pie-container"></div>
+        <!-- <p class="highcharts-description">
+        This pie chart shows the total number os students and teachers.
+    </p> -->
+      </figure>
+    </div>
+   
+  </div>
+  {% include "chart_includes/user_pie.html" %}
+  {% include "chart_includes/reviewer_bar.html" %}
    
     {% elif request.user|has_group:'Reviewer'  %}
     <div class="row">
@@ -267,23 +281,12 @@ Dashboard
     {% endif %}
     
       
-   
-      
     <!-- /.row -->
 
-
-
 </section>
-
-
-
-
 
 {% endblock  %}
 
 
-
 {% block custom_js %}
-
-
 {% endblock custom_js %}
