@@ -16,5 +16,13 @@ from django.utils.translation import gettext_lazy as _
 
 
 
-
+class EditCustomUserForm(forms.ModelForm):
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={"placeholder": " Enter Username",'readonly':'readonly'  }))
+    class Meta:
+        model = CustomUser
+        fields = ('username',)
+        
+    
+   
 

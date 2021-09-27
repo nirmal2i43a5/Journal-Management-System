@@ -95,34 +95,28 @@
       </div>
 
     </a>
-    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+    <ul class="dropdown-menu dropdown-menu-xs dropdown-menu-right" style="height: 30%;">
       <!-- User image -->
-      <li class="user-header" style="background-color: #004de6;">
+      <li class="user-header" style="background-color: white;">
         <div class="user-panel">
           <img src="{% static 'image/admin.png' %}" class="img-circle elevation-2 mb-2" alt="User Image">
 
         </div>
 
-        <span class="text-white">
+        <span class="text-black">
+          
           {{ request.user.username }}<br>
-          {{ request.user.full_name }}<br>
           <small> <strong>Last Login : </strong> {{ request.user.last_login }}</small>
         </span>
       </li>
-
-      <!-- Menu Footer-->
-
-
-
 
       <li class="user-footer">
         <div class="float-left">
           {% if request.user|has_group:'User' %}
           <a href="" class="btn btn-sm btn-default btn-flat">Profile</a>
-          <a href="" class="btn btn-sm ml-2  btn-default btn-flat">Reset Password</a>
-         
-
           {% endif %}
+          <a href="/user_password_reset/" class="btn btn-sm ml-2  btn-default btn-flat">Reset Password</a>
+
         </div>
         <!-- <div class="float-left ml-3">
       <a href="" class="btn btn-default btn-flat">Settings</a>

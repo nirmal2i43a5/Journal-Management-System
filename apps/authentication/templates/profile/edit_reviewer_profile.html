@@ -13,9 +13,9 @@
             <div class="p-3" style=" background-color:white;border-radius:10px;box-shadow: 0px 0px 10px 0px #000;">
                 <div class="row">
                     <div class="col-md-3 ">
-                        {% if request.user.adminuser.image %}
+                        {% if request.user.reviewer.image %}
 
-                        <img src="{{ request.user.adminuser.image.url }}" alt="" style="width: 60%; height:100%;" id="profile-pic" class="img-circle" />
+                        <img src="{{ request.user.reviewer.image.url }}" alt="" style="width: 60%; height:100%;" id="profile-pic" class="img-circle" />
 
                         {% else %}
                         <img src="{% static 'image/default_profile.png' %}" alt="" id="profile-pic"
@@ -25,20 +25,20 @@
                     </div>
                     <div class="col-md-1 mt-4" style="margin-right: 5rem;">
                         <h3><strong>{{user.username}}</strong></h3>
-                        <p>{{user.email}}</p>
+                        <p>{{request.user.reviewer.email}}</p>
                     </div>
                 </div>
                 <hr>
                 <h4 class="text-center">Profile Informaion</h4>
                 <hr>
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST"  enctype="multipart/form-data">
                     {% csrf_token %}
+            {{customuser_form|crispy}}
+            {{reviewer_form|crispy}}
 
-                    {{custom_form|crispy}}
 
 
-
-                    <button type="submit" name="admin_update" class="btn btn-success">Update</button>
+                    <button type="submit" name="reviewer_update" class="btn btn-success">Update</button>
 
                 </form>
             </div>
