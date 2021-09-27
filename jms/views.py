@@ -35,6 +35,7 @@ def dashboard(request):
     today_rejected_article_by_reviewer  = Article.objects.filter(status = STATUS_REJECTED,updated_at__gte = today_start).filter(updated_at__lte = today_end)
     today_publish_article_to_admin = Article.objects.filter(status = STATUS_REVIEWER_PUBLISHED,updated_at__gte = today_start).filter(updated_at__lte = today_end)
     article_under_review = Article.objects.filter(status = STATUS_UNDER_REVIEW)
+    total_publish_to_admin = Article.objects.filter(status = STATUS_REVIEWER_PUBLISHED)
     
 
     context = {
@@ -50,7 +51,8 @@ def dashboard(request):
         'today_accepted_article_by_reviewer_count':today_accepted_article_by_reviewer.count(),
         'today_rejected_article_by_reviewer_count':today_rejected_article_by_reviewer.count(),
         'today_publish_article_to_admin_count':today_publish_article_to_admin.count(),
-        'article_under_review_count':article_under_review.count()
+        'article_under_review_count':article_under_review.count(),
+        'total_publish_to_admin_count':total_publish_to_admin.count()
         
         
         

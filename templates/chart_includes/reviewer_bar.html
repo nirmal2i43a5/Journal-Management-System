@@ -1,0 +1,38 @@
+<script>
+    // Create the chart
+/*
+*/ 
+
+
+
+    Highcharts.chart('reviewer_bar-container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        yAxis: {
+            title: {
+                text: 'Total'
+            }
+    
+        },
+        xAxis: {
+            categories: [
+            'Under review','Total publish'
+            ]
+
+        },
+        series: [{
+            name: 'Articles',
+            color:'#9A9DFB',
+            data: [
+
+            {{article_under_review_count}},{{total_publish_to_admin_count}}
+
+            
+            ]
+        }, ]
+    });
+</script>

@@ -242,7 +242,28 @@ Dashboard
       </div>
       <!-- /.col -->
     </div>
- 
+  <!-- -------------------------------------------------------Hight chart start----------------------------------------------- -->
+  <div class="row">
+    <div class="col-md-6">
+      <figure class="reviewer_pie-container">
+        <div id="reviewer_pie-container"></div>
+        <!-- <p class="highcharts-description">
+        This pie chart shows the total number os students and teachers.
+    </p> -->
+      </figure>
+    </div>
+    <div class="col-md-6">
+      <figure class="reviewer_bar-container">
+        <div id="reviewer_bar-container"></div>
+        <!-- <p class="highcharts-description">
+        chart for subject and year
+  
+    </p> -->
+      </figure>
+    </div>
+  </div>
+  {% include "chart_includes/reviewer_pie.html" %}
+  {% include "chart_includes/reviewer_bar.html" %}
     {% endif %}
     
       

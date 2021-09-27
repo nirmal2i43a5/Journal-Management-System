@@ -1,0 +1,60 @@
+
+
+<script type="text/javascript">
+
+
+    Highcharts.chart('reviewer_pie-container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: ''
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y}</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Total',
+            colorByPoint: true,
+            data: [
+            {
+                name: 'Today accepted',
+                y: {{today_accepted_article_by_reviewer_count}},
+                color:'#31A2B8',
+                sliced: true,
+                selected: true
+            }, 
+            {
+                name: 'Today rejected',
+                color:'#9A9DFB',
+    
+                y: {{today_rejected_article_by_reviewer_count}}
+            }, 
+            {
+                name: 'Today publish',
+                color:'#95CDFC',
+    
+                y: {{today_publish_article_to_admin_count}}
+            }, 
+            ]
+        }]
+    });
+    </script>
