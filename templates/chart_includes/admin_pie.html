@@ -1,0 +1,54 @@
+
+
+<script type="text/javascript">
+
+
+    Highcharts.chart('users_total-container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Total number of reviewers and users'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y}</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Total',
+            colorByPoint: true,
+            data: [
+            {
+                name: 'Reviewers',
+                y: {{reviewer_count}},
+                color:'#31A2B8',
+                sliced: true,
+                selected: true
+            }, 
+            {
+                name: 'Users',
+                color:'#9A9DFB',
+    
+                y: {{normaluser_count}}
+            }, 
+            ]
+        }]
+    });
+    </script>

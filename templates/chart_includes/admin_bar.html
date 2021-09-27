@@ -1,0 +1,38 @@
+<script>
+    // Create the chart
+/*
+*/ 
+
+
+
+    Highcharts.chart('publish_unpublish_articles-container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Today published and unpublished articles'
+        },
+        yAxis: {
+            title: {
+                text: 'Total'
+            }
+    
+        },
+        xAxis: {
+            categories: [
+            'Today publish','Today unpublish'
+            ]
+
+        },
+        series: [{
+            name: 'Articles',
+            color:'#9A9DFB',
+            data: [
+
+            {{today_publish_count}},{{unpublish_count}}
+
+            
+            ]
+        }, ]
+    });
+</script>

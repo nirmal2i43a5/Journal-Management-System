@@ -65,7 +65,7 @@ Dashboard
           </span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Today Published</span>
+            <span class="info-box-text">Today Publish</span>
             <span class="info-box-number">{{today_publish_count}}</span>
           </div>
           <!-- /.info-box-content -->
@@ -78,13 +78,37 @@ Dashboard
           <span class="info-box-icon bg-success elevation-1"> <i class="fas fa-1x fa-book-open"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Total Unpublished</span>
+            <span class="info-box-text">Total Unpublish</span>
             <span class="info-box-number">{{unpublish_count}}</span>
           </div>
         </div>
       </div>
       <!-- /.col -->
     </div>
+ <!-- -------------------------------------------------------Hight chart start----------------------------------------------- -->
+ <div class="row">
+  <div class="col-md-6">
+    <figure class="users_total">
+      <div id="users_total-container"></div>
+      <!-- <p class="highcharts-description">
+      This pie chart shows the total number os students and teachers.
+  </p> -->
+    </figure>
+  </div>
+  <div class="col-md-6">
+    <figure class="publish_unpublish_articles">
+      <div id="publish_unpublish_articles-container"></div>
+      <!-- <p class="highcharts-description">
+      chart for subject and year
+
+  </p> -->
+    </figure>
+  </div>
+</div>
+{% include "chart_includes/admin_pie.html" %}
+{% include "chart_includes/admin_bar.html" %}
+
+        <!-- --------------------------------------------------------User -->
     {% elif request.user|has_group:'User'  %}
     <div class="row">
       <div class="col-12 col-sm-6 col-md-3">
@@ -226,29 +250,7 @@ Dashboard
       
     <!-- /.row -->
 
-   
-    <!-- -------------------------------------------------------Hight chart start----------------------------------------------- -->
-    <div class="row">
-      <div class="col-md-6">
-        <figure class="users_total">
-          <div id="users_total-container"></div>
-          <!-- <p class="highcharts-description">
-          This pie chart shows the total number os students and teachers.
-      </p> -->
-        </figure>
-      </div>
-      <div class="col-md-6">
-        <figure class="year_subjects">
-          <div id="year_subjects-container"></div>
-          <!-- <p class="highcharts-description">
-          chart for subject and year
 
-      </p> -->
-        </figure>
-      </div>
-    </div>
-
-    <!-- ------------------------------------------Hight chart end------------------------------------------------- -->
 
 </section>
 
