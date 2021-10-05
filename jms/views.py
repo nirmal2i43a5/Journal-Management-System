@@ -13,7 +13,7 @@ from apps.user.filters import ArticleFilter
 
 def first_page(request):
     categories = Category.objects.all()
-    published_articles = Article.objects.filter(status = STATUS_ADMIN_PUBLISHED)
+    published_articles = Article.objects.filter(status = STATUS_ADMIN_PUBLISHED).order_by('-updated_at')
     filter_form = ArticleFilter()
     title = request.GET.get('title')
     print(title)
