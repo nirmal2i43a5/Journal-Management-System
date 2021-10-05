@@ -8,7 +8,11 @@ from apps.user.models import STATUS_ADMIN_PUBLISHED, NormalUser,Article
 from apps.reviewer.models import STATUS_ACCEPTED, STATUS_REJECTED, STATUS_REVIEWER_PUBLISHED, STATUS_UNDER_REVIEW, Reviewer
 from datetime import datetime, timedelta, time
 
-
+def first_page(request):
+    context = {
+        
+    }
+    return render(request,'home.html',context)
 
 def dashboard(request):
     today = datetime.now().date()
