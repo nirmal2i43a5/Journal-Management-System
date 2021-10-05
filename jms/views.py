@@ -5,11 +5,17 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import LoginForm
 from apps.user.models import STATUS_ADMIN_PUBLISHED, NormalUser,Article
+from apps.admin_user.models import Category
 from apps.reviewer.models import STATUS_ACCEPTED, STATUS_REJECTED, STATUS_REVIEWER_PUBLISHED, STATUS_UNDER_REVIEW, Reviewer
 from datetime import datetime, timedelta, time
 
 def first_page(request):
+    category = Category.objects.all()
+    published_articles = Article.objects.filter(status = STATUS_ADMIN_PUBLISHED)
     context = {
+        'title':'Journal Management System',
+        'category':category,
+        'published_articles':published_articles
         
     }
     return render(request,'home.html',context)

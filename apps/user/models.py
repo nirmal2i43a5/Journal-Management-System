@@ -68,6 +68,7 @@ class NormalUser(models.Model):
         
         
 class Article(models.Model):
+    title = models.CharField(max_length=250, null = True)
     file = models.FileField(upload_to='Journal_papers', null=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE,null=True,blank = True)
