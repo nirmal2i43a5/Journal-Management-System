@@ -8,14 +8,35 @@ from apps.user.models import STATUS_ADMIN_PUBLISHED, NormalUser,Article
 from apps.admin_user.models import Category
 from apps.reviewer.models import STATUS_ACCEPTED, STATUS_REJECTED, STATUS_REVIEWER_PUBLISHED, STATUS_UNDER_REVIEW, Reviewer
 from datetime import datetime, timedelta, time
+from apps.user.filters import ArticleFilter
+
 
 def first_page(request):
-    category = Category.objects.all()
+    categories = Category.objects.all()
     published_articles = Article.objects.filter(status = STATUS_ADMIN_PUBLISHED)
+    filter_form = ArticleFilter()
+    title = request.GET.get('title')
+    print(title)
+    category = request.GET.get('category')
+    
+    if title or category:
+        filter_articles = ArticleFilter(request.GET, queryset=published_articles).qs
+        context = {
+        'title':'Journal Management System',
+        'category':Category.objects.all(),
+        'published_articles':filter_articles,
+        'filter_form':filter_form
+        
+    }
+        return render(request,'home.html',context)
+        
+   
+    # article_list = ArticleFilter(request.GET, queryset=published_articles)
     context = {
         'title':'Journal Management System',
-        'category':category,
-        'published_articles':published_articles
+        'category':categories,
+        'published_articles':published_articles,
+        'filter_form':filter_form
         
     }
     return render(request,'home.html',context)

@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 
 
+
 def user_register(request):
     auth_form = CustomUserForm()
     user_form = UserRegisterForm()
@@ -146,3 +147,6 @@ def article_view(request,pk):
         'article':article
     }
     return render(request,'users/article-view.html',context)
+
+
+

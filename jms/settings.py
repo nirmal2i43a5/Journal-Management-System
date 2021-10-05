@@ -53,7 +53,8 @@ CUSTOM_APPS = [
 THIRD_PARTY_APPS = [
      'crispy_forms',
     'django_countries',
-    'django_extensions'
+    'django_extensions',
+     'django_filters'
     
 ]
 
