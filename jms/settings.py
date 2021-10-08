@@ -171,9 +171,14 @@ LOGIN_REDIRECT_URL = '/home/'
 LOGIN_EXEMPT_URLS = (
     r'^logout/$',
       r'^user/register/$',
-        r'^$',
+       r'^$',
+        # r'^/media/^$',
+        #  r'^viewer/viewer.html/$',
+     
+       
     # r'^password/reset/.*$',
     # r'^reset/.*$',
 )
 # for pdf viewer
 # X_FRAME_OPTIONS = 'SAMEORIGIN'
+# 

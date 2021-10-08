@@ -11,6 +11,7 @@ if hasattr(settings, 'LOGIN_EXEMPT_URLS'):
 
 
 class LoginRequiredMiddleware:
+    
     def __init__(self, get_response):
         self.get_response = get_response
 
@@ -28,5 +29,9 @@ class LoginRequiredMiddleware:
             return redirect(settings.LOGIN_REDIRECT_URL)
         elif request.user.is_authenticated or url_is_exempt:
             return None
+        elif not request.user.is_authenticated:
+            if url_is_exempt:
+                return None
+            
         else:
             return redirect(settings.LOGIN_URL)

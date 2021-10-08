@@ -16,7 +16,6 @@ def first_page(request):
     published_articles = Article.objects.filter(status = STATUS_ADMIN_PUBLISHED).order_by('-updated_at')
     filter_form = ArticleFilter()
     title = request.GET.get('title')
-    print(title)
     category = request.GET.get('category')
     
     if title or category:
@@ -40,6 +39,7 @@ def first_page(request):
         
     }
     return render(request,'home.html',context)
+
 
 def dashboard(request):
     today = datetime.now().date()

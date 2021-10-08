@@ -13,7 +13,6 @@ from apps.user.models import Article
 
 @xframe_options_exempt
 def iframe(request):
-    print("sadksdajkdasjkdsjk")
     return render(request,'viewer.html')
 
 @xframe_options_exempt
