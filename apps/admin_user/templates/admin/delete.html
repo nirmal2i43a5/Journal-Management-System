@@ -1,0 +1,24 @@
+
+<!-- Modal -->
+<div class="modal fade" id="deleteReviewer-{{ reviewer.reviewer_user.pk }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+            <form action="{% url 'reviewer:delete_reviewer' reviewer.reviewer_user.pk %}" method="post">
+
+              {% csrf_token %}
+              <p>Are you sure you want to delete reviewer?</p>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-danger">Confirm</button>
+          </div>
+          </form>
+
+    </div>
+  </div>
+</div>

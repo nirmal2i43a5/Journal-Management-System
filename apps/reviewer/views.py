@@ -53,11 +53,41 @@ def add_reviewer(request):
             user.save()
             user.groups.add(group)#adding user to particular group.ie role
             messages.success(request, "Successfully Created Reviewer")
-            return redirect('admin:reviewer_index')
+            return redirect('admin_app:reviewer-index')
          
     return render(request,'reviewer/add.html',context)
 
 
+def edit_reviewer(request,pk):
+    rev_instance = get_object_or_404(Reviewer,pk = pk)
+    customuser_instance = get_object_or_404(CustomUser, pk = rev_instance.reviewer_user.pk)
+    auth_form = CustomUserForm(instance=customuser_instance)
+    reviewer_form = ReviewerRegisterForm(instance = rev_instance)
+    
+    if request.method == "POST":
+        auth_form = CustomUserForm(request.POST, request.FILES,instance=customuser_instance,)
+        reviewer_form = ReviewerRegisterForm(request.POST, request.FILES,instance = rev_instance)
+        if auth_form.is_valid() and reviewer_form.is_valid():
+            auth_form.save()
+            reviewer_form.save()
+            messages.success(request, "Successfully Edited Reviewer")
+            return redirect('admin_app:reviewer-index')
+            
+        
+    context = {
+        'title':'Register',
+        'instance':rev_instance,
+        'auth_form':auth_form,
+        'reviewer_user':reviewer_form
+    }
+    return render(request,'reviewer/add.html',context)
+
+def delete_reviewer(request,pk):
+    customuser_instance = get_object_or_404(CustomUser, pk = pk)
+    customuser_instance.delete()
+    messages.success(request, "Successfully deleted reviewer")
+    return redirect('admin_app:reviewer-index')
+            
 
 @permission_required('user.normal_user_view_by_reviewer', raise_exception=True)
 def normal_user_index(request):

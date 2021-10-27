@@ -6,6 +6,8 @@ app_name = 'reviewer'
 
 urlpatterns = [
     path('add/',add_reviewer,name='add_reviewer'),
+       path('edit/<pk>/',edit_reviewer,name='edit_reviewer'),
+        path('delete/<pk>/',delete_reviewer,name='delete_reviewer'),
         path('upload-article/',upload_article,name='upload-article'),
         path('article-view/<pk>/',article_view,name='article-view'),
     path('user/index/',normal_user_index,name='normal-user-index'),

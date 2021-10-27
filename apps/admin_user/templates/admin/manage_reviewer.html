@@ -52,6 +52,7 @@
               </thead>
               <tbody>
                 {% for reviewer in reviewers %}
+                {% include "admin/delete.html" %}
                 <tr>
                   <td></td>
                   <td>{{ forloop.counter }}</td>
@@ -71,9 +72,8 @@
                   <td>{{ reviewer.created_at }}</td>
                   <td>
                     
-                    <a href="" class="btn btn-xs btn-info"><strong>View</strong></a>
-                    <a href="" class="btn btn-xs btn-success"><i class="fas fa-xs fa-edit"></i></a>
-                    <button  class="btn btn-danger btn-xs"  data-target='#deleteStudent-{{ student.student_user.id }}' data-toggle="modal"><i
+                    <a href="{% url 'reviewer:edit_reviewer' reviewer.pk %}" class="btn btn-xs btn-success"><i class="fas fa-xs fa-edit"></i></a>
+                    <button  class="btn btn-danger btn-xs"  data-target='#deleteReviewer-{{ reviewer.reviewer_user.pk }}' data-toggle="modal"><i
                       class="fas fa-sm fa-trash-alt"></i></button>
                   </td>
                 

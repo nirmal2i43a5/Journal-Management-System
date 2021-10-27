@@ -21,7 +21,14 @@
         <!-- general form elements -->
         <div class="card">
 
+          
+          {% if instance %}
+          {% include 'override_table/header.html' with card_title='Edit Reviewer' %}
+          {% else %}
           {% include 'override_table/header.html' with card_title='Add Reviewer' %}
+
+          {% endif %}
+            
 
           <!-- /.card-header -->
           <!-- form start -->
