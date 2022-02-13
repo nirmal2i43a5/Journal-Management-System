@@ -1,0 +1,198 @@
+{% load static %}
+<style>
+    body {
+      font-family: 'Varela Round', sans-serif;
+    }
+  
+    .form-control {
+      box-shadow: none;
+      border-radius: 4px;
+    }
+  
+    .navbar {
+      background: #175FE6;
+      padding-left: 16px;
+      padding-right: 16px;
+      border-bottom: 1px solid #dfe3e8;
+      border-radius: 0;
+    }
+  
+  
+  
+    .navbar .navbar-nav>a {
+      margin: 0 0.25rem;
+    }
+  
+    .navbar .navbar-nav a,
+    .navbar .navbar-nav a:active {
+      color: #fff;
+      font-size: 15px;
+      background: transparent;
+    }
+  
+  
+  .navbar #sub-menu a{
+    background-color: #5E72E4;
+    color: #fff;
+  }
+  
+  .navbar #sub-menu a:hover{
+    background-color: #fff;
+    color: #5E72E4;
+    border-radius: 0%;
+  }
+    .navbar .navbar-nav a:hover,
+    .navbar .navbar-nav a:focus {
+      color: #fff;
+      background-color: #fff;
+      color: #5E72E4;
+      border-radius: 1rem;
+    }
+  
+    .navbar .navbar-nav.show>a,
+    .navbar .navbar-nav>a.active {
+      color: #5E72E4 !important;
+      background-color: #fff;
+      border-radius: 1rem;
+    }
+  
+    .search-box {
+      width: 100%;
+      position: relative;
+    }
+  
+    .search-box input {
+      border-color: #dfe3e8;
+      box-shadow: none
+    }
+  
+    .search-box input,
+    .search-box .btn {
+      min-height: 38px;
+      border-radius: 2px;
+    }
+  
+    .input-group-append .btn,
+    .input-group-append .btn:active {
+      border-color: #fff;
+      background: #5E72E4 !important;
+    }
+  
+    .navbar .nav-item i {
+      font-size: 18px;
+      line-height: 16px;
+    }
+  
+    .navbar .search-dropdown .dropdown-toggle::after {
+      display: none;
+    }
+  
+    .navbar .dropdown-menu {
+      border-radius: 1px;
+      border-color: #e5e5e5;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+    }
+  
+    .navbar .dropdown-menu a {
+      padding: 6px 20px;
+    }
+    .dropdown-menu {
+      padding:0%;
+    }
+    .navbar .search-dropdown .dropdown-menu {
+      width: 400px;
+      padding: 20px;
+      left: auto;
+      right: 0;
+      font-size: 14px;
+    }
+  
+    @media (max-width: 768px) {
+      .navbar .navbar-right .dropdown-menu {
+        width: 100%;
+        background: transparent;
+        padding: 10px 20px;
+      }
+  
+      .navbar .input-group {
+        width: 100%;
+      }
+    }
+  </style>
+  
+  
+  
+      <nav class="navbar navbar-expand-lg fixed-top ">
+        <div class="title">
+  
+          <a href="">
+          <img src="{% static 'assets/img/logo.png' %}" height = "50px"  class="navbar-brand" alt="">
+  
+          </a>
+  
+        </div>
+         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span style="color:white;">
+          <i class="fas fa-2x fa-bars"></i>
+  
+          </span>
+        </button>
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+          <div class="navbar-nav ml-4 mt-1">
+            <a href="" {% if request.path == '/' %}class=" nav-item nav-link active"{% endif %} class="nav-item nav-link  position-relative "><i class = "fas fa-sm fa-home"></i> Home</a>
+  
+              
+  
+            <div class="nav-item dropdown">
+              <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Categories</a>
+              <div id="sub-menu" class="dropdown-menu">
+              
+                {% for category,article_count in  categories %}
+                <a href="{{ category.get_absolute_url }}" class="dropdown-item">{{category.name}}
+                  <span class="badge badge-light ml-3">
+                    {{ article_count }} posts
+                  </span>
+               
+                </a>
+                
+              {% endfor %}
+              </div>
+            </div>
+  
+              
+            <a href="" {% if request.path == '/' %}class=" nav-item nav-link "{% endif %} class="nav-item nav-link">Projects</a>
+  
+  
+            
+            <a href="" {% if request.path == '/' %}class=" nav-item nav-link "{% endif %} class="nav-item nav-link">Contact</a>
+  
+        
+          </div>
+          <div class="navbar-nav ml-auto">
+            <div class="nav-item dropdown search-dropdown">
+             
+                  {% comment %} <form method="GET" action="">
+                    <div class="input-group search-box">
+                      <input type="text" name="q" class="form-control" placeholder="Search here...">
+                      <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                      </div>
+                    </div>
+                  </form> {% endcomment %}
+            </div>
+  
+            {% if request.user.is_authenticated %}
+            <a  class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a  class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+            <a  class="nav-item nav-link" href="{% url 'user:register' %}">Register</a>
+        {% endif %}
+           
+            <!-- <a href="#" class="nav-item nav-link"><i class="fa fa-google-plus"></i></a>
+            <a href="#" class="nav-item nav-link"><i class="fa fa-pinterest-p"></i></a> -->
+          </div>
+        </div>
+        <!-- Example split danger button -->
+  
+      </nav>
