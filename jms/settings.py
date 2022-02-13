@@ -176,9 +176,16 @@ LOGIN_EXEMPT_URLS = (
         #  r'^viewer/viewer.html/$',
      
        
-    # r'^password/reset/.*$',
-    # r'^reset/.*$',
+    r'^password/reset/.*$',
+    r'^reset/.*$',
 )
 # for pdf viewer
 # X_FRAME_OPTIONS = 'SAMEORIGIN'
 # 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nirmalpandey27450112@gmail.com'
+EMAIL_HOST_PASSWORD = 'xrevudfkvavqwksx'
