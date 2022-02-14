@@ -1,256 +1,261 @@
-{% load static %}
-{% load crispy_forms_tags %}
+{% load static %} {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>{{title}}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<script
+			type="text/javascript"
+			src="{% static 'flipbook/pdfjs-flipbook/js/jquery.fancybox.min.js' %}"
+		></script>
+		<!-- flipbook js -->
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="{% static 'flipbook/pdfjs-flipbook/css/jquery.fancybox.min.css' %}"
+		/>
+	</head>
 
-<head>
-  <title>{{title}}</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script
-type="text/javascript"
-src="{% static 'flipbook/pdfjs-flipbook/js/jquery.fancybox.min.js' %}"
-></script>
-  <!-- flipbook js -->
-  <link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'flipbook/pdfjs-flipbook/css/jquery.fancybox.min.css' %}"
-/>
-</head>
+	<body>
+		<div id="header">
+			<header id="toggle-header">
+				<div class="container">
+					{% include 'static_includes/blog_navbar.html' %}
+				</div>
+			</header>
+			<br /><br />
+			<hr />
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-8 mt-2 ml-4">
+					<div
+						class="card card-header"
+						style="background-color: #175fe6; color: white"
+					>
+						Filter articles
+					</div>
+					<div class="card card-body">
+						<form method="get">
+							<div class="input-group">
+								{{ filter_form.form|crispy }}
 
-<body>
-  <div id="header">
+                  <div class="input-group-btn">
+                    <button
+                      type="submit"
+                      class="btn"
+                      style="background-color: #175fe6; color: white;margin-left:5px;"
+                    >
+                      Search
+                    </button>
+                  </div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<hr />
+			<div class="row">
+				<div class="col-md-4 ml-4">
+					<ul class="list-group">
+						<li
+							class="list-group-item active fixed"
+							style="
+								background-color: #175fe6;
+								position: absolute;
+								padding-right: 100px;
+							"
+						>
+							<strong> Journal Article Category </strong>
+						</li>
+						{% for category in category %}
+						<a href="">
+							<li class="list-group-item">{{category.name}}</li>
+						</a>
 
-   
-   
-    <header id="toggle-header">
-      <div class="container">
-        {% include 'static_includes/blog_navbar.html' %}
+						{% endfor %}
+					</ul>
+				</div>
 
+				<div class="col-md-7">
+					{% if not published_articles %}
+					<h3>
+						<span style="margin-left: 25%"
+							>No articles found! Please search with appropriate keyword.</span
+						>
+					</h3>
+					{% endif %} {% if published_articles %}
 
-      </div>
-    </header>
-    <br><br>
-    <hr>
-    <div class="row">
-      <div class="col-md-3">
-        
-      </div>
-      <div class="col-md-8 mt-2 ml-4">
-        <div class="card card-header" style="background-color: #175FE6;color:white;">
-          Filter articles
-        </div>
-        <div class="card card-body p-5">
-          
-          <form method="get">
-            {{ filter_form.form  }}
-            <button type="submit" class = "btn btn-sm" style="background-color: #175FE6;color:white;">Search</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <hr>
-  <div class="row">
-    <div class="col-md-4 ml-4">
-      <ul class="list-group">
-        <li class="list-group-item active fixed" style="background-color:#175FE6;position:absolute;padding-right:100px;">
-          <strong>
-            Journal Article Category
-          </strong>
-        </li>
-        {% for category in category %}
-        <a href="">
-          <li class="list-group-item">
-            {{category.name}}
-          </li>
-        </a>
+					<div class="articles border border-primary">
+						<div
+							class="card card-header"
+							style="background-color: #175fe6; color: white"
+						>
+							<strong> Journals articles List</strong>
+						</div>
+						{% for article in published_articles %}
 
-        {% endfor %}
-      </ul>
-     
-    </div>
-    
-    <div class="col-md-7">
-      {% if not published_articles %}
-<h3><span style="margin-left:25%;">No articles found! Please search with appropriate keyword.</span></h3>
-{% endif %}
-  
-      {% if published_articles %}
+						<div class="d-flex flex-column">
+							<div class="p-2">
+								<a href=""> {{article.title}}</a>
+							</div>
+							<div class="p-2">
+								<strong>Author : </strong>{{article.user.normaluser.full_name}}
+								<span class="ml-4">
+									<strong> Category:</strong>
+									<span class="badge badge-info"
+										>{{article.category.name}}</span
+									>
+								</span>
+							</div>
 
-
-      <div class= "articles border border-primary">
-        <div class="card card-header" style="background-color: #175FE6;color:white;">
-     
-          <strong>     Journals articles List</strong>
-        </div>
-        {% for article in published_articles  %}
-  
-        <div class="d-flex flex-column">
-          <div class="p-2">
-          
-           <a href=""> {{article.title}}</a>
-          </div>
-          <div class="p-2">
-  
-          <strong>Author : </strong>{{article.user.normaluser.full_name}}
-          <span class="ml-4">
-            <strong> Category:</strong> <span class="badge badge-info">{{article.category.name}}</span>
-  
-           </span>
-             </div>
-            
-  
-             <div class="p-2">
-              <a data-fancybox data-type="iframe" class="btn btn-outline-primary"
-               data-src="/viewer/viewer.html?file={{ article.file.url }}" href="javascript:;">
-  
-              PDF
-             </a>
-             <!-- <a href="{{article.file.url}}" class="btn btn-outline-primary">
+							<div class="p-2">
+								<a
+									data-fancybox
+									data-type="iframe"
+									class="btn btn-outline-primary"
+									data-src="/viewer/viewer.html?file={{ article.file.url }}"
+									href="javascript:;"
+								>
+									PDF
+								</a>
+								<!-- <a href="{{article.file.url}}" class="btn btn-outline-primary">
   
               PDF
              </a> -->
-             <span class="ml-4">
-             <strong> Published Date:</strong> {{article.updated_at}}
-  
-            </span>
-                 </div>
-         
-      </div>
-      <hr>
-      {% endfor %}
-       
-          
-          
-      
-  
-    </div>
-    {% endif %}
-    </div>
-  </div>
+								<span class="ml-4">
+									<strong> Published Date:</strong> {{article.updated_at}}
+								</span>
+							</div>
+						</div>
+						<hr />
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
 
+		<style type="text/css">
+			#toggle-header {
+				background-color: #034691;
+				color: #fff;
+			}
 
+			body {
+				background-color: #f1f1f1;
+			}
 
-  </div>
-  
-  <style type="text/css">
-    #toggle-header {
-      background-color: #034691;
-      color: #fff;
-    }
+			#header .navbar-light .navbar-nav .nav-link:focus,
+			#header .navbar-light .navbar-nav .nav-link:hover {
+				color: #fff;
+			}
 
-    body {
-      background-color: #f1f1f1;
-    }
+			#header nav {
+				padding: 15px 0px;
+			}
 
-    #header .navbar-light .navbar-nav .nav-link:focus,
-    #header .navbar-light .navbar-nav .nav-link:hover {
-      color: #fff;
-    }
+			#header .navbar-light .navbar-nav .nav-link {
+				/*  color: #5a5a5a;*/
+				font-size: 20px;
+			}
 
-    #header nav {
-      padding: 15px 0px;
-    }
+			#header {
+				border-bottom: 1px solid #ddd;
+				background-color: #fff;
+				float: left;
+				width: 100%;
+			}
 
-    #header .navbar-light .navbar-nav .nav-link {
+			#header ul.navbar-nav {
+				position: absolute;
+				right: 0;
+			}
 
-      /*  color: #5a5a5a;*/
-      font-size: 20px;
-    }
+			#header li.nav-item {
+				margin: 0px 10px;
+			}
 
-    #header {
-      border-bottom: 1px solid #ddd;
-      background-color: #fff;
-      float: left;
-      width: 100%;
-    }
+			#header .navbar-light .navbar-nav .active > .nav-link,
+			#header .navbar-light .navbar-nav .nav-link,
+			#header .navbar-light .navbar-nav .nav-link.show,
+			#header .navbar-light .navbar-nav .show > .nav-link {
+				color: #fff;
+			}
 
-    #header ul.navbar-nav {
-      position: absolute;
-      right: 0;
-    }
+			#header .dropdown-menu.show {
+				border: none;
+			}
 
-    #header li.nav-item {
-      margin: 0px 10px;
-    }
+			.topbar {
+				background-color: #034691;
+				color: #fff;
+				padding: 4px 0px;
+			}
 
-    #header .navbar-light .navbar-nav .active>.nav-link,
-    #header .navbar-light .navbar-nav .nav-link,
-    #header .navbar-light .navbar-nav .nav-link.show,
-    #header .navbar-light .navbar-nav .show>.nav-link {
-      color: #fff;
-    }
+			.topbar ul {
+				margin: 0px;
+				padding: 0px;
+			}
 
-    #header .dropdown-menu.show {
-      border: none;
-    }
+			.topbar ul li {
+				float: left;
+				list-style: none;
+				margin: 3px 7px;
+				font-size: 15px;
+			}
 
-    .topbar {
-      background-color: #034691;
-      color: #fff;
-      padding: 4px 0px;
-    }
+			.topbar ul li a {
+				color: #fff;
+			}
 
-    .topbar ul {
-      margin: 0px;
-      padding: 0px;
-    }
+			.topbar ul li i {
+				font-size: 18px;
+				margin-right: 3px;
+			}
 
-    .topbar ul li {
-      float: left;
-      list-style: none;
-      margin: 3px 7px;
-      font-size: 15px;
-    }
+			.topbar ul li.followus-label {
+				font-weight: bold;
+			}
 
-    .topbar ul li a {
-      color: #fff;
-    }
+			#header .social-icon {
+				float: right;
+			}
 
-    .topbar ul li i {
-      font-size: 18px;
-      margin-right: 3px;
-    }
+			/*=============Responsive css==================*/
+			@media (max-width: 991px) {
+				.topbar ul li {
+					margin: 3px 3px;
+					font-size: 12px;
+				}
 
-    .topbar ul li.followus-label {
-      font-weight: bold;
-    }
+				#header ul.navbar-nav {
+					position: static;
+					width: 100%;
+					border-top: 1px solid #ddd;
+					margin: 15px 0px 0px;
+					color: #fff;
+				}
+			}
 
-    #header .social-icon {
-      float: right;
-    }
-
-    /*=============Responsive css==================*/
-    @media (max-width: 991px) {
-      .topbar ul li {
-        margin: 3px 3px;
-        font-size: 12px;
-      }
-
-      #header ul.navbar-nav {
-        position: static;
-        width: 100%;
-        border-top: 1px solid #ddd;
-        margin: 15px 0px 0px;
-        color: #fff;
-      }
-    }
-
-    .list-group {
-      margin-right: 25%;
-      max-height: 300px;
-      margin-bottom: 10px;
-      overflow: scroll;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-  </style>
-</body>
-
+			.list-group {
+				margin-right: 25%;
+				max-height: 300px;
+				margin-bottom: 10px;
+				overflow: scroll;
+				-webkit-overflow-scrolling: touch;
+			}
+		</style>
+	</body>
 </html>
