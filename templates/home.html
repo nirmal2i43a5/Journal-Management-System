@@ -2,226 +2,221 @@
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <title>{{title}}</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script
-type="text/javascript"
-src="{% static 'flipbook/pdfjs-flipbook/js/jquery.fancybox.min.js' %}"
-></script>
-  <!-- flipbook js -->
-  <link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'flipbook/pdfjs-flipbook/css/jquery.fancybox.min.css' %}"
-/>
-</head>
-
-<body>
-  <div id="header">
-
-    <div class="topbar">
-      <div class="container">
-        <div class="row p-3">
-          <div class="col-sm-8">
-            <ul>
-              <li><i class="fa fa-volume-control-phone" aria-hidden="true"></i> +977-083-524681</li>
-              <li>|</li>
-              <li><a href="mailto:"><i class="fa fa-envelope-o" aria-hidden="true"></i> example@youremail.com</a></li>
-              <li>|</li>
-              <li><i class="fa fa-clock-o" aria-hidden="true"></i> Address</li>
-            </ul>
-          </div>
-          <div class="col-sm-4">
-            <ul class="social-icon">
-              <li class="followus-label">Follow Us:</li>
-              <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="mt-1">
-      <a href="#"><img src="{% static 'image/mid-western-logo.png' %}" style="height:150px;width:150px;margin-left:50%;"
-          alt="logo"></a>
-      <hr>
-    </div>
-    <header id="toggle-header">
-      <div class="container">
+    <head>
+        <title>{{ title }}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{% static 'flipbook/pdfjs-flipbook/js/jquery.fancybox.min.js' %}"></script>
+        <!-- flipbook js -->
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'flipbook/pdfjs-flipbook/css/jquery.fancybox.min.css' %}"/>
+    </head>
+    <body>
+        <div id="header">
+            <div class="topbar">
+                <div class="container-fluid">
+                    <div class="row p-2">
+                        <div class="col-sm-8">
+                            <ul>
+                                <li>
+                                    <i class="fa fa-volume-control-phone" aria-hidden="true"></i> +977-083-524681
+                                </li>
+                                <li>|</li>
+                                <li>
+                                    <a href="mailto:"><i class="fa fa-envelope-o" aria-hidden="true"></i> example@youremail.com</a>
+                                </li>
+                                <li>|</li>
+                                <li>
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i> Address
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <ul class="social-icon">
+                                <li class="followus-label">Follow Us:</li>
+                                <li>
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+              <marquee>his</marquee>
+            </div>
+            <header id="toggle-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                            <button class="navbar-toggler  bg-light"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#navbartoggle"
+                                    aria-controls="navbartoggle"
+                                    aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbartoggle">
+                                <div class="col-md-4">
+                                    <a href="#">
+                                        <img class="rounded img-two" style="margin-right:500px"
+                                             src="{% static 'image/musom-logo.png' %}"
+                                             alt="logo">
+                                    </a>
+                                </div>
+                            
+                                <div class="col-md-8" style="margin-left: 3%">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item active ">
+                                            <a class="nav-link" href="/"><i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"><i class="fa fa-bandcamp"></i> About Us</a>
+                                        </li>
+                                        {% if request.user.is_authenticated %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'user:register' %}">Register</a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
         <div class="row">
-          <div class="col-12 p-4">
-            <nav class="navbar navbar-expand-lg navbar-light">
-              <button class="navbar-toggler  bg-light" type="button" data-toggle="collapse" data-target="#navbartoggle"
-                aria-controls="navbartoggle" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-
-              <div class="collapse navbar-collapse" id="navbartoggle">
-                <ul class="navbar-nav float-right">
-                  <li class="nav-item active ">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
-                  </li>
-                  <!-- <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Services</a>
-                    <a class="dropdown-item" href="#">Best Services</a>
-                    <a class="dropdown-item" href="#">Cheap Services</a>
-                  </div>
-                </li>    -->
-                  <!-- <li class="nav-item">
-                  <a class="nav-link" href="#">Term & Condition</a>
-                </li> -->
-                  <!-- <li class="nav-item">
-                  <a class="nav-link btn btn-xs btn-light text-dark" href="#">Login</a>
-                </li>   -->
-                
-                {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'user:register' %}">Register</a>
-                </li>
-                  
-                {% endif %}
-                  
-                
-
+            <div class="col-md-3">
+                <a href="#">
+                    <img class="rounded img-one"
+                         src="{% static 'image/mid-western-logo.png' %}"
+                         alt="logo">
+                </a>
+            </div>
+            <div class="col-md-8 mt-2 ml-4">
+                <div class="card card-header"
+                     style="background-color: #034691;
+                            color:white;">Filter articles</div>
+                <div class="card card-body p-5">
+                    <form method="get">
+                        {{ filter_form.form }}
+                        <button type="submit"
+                                class
+                                btn
+                                btn-sm
+                                style="background-color: #034691;
+                                       color:white;">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-3 ml-4">
+                <ul class="list-group">
+                    <li class="list-group-item active" style="background-color:#034691;">
+                        <strong>Journal Article Category</strong>
+                    </li>
+                    {% for category in category %}
+                        <a href="">
+                            <li class="list-group-item">{{ category.name }}</li>
+                        </a>
+                    {% endfor %}
                 </ul>
-              </div>
-            </nav>
-          </div>
+            </div>
+            <div class="col-md-8">
+                {% if not published_articles %}
+                    <h3>
+                        <span style="margin-left:25%;">No articles found! Please search with appropriate keyword.</span>
+                    </h3>
+                {% endif %}
+                {% if published_articles %}
+                    <div class= "articles border border-primary">
+                        <div class="card card-header"
+                             style="background-color: #034691;
+                                    color:white;">
+                            <strong>Journals articles List</strong>
+                        </div>
+                        {% for article in published_articles  %}
+                            <div class="d-flex flex-column">
+                                <div class="p-2">
+                                    <a href="">{{ article.title }}</a>
+                                </div>
+                                <div class="p-2">
+                                    <strong>Author :</strong>{{ article.user.normaluser.full_name }}
+                                    <span class="ml-4">
+                                        <strong>Category:</strong> <span class="badge badge-info">{{ article.category.name }}</span>
+                                    </span>
+                                </div>
+                                <div class="p-2">
+                                    <a data-fancybox
+                                       data-type="iframe"
+                                       class="btn btn-outline-primary"
+                                       data-src="/viewer/viewer.html?file={{ article.file.url }}"
+                                       href="javascript:;">
+                                        PDF
+                                    </a>
+                                    <!-- <a href="{{article.file.url}}" class="btn btn-outline-primary">PDF</a> -->
+                                    <span class="ml-4">
+                                        <strong>Published Date:</strong> {{ article.updated_at }}
+                                    </span>
+                                </div>
+                            </div>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
         </div>
-      </div>
-    </header>
-    <hr>
-    <div class="row">
-      <div class="col-md-3">
-        
-      </div>
-      <div class="col-md-8 mt-2 ml-4">
-        <div class="card card-header" style="background-color: #034691;color:white;">
-          Filter articles
-        </div>
-        <div class="card card-body p-5">
-          
-          <form method="get">
-            {{ filter_form.form }}
-            <button type="submit" class = "btn btn-sm" style="background-color: #034691;color:white;">Search</button>
-          </form>
-        </div>
-      </div>
     </div>
-    <hr>
-
-  <div class="row">
-    <div class="col-md-3 ml-4">
-      <ul class="list-group">
-        <li class="list-group-item active" style="background-color:#034691;">
-          <strong>
-            Journal Article Category
-          </strong>
-        </li>
-        {% for category in category %}
-        <a href="">
-          <li class="list-group-item">
-            {{category.name}}
-          </li>
-        </a>
-
-        {% endfor %}
-      </ul>
-     
-    </div>
-    
-    <div class="col-md-8">
-      {% if not published_articles %}
-<h3><span style="margin-left:25%;">No articles found! Please search with appropriate keyword.</span></h3>
-{% endif %}
-  
-      {% if published_articles %}
-
-
-      <div class= "articles border border-primary">
-        <div class="card card-header" style="background-color: #034691;color:white;">
-     
-          <strong>     Journals articles List</strong>
-        </div>
-        {% for article in published_articles  %}
-  
-        <div class="d-flex flex-column">
-          <div class="p-2">
-          
-           <a href=""> {{article.title}}</a>
-          </div>
-          <div class="p-2">
-  
-          <strong>Author : </strong>{{article.user.normaluser.full_name}}
-          <span class="ml-4">
-            <strong> Category:</strong> <span class="badge badge-info">{{article.category.name}}</span>
-  
-           </span>
-             </div>
-            
-  
-             <div class="p-2">
-              <a data-fancybox data-type="iframe" class="btn btn-outline-primary"
-               data-src="/viewer/viewer.html?file={{ article.file.url }}" href="javascript:;">
-  
-              PDF
-             </a>
-             <!-- <a href="{{article.file.url}}" class="btn btn-outline-primary">
-  
-              PDF
-             </a> -->
-             <span class="ml-4">
-             <strong> Published Date:</strong> {{article.updated_at}}
-  
-            </span>
-                 </div>
-         
-      </div>
-      <hr>
-      {% endfor %}
-       
-          
-          
-      
-  
-    </div>
-    {% endif %}
-    </div>
-  </div>
-
-
-
-  </div>
-  
-  <style type="text/css">
+    <style type="text/css">
     #toggle-header {
-      background-color: #034691;
+      background-color: #026cac;
       color: #fff;
+      margin-top: 4px;
     }
+    .img-one {
+      margin-left: 110px !important;
+      margin-top: 30px !important;
+      height:170px;
+      width:180px;
+      margin-right:50%;
+    }
+    .img-two {
+      margin-left: 30px;
+      height: 55px;
+      width: 320px;
+      
 
+      
+    }
     body {
       background-color: #f1f1f1;
     }
@@ -249,7 +244,6 @@ src="{% static 'flipbook/pdfjs-flipbook/js/jquery.fancybox.min.js' %}"
     }
 
     #header ul.navbar-nav {
-      position: absolute;
       right: 0;
     }
 
@@ -269,7 +263,7 @@ src="{% static 'flipbook/pdfjs-flipbook/js/jquery.fancybox.min.js' %}"
     }
 
     .topbar {
-      background-color: #034691;
+      background-color: #d93d2b;
       color: #fff;
       padding: 4px 0px;
     }
@@ -326,8 +320,8 @@ src="{% static 'flipbook/pdfjs-flipbook/js/jquery.fancybox.min.js' %}"
       overflow: scroll;
       -webkit-overflow-scrolling: touch;
     }
+   
     
-  </style>
+    </style>
 </body>
-
 </html>

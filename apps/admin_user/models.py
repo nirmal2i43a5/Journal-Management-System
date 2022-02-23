@@ -21,3 +21,10 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+class Marquee(models.Model):
+    name = models.CharField(max_length=250, blank=True, null=True)
+    body = models.TextField()
+
+    def __str__(self):
+        return self.name
