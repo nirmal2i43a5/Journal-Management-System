@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+{{ message|safe }}
+<img src="{{file.url}}" alt="">
+  
+<!-- <img src="{{request.get_host}} {% static 'image/global_college_logo.png' %}" class="img-rectangle " style="width: 100%;height:60px;"> -->
+</body>
+</html>

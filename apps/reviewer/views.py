@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
+from django.template.loader import get_template
+from django.core.mail import EmailMessage
 from django.contrib.auth.models import Group
 from apps.user.models import NormalUser
 from django.contrib.auth.decorators import login_required, permission_required  
@@ -200,6 +202,7 @@ def check_user_article(request,pk):
 def article_feedback(request):
     
     userId = request.POST['userId']
+    print(userId,"-------------------")
     articleId = request.POST['articleId']
     feedback = request.POST['feedback']
     status = request.POST['status']
@@ -209,13 +212,39 @@ def article_feedback(request):
         article_object.status = STATUS_ACCEPTED 
         article_object.save()
     elif status == 'Rejected':
+        # send emai with annotate pdf
+        
         article_object.status = STATUS_REJECTED
         article_object.save()     
-           
+    
+    user_instance = get_object_or_404(NormalUser,pk = userId)
     feedback = Feedback(feedback = feedback, status = status)
-    feedback.user = get_object_or_404(CustomUser,pk = userId)
+    feedback.user = user_instance
     feedback.article = article_object
     feedback.save()
+    # files = request.FILES('file')
+    subject = "Subject"
+    feedback_message = "Message"
+    context = {
+        'message':    feedback_message
+    }
+    template = get_template('reviewer/send_message.html').render(context)
+    print(user_instance.email,"djs-------------")
+    email = EmailMessage(
+        subject,
+        template,
+        'nirmalpandey27450112@gmail.com',  # sender
+        user_instance.email,  # receiver
+    )
+    file = article_object.file
+    print(file)
+    # for file in files:
+    email.attach(file.name, file.read(), file.content_type)
+
+    email.content_subtype = 'html'
+    email.send()
+    email.fail_silently = False
+
     
     messages.success(request,"Successfully Review Paper")
     return redirect('reviewer:user-under-review-articles',userId)
