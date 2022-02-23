@@ -115,7 +115,6 @@ def normal_user_index(request):
                                'rejected_articles_count':rejected_articles_count,'article_under_review_count':article_under_review_count,
                                'article_publish_to_admin':article_publish_to_admin_count})
         
-    print(total_articles)
     context = {
         'title':'Manage User',
         'users':zip(users,total_articles)
