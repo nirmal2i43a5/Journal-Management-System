@@ -169,3 +169,8 @@ def published_articles_list(request,user_id):
     }
     return render(request,'admin/articles/published_articles.html',context)
 
+def MarqueeView(request):
+    pass
+
+
+
