@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div>
-              <marquee>his</marquee>
+              <marquee><h4>Mid western Title</h4></marquee>
             </div>
             <header id="toggle-header">
                 <div class="container-fluid">
@@ -119,38 +119,51 @@
                          alt="logo">
                 </a>
             </div>
-            <div class="col-md-8 mt-2 ml-4">
+            <div class="col-md-7 mt-4" id = "search_article">
                 <div class="card card-header"
-                     style="background-color: #034691;
+                     style="background-color: #026CAC;
                             color:white;">Filter articles</div>
-                <div class="card card-body p-5">
-                    <form method="get">
-                        {{ filter_form.form }}
-                        <button type="submit"
-                                class
-                                btn
-                                btn-sm
-                                style="background-color: #034691;
-                                       color:white;">Search</button>
-                    </form>
+                <div class="card card-body p-4">
+					<form method="get">
+						<div class="input-group">
+							{{ filter_form.form|crispy }}
+
+			  <div class="input-group-btn">
+				<button
+				  type="submit"
+				  class="btn"
+				  style="background-color: #175fe6; color: white;margin-left:5px;"
+				>
+				  Search
+				</button>
+			  </div>
+						</div>
+					</form>
                 </div>
             </div>
         </div>
         <hr>
-        <div class="row">
+        <div class="row"> 
             <div class="col-md-4">
-                <ul class="list-group">
-                    <li class="list-group-item active" style="background-color:#034691;">
-                        <strong>Journal Article Category</strong>
-                    </li>
-                    {% for category in category %}
-                        <a href="">
-                            <li class="list-group-item">{{ category.name }}</li>
-                        </a>
-                    {% endfor %}
-                </ul>
+                <ul class="list-group category_list">
+					<li
+						class="list-group-item active"
+						style="
+							background-color: #026CAC;
+							padding-right: 100px;
+						"
+					>
+						<strong> Journal Article Category </strong>
+					</li>
+					{% for category in category %}
+					<a href="">
+						<li class="list-group-item">{{category.name}}</li>
+					</a>
+
+					{% endfor %}
+				</ul>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
                 {% if not published_articles %}
                     <h3>
                         <span style="margin-left:25%;">No articles found! Please search with appropriate keyword.</span>
@@ -159,7 +172,7 @@
                 {% if published_articles %}
                     <div class= "articles border border-primary">
                         <div class="card card-header"
-                             style="background-color: #034691;
+                             style="background-color: #026CAC;
                                     color:white;">
                             <strong>Journals articles List</strong>
                         </div>
@@ -195,6 +208,81 @@
             </div>
         </div>
     </div>
+	<br>
+	<footer class="text-center text-lg-start  text-muted" style="background-color:#026CAC">
+		
+		<section class="pt-1">
+		  <div class="container text-light text-center text-md-start mt-5">
+		   
+			<div class="row mt-3">
+			  <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+				<div class="d-flex flex-column">
+					<div class="p-2">
+						<h6 class="text-uppercase fw-bold">
+
+							<i class="fa fa-location-dot"></i>&nbsp;Contact Information
+						</h6>
+					</div>
+					<div class="p-2">
+						<i class="fa fa-map-marker " aria-hidden="true"></i>  Birendranagar 07 itram Surkhet
+					</div>
+					<div class="p-2"> 
+						<i class="fa fa-envelope-o" aria-hidden="true"></i>  info@musom.edu.np
+					</div>
+					<div class="p-2"> 
+						<i class="fa fa-volume-control-phone" aria-hidden="true"></i>  083-525352
+					</div>
+				
+				  </div>
+				
+				<p>
+					<br>
+				</p >
+				<p  >  </p>
+				<p>   </p>
+			
+			  </div>
+			
+			 
+			  
+			  <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+				
+				<h6 class="text-uppercase fw-bold mb-4">
+				  Useful links
+				</h6>
+				<p>
+				  <a href="#!" class="text-reset">Pricing</a>
+				</p>
+				<p>
+				  <a href="#!" class="text-reset">Settings</a>
+				</p>
+				<p>
+				  <a href="#!" class="text-reset">Orders</a>
+				</p>
+				<p>
+				  <a href="#!" class="text-reset">Help</a>
+				</p>
+			  </div>
+			  
+			  <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+			   
+				
+				
+				
+			  </div>
+			  
+			</div>
+		   
+		  </div>
+		</section>
+	   
+		
+		<div class="text-center p-4" style="background-color: white;">
+		  © 2021 Copyright:
+		  <a class="text-reset fw-bold" href="https:/musom.edu.np/">Mid-West University School of Management</a>
+		</div>
+		
+	  </footer>
     <style type="text/css">
     #toggle-header {
       background-color: #026cac;
@@ -202,8 +290,8 @@
       margin-top: 4px;
     }
     .img-one {
-      margin-left: 110px !important;
-      margin-top: 30px !important;
+      margin-left: 100px !important;
+      margin-top: 20px !important;
       height:170px;
       width:180px;
       margin-right:50%;
@@ -319,7 +407,27 @@
       overflow: scroll;
       -webkit-overflow-scrolling: touch;
     }
-   
+   	/*for mobile*/
+	@media (max-width: 991px	) {
+		.articles {
+		  width: 100%;
+		  
+		}
+		.category_list{
+			width: 100%;
+			
+
+		}
+	  }
+	  /* for medium */
+	  @media (min-width: 992px) {
+		#search_article {
+			margin-left:9rem;
+		}
+		.category_list{
+			margin-left:10px;
+		}
+	  }
     
     </style>
 </body>
