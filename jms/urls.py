@@ -27,7 +27,7 @@ urlpatterns = [
      
      path('accounts/login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
-    path('home/',dashboard, name = 'home'),
+    path('dashboard/',dashboard, name = 'home'),
       path('',first_page, name = 'first_page'),
      path('user/',include('apps.user.urls',namespace='user')),
        path('reviewer/',include('apps.reviewer.urls',namespace='reviewer')),

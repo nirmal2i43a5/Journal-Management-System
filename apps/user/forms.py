@@ -38,7 +38,7 @@ class UserRegisterForm(forms.ModelForm):
 class PaperUploadForm(forms.ModelForm):
     class Meta:
         model = Article
-        exclude = ['user','status','reviewed_by']
+        exclude = ['user','status','reviewed_by','new_category']
         fields = '__all__'
         
         

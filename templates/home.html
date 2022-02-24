@@ -59,7 +59,8 @@
                 </div>
             </div>
             <div>
-              <marquee><h4>Mid western Title</h4></marquee>
+            
+              <marquee class ="mt-2" style="color:#026CAC;"><h4>MUSOM - JOURNAL MANAGEMENT SYSTEM</h4></marquee>
             </div>
             <header id="toggle-header">
                 <div class="container-fluid">
@@ -76,7 +77,7 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbartoggle">
                                 <div class="col-md-4">
-                                    <a href="#">
+                                    <a href="/">
                                         <img class="rounded img-two" style="margin-right:500px"
                                              src="{% static 'image/musom-logo.png' %}"
                                              alt="logo">
@@ -144,7 +145,7 @@
         </div>
         <hr>
         <div class="row"> 
-            <div class="col-md-4">
+            <div class="col-md-4" style="margin-left:4rem;">
                 <ul class="list-group category_list">
 					<li
 						class="list-group-item active"
@@ -153,7 +154,7 @@
 							padding-right: 100px;
 						"
 					>
-						<strong> Journal Article Category </strong>
+						<strong> Journal Category </strong>
 					</li>
 					{% for category in category %}
 					<a href="">
@@ -161,47 +162,74 @@
 					</a>
 
 					{% endfor %}
+          {% autoescape off %}
+            
+          {% endautoescape %}
+          
 				</ul>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7" style="position:relative">
                 {% if not published_articles %}
-                    <h3>
+                    <h5>
                         <span style="margin-left:25%;">No articles found! Please search with appropriate keyword.</span>
-                    </h3>
+                    </h5>
                 {% endif %}
                 {% if published_articles %}
-                    <div class= "articles border border-primary">
-                        <div class="card card-header"
+                    <div class= "articles">
+                        <div class="card card-header mb-2"
                              style="background-color: #026CAC;
                                     color:white;">
                             <strong>Journals articles List</strong>
                         </div>
                         {% for article in published_articles  %}
-                            <div class="d-flex flex-column">
-                                <div class="p-2">
-                                    <a href="">{{ article.title }}</a>
-                                </div>
-                                <div class="p-2">
-                                    <strong>Author :</strong>{{ article.user.normaluser.full_name }}
-                                    <span class="ml-4">
-                                        <strong>Category:</strong> <span class="badge badge-info">{{ article.category.name }}</span>
-                                    </span>
-                                </div>
-                                <div class="p-2">
-                                    <a data-fancybox
-                                       data-type="iframe"
-                                       class="btn btn-outline-primary"
-                                       data-src="/viewer/viewer.html?file={{ article.file.url }}"
-                                       href="javascript:;">
-                                        PDF
-                                    </a>
-                                    <!-- <a href="{{article.file.url}}" class="btn btn-outline-primary">PDF</a> -->
-                                    <span class="ml-4">
-                                        <strong>Published Date:</strong> {{ article.updated_at }}
-                                    </span>
-                                </div>
-                            </div>
-                            <hr>
+                        <div class="row" id="card-content">
+                          <div class="col-md-4">
+                            {% if article.file_image %}
+                            <img class=" mt-1 d-md-flex my-2" src="{{article.file_image.url}}" 
+                            style="border-radius:15px;
+                            height: 133px;
+                            width: 200px;
+                            box-shadow: 2px 4px 10px rgba(0,0,0,0.3);" 
+                            alt="image">
+                            {% else %}
+                            <img class=" mt-1 d-md-flex my-2" src="{% static 'image/document_static.png' %}" 
+                            style="border-radius:15px;
+                            height: 133px;
+                            width: 200px;
+                            box-shadow: 2px 4px 10px rgba(0,0,0,0.3);" 
+                            alt="image">
+                            {% endif %}
+                           
+                          </div>
+                          <div class="col-md-8">
+                            <div  class="d-flex flex-column mt-1">
+                              <div class="p-2">
+                                  <a href="">{{ article.title }}</a>
+                              </div>
+                              <div class="p-2">
+                                  <strong>Author :</strong>{{ article.user.normaluser.full_name }}
+                                  <span class="ml-4">
+                                      <strong>Category:</strong> <span class="badge" style="background-color:#026CAC;color:white;">{{ article.category.name }}</span>
+                                  </span>
+                              </div>
+                              <div class="p-2">
+                                  <a data-fancybox
+                                     data-type="iframe"
+                                     class="btn btn-outline-primary"
+                                     data-src="/viewer/viewer.html?file={{ article.file.url }}"
+                                     href="javascript:;">
+                                      PDF
+                                  </a>
+                                  <!-- <a href="{{article.file.url}}" class="btn btn-outline-primary">PDF</a> -->
+                                  <span class="ml-4">
+                                      <strong>Published Date:</strong> {{ article.updated_at }}
+                                  </span>
+                              </div>
+                          </div>
+                          </div>
+                        </div>
+                        
+                            <br>
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -281,8 +309,9 @@
 		  © 2021 Copyright:
 		  <a class="text-reset fw-bold" href="https:/musom.edu.np/">Mid-West University School of Management</a>
 		</div>
-		
+	
 	  </footer>
+
     <style type="text/css">
     #toggle-header {
       background-color: #026cac;
@@ -305,7 +334,7 @@
       
     }
     body {
-      background-color: #f1f1f1;
+      background-color: #F8FAFA;
     }
 
     #header .navbar-light .navbar-nav .nav-link:focus,
@@ -349,6 +378,13 @@
       border: none;
     }
 
+ /*
+    .navbar-nav a:hover{
+      background-color: #fff;
+      color: #5E72E4;
+      border-radius: 0%;
+      padding:15px 0px;
+    }*/
     .topbar {
       background-color: #d93d2b;
       color: #fff;
@@ -407,6 +443,14 @@
       overflow: scroll;
       -webkit-overflow-scrolling: touch;
     }
+    #card-content{
+      border-radius:30px;
+      background-color:#FFFFFF;
+      border-radius: 15px;
+		margin: 0 auto;
+		box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+		transition: .5s;
+    }
    	/*for mobile*/
 	@media (max-width: 991px	) {
 		.articles {
@@ -415,14 +459,12 @@
 		}
 		.category_list{
 			width: 100%;
-			
-
 		}
 	  }
 	  /* for medium */
 	  @media (min-width: 992px) {
 		#search_article {
-			margin-left:9rem;
+			margin-left:10.5rem;
 		}
 		.category_list{
 			margin-left:10px;

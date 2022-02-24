@@ -70,9 +70,11 @@ class NormalUser(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=250, null = True)
     file = models.FileField(upload_to='Journal_papers', null=True)
+    file_image = models.ImageField(upload_to='Journal_Papers_image', null=True,blank=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE,null=True,blank = True)
-    new_category = models.CharField(help_text = 'Only add new Category if you do not see your wise category in Category Choice list.',max_length=100,null=True, blank=True)
+    new_category = models.CharField(help_text = 'Only add new Category if you do not see your wise category in Category Choice list.',
+                                    max_length=100,null=True, blank=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES)
     description = models.TextField(null=True, blank=True)
     reviewed_by = models.ForeignKey(Reviewer, on_delete=models.CASCADE,null=True)
@@ -87,6 +89,7 @@ class Article(models.Model):
             ("view_publish_articles_to_sites", "Can view published articles to sites"),
             ("publish_articles_to_sites", "Can Published articles to pites"),
               ("article_publish_to_admin_by_reviewer", "Can publish  article to admin"),
+                 ("check_article", "Can check  user articles"),
             ("each_article_view", "Can  view each articles "),#for admin sides
             ("view_unpublish_articles", "Can view unPublished articles"),#this is the accepted articles by reviewer which is yet unpublish by admin
          
@@ -101,4 +104,4 @@ class Feedback(models.Model):
     status = models.CharField(max_length=50,choices = status, null=True)
     feedback = models.TextField(null=True, blank=True)
     article = models.ForeignKey(Article,on_delete=models.CASCADE,null=True)
-    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True,blank = True)
+    user = models.ForeignKey(NormalUser,on_delete=models.CASCADE,null=True,blank = True)

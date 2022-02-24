@@ -185,7 +185,7 @@ def view_user_rejected_articles(request,pk):
     return render(request,'reviewer/rejected_articles.html',context)
 
 
-
+@permission_required('user.check_article', raise_exception=True)
 def check_user_article(request,pk):
     article = get_object_or_404(Article, pk = pk)
     context = {
@@ -222,27 +222,27 @@ def article_feedback(request):
     feedback.article = article_object
     feedback.save()
     # files = request.FILES('file')
-    subject = "Subject"
-    feedback_message = "Message"
-    context = {
-        'message':    feedback_message
-    }
-    template = get_template('reviewer/send_message.html').render(context)
-    print(user_instance.email,"djs-------------")
-    email = EmailMessage(
-        subject,
-        template,
-        'nirmalpandey27450112@gmail.com',  # sender
-        user_instance.email,  # receiver
-    )
-    file = article_object.file
-    print(file)
-    # for file in files:
-    email.attach(file.name, file.read(), file.content_type)
+    # subject = "Subject"
+    # feedback_message = "Message"
+    # context = {
+    #     'message':    feedback_message
+    # }
+    # template = get_template('reviewer/send_message.html').render(context)
+    # print(user_instance.email,"djs-------------")
+    # email = EmailMessage(
+    #     subject,
+    #     template,
+    #     'nirmalpandey27450112@gmail.com',  # sender
+    #     user_instance.email,  # receiver
+    # )
+    # file = article_object.file
+    # print(file)
+    # # for file in files:
+    # email.attach(file.name, file.read(), file.content_type)
 
-    email.content_subtype = 'html'
-    email.send()
-    email.fail_silently = False
+    # email.content_subtype = 'html'
+    # email.send()
+    # email.fail_silently = False
 
     
     messages.success(request,"Successfully Review Paper")
@@ -253,7 +253,6 @@ def article_feedback(request):
 @permission_required('user.article_publish_to_admin_by_reviewer', raise_exception=True)
 def publish_to_admin(request,user_id,article_id):
     reviewer_object = get_object_or_404(Reviewer, reviewer_user__pk = request.user.id)
-    print(reviewer_object.reviewer_user.username)
     article = Article.objects.get(pk = article_id)
     article.reviewed_by = reviewer_object
     article.status = STATUS_REVIEWER_PUBLISHED

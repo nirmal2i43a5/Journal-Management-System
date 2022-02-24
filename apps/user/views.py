@@ -88,19 +88,14 @@ def upload_article(request):
 # This is the article under review 
 def article_under_review(request):
     articles = Article.objects.filter(user = request.user)
-    
     articles_under_review = Article.objects.filter(status = STATUS_UNDER_REVIEW,user = request.user)
-    
-
-                
-    # print(rejected_feedback)
-    
     context = {
         'title':'View Paper',
         'articles_under_review':articles_under_review,
     }
     
     return render(request,'users/article-under-review.html',context)
+
 
 def accepted_article_list(request):
     articles = Article.objects.filter(user = request.user)
