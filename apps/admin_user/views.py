@@ -230,9 +230,9 @@ def delete_notice(request, notice_id):
         notice = get_object_or_404(Notice, id = notice_id)
         notice.delete()
         messages.success(request, f' Notice is Deleted Successfully')
-        return redirect('admin_app:notice-delete')
+        return redirect('admin_app:notice-index')
     except:
-        messages.error(request, 'Failed To Delete Notice')
+        messages.error(request, 'Failed To index Notice')
         return redirect('admin_app:notice-delete')
 
 

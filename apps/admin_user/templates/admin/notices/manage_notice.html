@@ -45,6 +45,8 @@
               </thead>
               <tbody>
                 {% for notice in notices %}
+                {% include 'admin/notices/delete.html' %}
+
                 <tr>
                   <td></td>
                   <td>{{ notice.id }}</td>
@@ -74,7 +76,9 @@
                
                   <td>
                     <a href="{% url 'admin_app:notice-edit' notice.id %}" class="btn btn-xs btn-success"><i class="fas fa-xs fa-edit"></i></a>
-                    <a href="{% url 'admin_app:notice-delete' notice.id %}" class="btn btn-xs btn-danger"><i class="fas fa-xs fa-trash-alt"></i></a>
+                    <button  class="btn btn-danger btn-xs"  data-target='#deleteNotice-{{ notice.pk }}' data-toggle="modal"><i
+                      class="fas fa-sm fa-trash-alt"></i></button>
+                 
                   </td>
                   {% endif %}
                 </tr>

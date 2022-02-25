@@ -1,15 +1,15 @@
 
 <!-- Modal -->
-<div class="modal fade" id="deleteTeacher-{{ staff.staff_user.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="deleteNotice-{{ notice.pk }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
       <div class="modal-body">
-            <form action="{% url 'admin_app:delete_staff' staff.staff_user.id %}" method="post">
+            <form action="{% url 'admin_app:notice-delete' notice.pk %}" method="post">
 
               {% csrf_token %}
-              <p>Are you sure you want to delete detail of  <strong>{{ staff.staff_user.full_name }} </strong>?</p>
+              <p>Are you sure you want to delete detail of  <strong>{{ notice.title }} </strong>?</p>
 
 
           </div>
