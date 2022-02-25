@@ -12,7 +12,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ 
         <script type="text/javascript" src="{% static 'flipbook/pdfjs-flipbook/js/jquery.fancybox.min.js' %}"></script>
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'css/journal_home.css' %}"/>
         <!-- flipbook js -->
         <link rel="stylesheet"
               type="text/css"
@@ -183,7 +188,13 @@
                         </div>
                         {% for article in published_articles  %}
                         <div class="row" id="card-content">
+
+                        
                           <div class="col-md-4">
+                            <a data-fancybox
+                            data-type="iframe"
+                            data-src="/viewer/viewer.html?file={{ article.file.url }}"
+                            href="javascript:;">
                             {% if article.file_image %}
                             <img class=" mt-1 d-md-flex my-2" src="{{article.file_image.url}}" 
                             style="border-radius:15px;
@@ -199,7 +210,9 @@
                             box-shadow: 2px 4px 10px rgba(0,0,0,0.3);" 
                             alt="image">
                             {% endif %}
-                           
+
+                         </a>
+                                                      
                           </div>
                           <div class="col-md-8">
                             <div  class="d-flex flex-column mt-1">
@@ -213,15 +226,15 @@
                                   </span>
                               </div>
                               <div class="p-2">
-                                  <a data-fancybox
+                                  {% comment %} <a data-fancybox
                                      data-type="iframe"
                                      class="btn btn-outline-primary"
                                      data-src="/viewer/viewer.html?file={{ article.file.url }}"
                                      href="javascript:;">
                                       PDF
-                                  </a>
+                                  </a> {% endcomment %}
                                   <!-- <a href="{{article.file.url}}" class="btn btn-outline-primary">PDF</a> -->
-                                  <span class="ml-4">
+                                  <span>
                                       <strong>Published Date:</strong> {{ article.updated_at }}
                                   </span>
                               </div>
@@ -236,241 +249,173 @@
             </div>
         </div>
     </div>
+    <nav aria-label="Page navigation example">
+      {% if published_articles.has_other_pages %}
+      <ul class="pagination justify-content-center">
+        {% if published_articles.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ published_articles.previous_page_number }}" tabindex="-1">Prev</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Prev</span>
+        </li>
+        {% endif %}
+        {% for i in published_articles.paginator.page_range %}
+        {% if published_articles.number == i %}
+        <li class="page-item active">
+          <span class="page-link">
+            {{ i }}
+            <span class="sr-only">(current)</span>
+          </span>
+        </li>
+        {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endif %}
+
+        {% endfor %}
+        {% if published_articles.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ published_articles.next_page_number }}">Next</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Next</span>
+        </li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </nav>
 	<br>
-	<footer class="text-center text-lg-start  text-muted" style="background-color:#026CAC">
-		
-		<section class="pt-1">
-		  <div class="container text-light text-center text-md-start mt-5">
-		   
-			<div class="row mt-3">
-			  <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-				<div class="d-flex flex-column">
-					<div class="p-2">
-						<h6 class="text-uppercase fw-bold">
 
-							<i class="fa fa-location-dot"></i>&nbsp;Contact Information
-						</h6>
-					</div>
-					<div class="p-2">
-						<i class="fa fa-map-marker " aria-hidden="true"></i>  Birendranagar 07 itram Surkhet
-					</div>
-					<div class="p-2"> 
-						<i class="fa fa-envelope-o" aria-hidden="true"></i>  info@musom.edu.np
-					</div>
-					<div class="p-2"> 
-						<i class="fa fa-volume-control-phone" aria-hidden="true"></i>  083-525352
-					</div>
-				
-				  </div>
-				
-				<p>
-					<br>
-				</p >
-				<p  >  </p>
-				<p>   </p>
-			
-			  </div>
-			
-			 
-			  
-			  <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-				
-				<h6 class="text-uppercase fw-bold mb-4">
-				  Useful links
-				</h6>
-				<p>
-				  <a href="#!" class="text-reset">Pricing</a>
-				</p>
-				<p>
-				  <a href="#!" class="text-reset">Settings</a>
-				</p>
-				<p>
-				  <a href="#!" class="text-reset">Orders</a>
-				</p>
-				<p>
-				  <a href="#!" class="text-reset">Help</a>
-				</p>
-			  </div>
-			  
-			  <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-			   
-				
-				
-				
-			  </div>
-			  
-			</div>
-		   
-		  </div>
-		</section>
-	   
-		
-		<div class="text-center p-4" style="background-color: white;">
-		  © 2021 Copyright:
-		  <a class="text-reset fw-bold" href="https:/musom.edu.np/">Mid-West University School of Management</a>
-		</div>
-	
-	  </footer>
+<footer class=" text-light pt-4" style="background-color:#026CAC">
 
-    <style type="text/css">
-    #toggle-header {
-      background-color: #026cac;
-      color: #fff;
-      margin-top: 4px;
-    }
-    .img-one {
-      margin-left: 100px !important;
-      margin-top: 20px !important;
-      height:170px;
-      width:180px;
-      margin-right:50%;
-    }
-    .img-two {
-      margin-left: 30px;
-      height: 55px;
-      width: 320px;
-      
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+     
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
 
       
-    }
-    body {
-      background-color: #F8FAFA;
-    }
+      <!-- Grid column -->
 
-    #header .navbar-light .navbar-nav .nav-link:focus,
-    #header .navbar-light .navbar-nav .nav-link:hover {
-      color: #fff;
-    }
+      <hr class="clearfix w-100 d-md-none">
 
-    #header nav {
-      padding: 15px 0px;
-    }
+      <!-- Grid column -->
+      <div class="col-g-4 mx-auto my-md-4 my-0 mt-4 mb-1">
 
-    #header .navbar-light .navbar-nav .nav-link {
+        <!-- Contact details -->
+        <h5 class="font-weight-bold text-uppercase mb-4">Contact Information</h5>
 
-      /*  color: #5a5a5a;*/
-      font-size: 20px;
-    }
+        <ul class="list-unstyled">
+         
+          <li>
+            <p>
+              <i class="fa fa-map-marker " aria-hidden="true"></i> Birendranagar 07 itram Surkhet</p>
+          </li>
+          <li>
+            <p>
+              <i class="fa fa-envelope-o" aria-hidden="true"></i> info@musom.edu.np</p>
+          </li>
+          <li>
+            <p>
+              <i class="fa fa-volume-control-phone" aria-hidden="true"></i> 083-525352</p>
+          </li>
+        
+        </ul>
 
-    #header {
-      border-bottom: 1px solid #ddd;
-      background-color: #fff;
-      float: left;
-      width: 100%;
-    }
+      </div>
+      <!-- Grid column -->
 
-    #header ul.navbar-nav {
-      right: 0;
-    }
+      <hr class="clearfix w-100 d-md-none">
+      {% comment %} <div class="col-lg-3">
+        <a href="#">
+            <img class="" style=""
+                 src="{% static 'image/mid-western-logo2.png' %}"
+                 alt="logo">
+        </a>
+    </div> {% endcomment %}
+      <!-- Grid column -->
+      <div class="col-lg-5 text-center mx-auto my-4">
 
-    #header li.nav-item {
-      margin: 0px 10px;
-    }
+        <!-- Social buttons -->
+        <h5 class="font-weight-bold text-uppercase mb-4">Connect with MUSOM</h5>
 
-    #header .navbar-light .navbar-nav .active>.nav-link,
-    #header .navbar-light .navbar-nav .nav-link,
-    #header .navbar-light .navbar-nav .nav-link.show,
-    #header .navbar-light .navbar-nav .show>.nav-link {
-      color: #fff;
-    }
+        <!-- Facebook -->
+        <a href = "https://www.facebook.com/musomskt" class=" text-white mr-3" >
+          <i class="fa fa-2x fa-facebook" ></i>
+        </a>
+        <!-- Twitter -->
+        <a href = "#"  class=" text-white">
+          <i class="fa fa-2x fa-instagram"  ></i>
+        </a>
+        <!-- Google +-->
+        <a href = "#" class="mx-3 text-white">
+          <i class="fa fa-2x fa-twitter"></i>
+        </a>
+        <a href = "#"  class=" text-white">
+          <i class="fa fa-2x fa-linkedin"></i>
+        </a>
+        <!-- Dribbble -->
+       
+      </div>
+      <!-- Grid column -->
 
-    #header .dropdown-menu.show {
-      border: none;
-    }
+    </div>
+    <!-- Grid row -->
 
- /*
-    .navbar-nav a:hover{
-      background-color: #fff;
-      color: #5E72E4;
-      border-radius: 0%;
-      padding:15px 0px;
-    }*/
-    .topbar {
-      background-color: #d93d2b;
-      color: #fff;
-      padding: 4px 0px;
-    }
+  </div>
+  <!-- Footer Links -->
 
-    .topbar ul {
-      margin: 0px;
-      padding: 0px;
-    }
+  <!-- Copyright -->
+  <div class="text-center p-4 text-dark bg-light">
+    © 2021 Copyright:
+    <a class="text-reset fw-bold" href="https:/musom.edu.np/">Mid-West University School of Management</a>
+  </div>
+  <!-- Copyright -->
 
-    .topbar ul li {
-      float: left;
-      list-style: none;
-      margin: 3px 7px;
-      font-size: 15px;
-    }
+</footer>
+<!-- Footer -->
 
-    .topbar ul li a {
-      color: #fff;
-    }
+    <style type = "text/css">
 
-    .topbar ul li i {
-      font-size: 18px;
-      margin-right: 3px;
-    }
-
-    .topbar ul li.followus-label {
-      font-weight: bold;
-    }
-
-    #header .social-icon {
-      float: right;
-    }
-
-    /*=============Responsive css==================*/
-    @media (max-width: 991px) {
-      .topbar ul li {
-        margin: 3px 3px;
-        font-size: 12px;
+      #card-content{
+        border-radius:30px;
+        background-color:#FFFFFF;
+        border-radius: 15px;
+          margin: 0 auto;
+          box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+          transition: .5s;
       }
-
-      #header ul.navbar-nav {
-        position: static;
-        width: 100%;
-        border-top: 1px solid #ddd;
-        margin: 15px 0px 0px;
-        color: #fff;
-      }
-    }
-
-    .list-group {
-      margin-right: 25%;
-      max-height: 300px;
-      margin-bottom: 10px;
-      overflow: scroll;
-      -webkit-overflow-scrolling: touch;
-    }
-    #card-content{
-      border-radius:30px;
-      background-color:#FFFFFF;
-      border-radius: 15px;
-		margin: 0 auto;
-		box-shadow: 0 10px 15px rgba(0,0,0,0.3);
-		transition: .5s;
-    }
-   	/*for mobile*/
-	@media (max-width: 991px	) {
-		.articles {
-		  width: 100%;
-		  
-		}
-		.category_list{
-			width: 100%;
-		}
-	  }
-	  /* for medium */
-	  @media (min-width: 992px) {
-		#search_article {
-			margin-left:10.5rem;
-		}
-		.category_list{
-			margin-left:10px;
-		}
-	  }
-    
+         /*for mobile*/
+      @media (max-width: 991px	) {
+          .articles {
+            width: 100%;
+            
+          }
+          .category_list{
+              width: 100%;
+          }
+        }
+        /* for medium */
+        @media (min-width: 992px) {
+          #search_article {
+              margin-left:10.5rem;
+          }
+          .category_list{
+              margin-left:10px;
+          }
+        }
+      
     </style>
+   
 </body>
 </html>

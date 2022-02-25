@@ -1,10 +1,10 @@
 import datetime
-from apps.admin_user.models import Category
+from apps.admin_user.models import Category,Notice
 from django.shortcuts import render,get_object_or_404,redirect
 from apps.user.models import STATUS_ACCEPTED, NormalUser,Article
 from apps.reviewer.models import STATUS_ADMIN_PUBLISHED, STATUS_REVIEWER_PUBLISHED, Reviewer
 from apps.permissions.models import CustomUser
-from .forms import ArticleCategoryForm
+from .forms import ArticleCategoryForm,NoticeForm
 from django.contrib import messages
 from django.contrib.auth.decorators import  permission_required
 
@@ -169,8 +169,100 @@ def published_articles_list(request,user_id):
     }
     return render(request,'admin/articles/published_articles.html',context)
 
-def MarqueeView(request):
-    pass
+
+
+@permission_required('admin_user.add_notice', raise_exception=True)
+def add_notice(request):
+    if request.method == 'POST':
+        form = NoticeForm(request.POST, request.FILES)
+        try:     
+            if form.is_valid():
+                instance = form.save(commit = False)
+                
+                try:
+                    #if one notice is already active then it will become inactive if i add new one
+                    notice_item = get_object_or_404(Notice, status=True)
+                    notice_item.status=False
+                    notice_item.save()
+                except:
+                    instance.save()
+                instance.save()
+                title = form.cleaned_data['title']
+                user=request.user
+                
+                messages.success(request, "Notice is Added Successfully.")
+                return redirect('admin_app:manage_notice')
+        except:
+            messages.error(request, "Failed to Add Notice.")
+            return redirect('admin_app:add_notice')
+    else:
+        form = NoticeForm()
+   
+    context = {'form':form,'title':'Notice'}
+    return render(request, "admin/notices/add_notice.html", context)
+
+
+@permission_required('admin_user.change_notice', raise_exception=True)
+def edit_notice(request, notice_id):
+    notice_instance = get_object_or_404(Notice, id = notice_id)
+    if request.method == 'POST':
+        form = NoticeForm(request.POST, request.FILES, instance = notice_instance)
+   
+        try:     
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Notice is Updated Successfully.")
+                return redirect('admin_app:manage_notice')
+        except:
+            messages.error(request, "Failed to Updated Notice.")
+            return redirect('admin_app:edit_notice')
+            
+    else:
+        form = NoticeForm(instance = notice_instance)
+   
+    context = {'form':form,'title':'Notice'}
+    return render(request, "admin/notices/edit_notice.html", context)
+
+
+@permission_required('amin_user.delete_notice', raise_exception=True)
+def delete_notice(request, notice_id):
+    try:
+        notice = get_object_or_404(Notice, id = notice_id)
+        notice.delete()
+        messages.success(request, f' Notice is Deleted Successfully')
+        return redirect('admin_app:manage_notice')
+    except:
+        messages.error(request, 'Failed To Delete Notice')
+        return redirect('admin_app:manage_notice')
+
+
+# @permission_required('announcement.view_notice', raise_exception=True)
+def manage_notice(request):
+    notices = Notice.objects.all()
+    context = {'notices': notices,'title':'Manage Notice'}
+    return render(request, 'admin/notices/manage_notice.html', context)
+
+
+
+def update_notice_status(request):
+    if request.is_ajax():        
+        id=request.GET.get('id')
+        st=get_object_or_404(Notice,pk=id)
+        if st.status == False:
+            st.status=True
+            # notice = get_object_or_404(Notice, status=True)
+            # notice.status=False#make previous inactive
+            # notice.save()
+            st.save()
+        else:
+            st.status=False
+            st.save()
+            
+        notice_data = Notice.objects.all()
+    return render(request, 'admin/notices/notice_list.html', {'notices':notice_data})#because of design fluctuation i am rendering to notice_list.html
+
+
+
 
 
 

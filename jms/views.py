@@ -9,11 +9,22 @@ from apps.admin_user.models import Category
 from apps.reviewer.models import STATUS_ACCEPTED, STATUS_REJECTED, STATUS_REVIEWER_PUBLISHED, STATUS_UNDER_REVIEW, Reviewer
 from datetime import datetime, timedelta, time
 from apps.user.filters import ArticleFilter
+from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage
+from django.core.paginator import PageNotAnInteger
 
 
 def first_page(request):
     categories = Category.objects.all()
     published_articles = Article.objects.filter(status = STATUS_ADMIN_PUBLISHED).order_by('-updated_at')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(published_articles, 10)
+    try:
+        published_articles = paginator.page(page)
+    except PageNotAnInteger:
+        published_articles = paginator.page(1)
+    except EmptyPage:
+        published_articles = paginator.page(paginator.num_pages)
     filter_form = ArticleFilter()
     title = request.GET.get('title')
     category = request.GET.get('category')

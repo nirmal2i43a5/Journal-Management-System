@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+  {{title}}
+{% endblock title %}
+{% block main_content %}
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+
+      {% include "messages.html" %}
+
+    <div class="row" >
+      <div class="col-md-12" >
+        <!-- general form elements -->
+        <div class="card card-info">
+         
+          {% include 'override_table/header.html' with card_title='Edit Student' %}
+          {% url 'admin_app:manage_notice' as back_url %}
+          {% include 'admin_templates/form.html' with messages=messages form=form back_url=back_url  button_text="Edit Notice" %}
+
+          <!-- /.card-header -->
+          <!-- form start -->
+         
+
+        </div>
+        <!-- /.card -->
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /.content -->
+{% endblock main_content %}

@@ -22,9 +22,19 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-class Marquee(models.Model):
-    name = models.CharField(max_length=250, blank=True, null=True)
-    body = models.TextField()
+class Notice(models.Model):
+    title = models.CharField(max_length=100, blank=True)
+    file = models.FileField(upload_to='Notices', null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    status = models.BooleanField(default = True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    class Meta:
+        db_table = 'tbl_notice'
+        verbose_name = _("notice")
+        verbose_name_plural = _("notices")
 
     def __str__(self):
-        return self.name
+        return self.title

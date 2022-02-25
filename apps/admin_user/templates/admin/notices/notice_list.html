@@ -1,0 +1,91 @@
+<div id="noticepopup" class="card-body table-responsive">
+  {% url 'admin_app:add_notice' as button_url %}
+
+  {% include 'override_table/header_button.html' with button_title='notice' button_url=button_url %}
+
+
+  <table id="dataTable"
+    class="table table-sm  table-striped table-bordered table-hover  text-nowrap  dataTable no-footer">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>ID</th>
+        <th>Title</th>
+        <th>View File</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for notice in notices %}
+      <tr>
+        <td></td>
+        <td>{{ notice.id }}</td>
+        <td>{{ notice.title }}</td>
+
+
+        <td>
+          {% if notice.file %}
+          <a href="{{ notice.file.url}}" class="btn btn-xs" style="background-color: #094089;color:white;"><i class="fas fa-xs fa-eye"></i> view File</a>
+          {% else %}
+          null
+          {% endif %}
+        </td>
+        {% if notice.status == 1 %}
+        <td class="btn btn-xs btn-success"> <a class="data-change text-white" data-id="{{notice.pk}}" href="">
+            <strong>Active</strong></a></td>
+        {% elif notice.status == 0 %}
+        <td class="btn btn-xs btn-danger" data-id="{{notice.pk}}">
+
+          <a class="data-change text-white" data-id="{{notice.pk}}" href=""> <strong>Inactive</strong></a>
+
+        </td>
+        {% endif %}
+        <!-- ............................ -->
+
+        <td>
+          <a href="{% url 'admin_app:edit_notice' notice.id %}" class="btn btn-xs btn-success"><i
+              class="fas fa-xs fa-edit"></i></a>
+          <a href="{% url 'admin_app:delete_notice' notice.id %}" class="btn btn-xs btn-danger"><i
+              class="fas fa-xs fa-trash-alt"></i></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+
+  $(document).ready(function () {
+
+
+
+    $('a.data-change').click(function (event) {
+
+      event.preventDefault();
+      var id = $(this).data('id');
+
+      $.ajax({
+        url: "{% url 'admin_app:update_notice' %}",
+        data: { 'id': id },
+        success: function (data) {
+
+          $('#noticepopup').html("");
+          $('#noticepopup').html(data);
+        },
+        error: function () {
+          alert("something went wrong")
+        }
+      });
+    });
+
+    $('#dataTable').DataTable({
+
+      dom: 'lBfrtip',//if i use buttons then entries goes away
+      pagingType: "full_numbers",
+      
+     
+    });
+  });
+</script>

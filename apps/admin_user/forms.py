@@ -7,9 +7,8 @@ class ArticleCategoryForm(forms.ModelForm):
         fields = '__all__'
 
 
-class MarqueeForm(forms.ModelForm):
+
+class NoticeForm(forms.ModelForm):
     class Meta:
-        model = Marquee
-        fields = '__all__'
-        
- 
+        model = Notice            
+        fields = ['title','file','description']
