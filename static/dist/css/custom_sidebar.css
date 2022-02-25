@@ -1,0 +1,46 @@
+.nav-link p,i{
+    color: white;
+    font-weight: 2px;
+    font-size: 16px;
+  }
+  .d-block{
+    color:white;
+  }
+  /* .nav-item .has-treeview ,a.nav-link:hover{
+    background-color:#0FADEF;
+  
+  } /
+  
+  .nav-link-notification i{
+    color:white;
+  }
+  
+  
+  / 
+  .nav-link .has-treeview a, p:hover{
+    background-color:white;
+  } */
+  
+  
+  
+   .os-content {
+    padding: 0px !important;
+  }
+  .nav-item a:hover {
+    background: #fff;
+  }
+   .nav-item a:hover p,
+   .nav-item a:hover i 
+  {
+    color: #004de6 !important;
+  
+  } 
+
+  .nav-item .has-treeview ,a.nav-link{
+    color: white;
+  }
+  
+  .nav-link{
+  padding: 0.2rem 1rem;
+  }
+  

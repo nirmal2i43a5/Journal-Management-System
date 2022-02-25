@@ -1,0 +1,79 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+div.outer_div{
+    border-style: solid;
+    padding: 1%;
+    margin-top: 2%;
+}
+
+div.table_container{
+    margin-top: 2%;
+}
+
+
+
+table, th, td {
+    border:2px solid black;
+    border-collapse: collapse;
+}
+td, th{
+    border:1px solid black;
+    border-top: none;
+    border-bottom: none;
+}
+
+tr:last-child{
+    border:1px solid black;
+    border-top: none;
+}
+
+tr:first-child{
+    border:2px solid black;
+    border-bottom: none;
+}
+
+th.sn{
+    width: 10%;
+;
+}
+
+th.subject{
+    width: 30%;
+
+}
+
+th.grade{
+    width: 10%;
+
+}
+
+th.marks{
+    width: 10%;
+
+}
+
+th.subjectrank{
+    width: 8%;
+
+}
+
+td{
+
+    padding-top: .25%;
+    padding-bottom: .25%;
+}
+
+div.block{
+    /* flex: 1 1 auto; */
+    min-height: 250px;
+    
+
+}
+
+div.signature{
+    text-align: center;
+}
