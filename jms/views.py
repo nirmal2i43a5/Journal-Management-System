@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import LoginForm
 from apps.user.models import STATUS_ADMIN_PUBLISHED, NormalUser,Article
-from apps.admin_user.models import Category
+from apps.admin_user.models import Category,Notice
 from apps.reviewer.models import STATUS_ACCEPTED, STATUS_REJECTED, STATUS_REVIEWER_PUBLISHED, STATUS_UNDER_REVIEW, Reviewer
 from datetime import datetime, timedelta, time
 from apps.user.filters import ArticleFilter
@@ -19,7 +19,7 @@ def first_page(request):
     published_articles = Article.objects.filter(status = STATUS_ADMIN_PUBLISHED).order_by('-updated_at')
     page = request.GET.get('page', 1)
     paginator = Paginator(published_articles, 10)
-    try:
+    try:    
         published_articles = paginator.page(page)
     except PageNotAnInteger:
         published_articles = paginator.page(1)
@@ -35,7 +35,8 @@ def first_page(request):
         'title':'Journal Management System',
         'category':Category.objects.all(),
         'published_articles':filter_articles,
-        'filter_form':filter_form
+        'filter_form':filter_form,
+        
         
     }
         return render(request,'home.html',context)
@@ -46,9 +47,11 @@ def first_page(request):
         'title':'Journal Management System',
         'category':categories,
         'published_articles':published_articles,
-        'filter_form':filter_form
+        'filter_form':filter_form,
+         'notice': Notice.objects.filter(status=True).first(),
         
     }
+    
     return render(request,'home.html',context)
 
 

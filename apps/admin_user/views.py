@@ -191,10 +191,10 @@ def add_notice(request):
                 user=request.user
                 
                 messages.success(request, "Notice is Added Successfully.")
-                return redirect('admin_app:manage_notice')
+                return redirect('admin_app:notice-index')
         except:
             messages.error(request, "Failed to Add Notice.")
-            return redirect('admin_app:add_notice')
+            return redirect('admin_app:notice-add')
     else:
         form = NoticeForm()
    
