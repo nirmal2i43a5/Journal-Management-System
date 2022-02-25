@@ -17,14 +17,8 @@ from django.core.paginator import PageNotAnInteger
 def first_page(request):
     categories = Category.objects.all()
     published_articles = Article.objects.filter(status = STATUS_ADMIN_PUBLISHED).order_by('-updated_at')
-    page = request.GET.get('page', 1)
-    paginator = Paginator(published_articles, 10)
-    try:    
-        published_articles = paginator.page(page)
-    except PageNotAnInteger:
-        published_articles = paginator.page(1)
-    except EmptyPage:
-        published_articles = paginator.page(paginator.num_pages)
+    
+        
     filter_form = ArticleFilter()
     title = request.GET.get('title')
     category = request.GET.get('category')
@@ -41,7 +35,14 @@ def first_page(request):
     }
         return render(request,'home.html',context)
         
-   
+    page = request.GET.get('page', 1)
+    paginator = Paginator(published_articles, 1)
+    try:    
+        published_articles = paginator.page(page)
+    except PageNotAnInteger:
+        published_articles = paginator.page(1)
+    except EmptyPage:
+        published_articles = paginator.page(paginator.num_pages)
     # article_list = ArticleFilter(request.GET, queryset=published_articles)
     context = {
         'title':'Journal Management System',
