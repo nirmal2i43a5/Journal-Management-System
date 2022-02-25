@@ -33,6 +33,12 @@ http://sourceforge.net/adobe/cmap/wiki/License/
     <script>
         var url = "{% static 'flipbook/pdfjs-flipbook' %}";
     </script>
+    <script src="{% static 'flipbook/pdfjs-flipbook/web/l10n.js' %}"></script>
+  <script src="{% static 'flipbook/pdfjs-flipbook/build/pdf.js' %}"></script>
+      <script src="{% static 'flipbook/pdfjs-flipbook/turnjs4/lib/turn.min.js' %}"></script>
+      <script src="{% static 'flipbook/pdfjs-flipbook/turnjs4/lib/zoom.min.js' %}"></script>
+    <script src="{% static 'flipbook/pdfjs-flipbook/web/debugger.js' %}"></script>
+    <script src="{% static 'flipbook/pdfjs-flipbook/web/magazine.js' %}"></script>
   </head>
 
   <body tabindex="1" class="loadingInProgress" style="background-color:#004de6;">
@@ -393,13 +399,8 @@ http://sourceforge.net/adobe/cmap/wiki/License/
 <!-- jquery may not necessary in cms -->
       <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <!-- turn.min.js, zoom.min.js, magazine.js -->
-<script src="{% static 'flipbook/pdfjs-flipbook/web/l10n.js' %}"></script>
-  <script src="{% static 'flipbook/pdfjs-flipbook/build/pdf.js' %}"></script>
-      <script src="{% static 'flipbook/pdfjs-flipbook/turnjs4/lib/turn.min.js' %}"></script>
-      <script src="{% static 'flipbook/pdfjs-flipbook/turnjs4/lib/zoom.min.js' %}"></script>
-    <script src="{% static 'flipbook/pdfjs-flipbook/web/debugger.js' %}"></script>
+
     <script src="{% static 'flipbook/pdfjs-flipbook/web/viewer.js' %}"></script>
-    <script src="{% static 'flipbook/pdfjs-flipbook/web/magazine.js' %}"></script>
 
       <script type="text/javascript">
           $(document).ready(function () {
