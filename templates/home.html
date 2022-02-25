@@ -99,14 +99,14 @@
                                         </li>
                                         {% if request.user.is_authenticated %}
                                             <li class="nav-item">
-                                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                                                <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
                                             </li>
                                         {% else %}
                                             <li class="nav-item">
-                                                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                          <a class="nav-link" href="{% url 'login' %}">     <i class="fa fa-sign-in"></i>  Login</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="{% url 'user:register' %}">Register</a>
+                                                <a class="nav-link" href="{% url 'user:register' %}"><i class="fa fa-user"></i> Register</a>
                                             </li>
                                         {% endif %}
                                     </ul>
