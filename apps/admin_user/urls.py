@@ -17,9 +17,9 @@ urlpatterns = [
     path('publish_articles_to_sites/<article_id>/',publish_articles_to_sites,name='publish_articles_to_sites'),
     path('published-articles/<user_id>/',published_articles_list,name='published-articles'),
     path('notice/add/',add_notice,name='notice-add'),
-    path('notice/edit/',edit_notice,name='notice-edit'),
+    path('notice/edit/<notice_id>/',edit_notice,name='notice-edit'),
      path('notice/index/',manage_notice,name='notice-index'),
-    path('notice/delete/',delete_notice,name='notice-delete'),
+    path('notice/delete/<notice_id>/',delete_notice,name='notice-delete'),
     path('notice/status/update/',update_notice_status,name='notice-status-update'),
      
       

@@ -1,7 +1,7 @@
 <div id="noticepopup" class="card-body table-responsive">
-  {% url 'admin_app:add_notice' as button_url %}
+  {% url 'admin_app:notice-add' as button_url %}
 
-  {% include 'override_table/header_button.html' with button_title='notice' button_url=button_url %}
+  {% include 'override_table/header_button.html' with button_title='add notice' button_url=button_url %}
 
 
   <table id="dataTable"
@@ -44,9 +44,9 @@
         <!-- ............................ -->
 
         <td>
-          <a href="{% url 'admin_app:edit_notice' notice.id %}" class="btn btn-xs btn-success"><i
+          <a href="{% url 'admin_app:notice-edit' notice.id %}" class="btn btn-xs btn-success"><i
               class="fas fa-xs fa-edit"></i></a>
-          <a href="{% url 'admin_app:delete_notice' notice.id %}" class="btn btn-xs btn-danger"><i
+          <a href="{% url 'admin_app:notice-delete' notice.id %}" class="btn btn-xs btn-danger"><i
               class="fas fa-xs fa-trash-alt"></i></a>
         </td>
       </tr>
@@ -67,7 +67,7 @@
       var id = $(this).data('id');
 
       $.ajax({
-        url: "{% url 'admin_app:update_notice' %}",
+        url: "{% url 'admin_app:notice-status-update' %}",
         data: { 'id': id },
         success: function (data) {
 

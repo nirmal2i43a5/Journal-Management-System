@@ -21,7 +21,11 @@
         <!-- general form elements -->
         <div class="card">
 
+          {% if notice_instance %}
+          {% include 'override_table/header.html' with card_title='Edit Notice' %}
+          {% else %}
           {% include 'override_table/header.html' with card_title='Add Notice' %}
+          {% endif %}
 
           <!-- /.card-header -->
           <!-- form start -->

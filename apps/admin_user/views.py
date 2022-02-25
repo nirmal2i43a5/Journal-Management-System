@@ -212,16 +212,16 @@ def edit_notice(request, notice_id):
             if form.is_valid():
                 form.save()
                 messages.success(request, "Notice is Updated Successfully.")
-                return redirect('admin_app:manage_notice')
+                return redirect('admin_app:notice-index')
         except:
             messages.error(request, "Failed to Updated Notice.")
-            return redirect('admin_app:edit_notice')
+            return redirect('admin_app:notice-edit')
             
     else:
         form = NoticeForm(instance = notice_instance)
    
-    context = {'form':form,'title':'Notice'}
-    return render(request, "admin/notices/edit_notice.html", context)
+    context = {'form':form,'title':'Notice','notice_instance':notice_instance}
+    return render(request, "admin/notices/add_notice.html", context)
 
 
 @permission_required('amin_user.delete_notice', raise_exception=True)
@@ -230,10 +230,10 @@ def delete_notice(request, notice_id):
         notice = get_object_or_404(Notice, id = notice_id)
         notice.delete()
         messages.success(request, f' Notice is Deleted Successfully')
-        return redirect('admin_app:manage_notice')
+        return redirect('admin_app:notice-delete')
     except:
         messages.error(request, 'Failed To Delete Notice')
-        return redirect('admin_app:manage_notice')
+        return redirect('admin_app:notice-delete')
 
 
 # @permission_required('announcement.view_notice', raise_exception=True)
@@ -245,7 +245,7 @@ def manage_notice(request):
 
 
 def update_notice_status(request):
-    if request.is_ajax():        
+    if request.is_ajax():    
         id=request.GET.get('id')
         st=get_object_or_404(Notice,pk=id)
         if st.status == False:
@@ -259,7 +259,10 @@ def update_notice_status(request):
             st.save()
             
         notice_data = Notice.objects.all()
-    return render(request, 'admin/notices/notice_list.html', {'notices':notice_data})#because of design fluctuation i am rendering to notice_list.html
+        
+    '''Due to   design fluctuation, I am rendering to notice_list.html'''
+    return render(request, 'admin/notices/notice_list.html', {'notices':notice_data})
+
 
 
 
