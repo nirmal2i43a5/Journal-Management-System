@@ -1,53 +1,47 @@
-📚 Journal Management System
-Welcome to the Journal Management System – a streamlined platform for managing the full lifecycle of academic journal submissions. From manuscript upload to peer review, annotation-based feedback, and final publication, this system provides a complete end-to-end solution for authors, reviewers, and administrators.
+# 📚 Journal Management System
 
-🚀 Features
-🔹 Author Dashboard
-Upload research papers (PDF format)
+Welcome to the **Journal Management System** – a streamlined platform for managing the full lifecycle of academic journal submissions. From manuscript upload to peer review, annotation-based feedback, and final publication, this system provides a complete end-to-end solution for authors, reviewers, and administrators.
 
-Track submission status (Under Review / Needs Revision / Accepted / Rejected)
+---
 
-Receive reviewer feedback directly on the submitted PDF
+## 🚀 Features
 
-🔹 Reviewer Portal
-View assigned submissions
+### 🔹 Author Dashboard
+- Upload research papers (PDF format)
+- Track submission status (Under Review / Needs Revision / Accepted / Rejected)
+- Receive reviewer feedback directly on the submitted PDF
 
-Annotate directly on the PDF (inline comments, highlights, etc.)
+### 🔹 Reviewer Portal
+- View assigned submissions
+- Annotate directly on the PDF (inline comments, highlights, etc.)
+- Submit structured feedback with recommendations (Accept, Minor/Major Revisions, Reject)
 
-Submit structured feedback with recommendations (Accept, Minor/Major Revisions, Reject)
+### 🔹 Admin Controls
+- Manage user roles (Author, Reviewer, Admin)
+- Assign reviewers to submissions
+- Approve final versions for publication
 
-🔹 Admin Controls
-Manage user roles (Author, Reviewer, Admin)
+### 🔹 Publication Workflow
+- Accepted papers are automatically published to the public journal site
+- Each paper includes metadata (Title, Author, Abstract, Date)
+- Full-text view and download available for readers
 
-Assign reviewers to submissions
+---
 
-Approve final versions for publication
+## 🔁 Submission Workflow
 
-🔹 Publication Workflow
-Accepted papers are automatically published to the public journal site
+1. **Submit:** Author uploads a journal paper via the portal.
+2. **Review:** Assigned reviewers provide feedback and annotate the PDF.
+3. **Revise:** Author makes revisions based on feedback.
+4. **Approve:** Admin approves the final version after satisfactory changes.
+5. **Publish:** Paper is published on the platform for public access.
 
-Each paper includes metadata (Title, Author, Abstract, Date)
+---
 
-Full-text view and download available for readers
+## 📦 Tech Stack
 
-🔁 Submission Workflow
-Submit: Author uploads a journal paper via the portal.
-
-Review: Assigned reviewers provide feedback and annotate the PDF.
-
-Revise: Author makes revisions based on feedback.
-
-Approve: Admin approves the final version after satisfactory changes.
-
-Publish: Paper is published on the platform for public access.
-
-📦 Tech Stack
-Frontend: HTML/CSS, JavaScript (React/Bootstrap – optional)
-
-Backend: Python (Django / Flask)
-
-Database: PostgreSQL / MySQL
-
-PDF Annotation: PDF.js or other annotation libraries
-
-Authentication: JWT / Django Auth
+- **Frontend:** HTML/CSS, JavaScript (React/Bootstrap – optional)
+- **Backend:** Python (Django / Flask)
+- **Database:** PostgreSQL / MySQL
+- **PDF Annotation:** PDF.js or other annotation libraries
+- **Authentication:** JWT / Django Auth
