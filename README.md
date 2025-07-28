@@ -2,9 +2,9 @@
 
 Welcome to the **Journal Management System** – a streamlined platform for managing the full lifecycle of academic journal submissions. From manuscript upload to peer review, annotation-based feedback, and final publication, this system provides a complete end-to-end solution for authors, reviewers, and administrators.
 
----
 
-## 🚀 Features
+
+## Features
 
 ### 🔹 Author Dashboard
 - Upload research papers (PDF format)
@@ -26,7 +26,7 @@ Welcome to the **Journal Management System** – a streamlined platform for mana
 - Each paper includes metadata (Title, Author, Abstract, Date)
 - Full-text view and download available for readers
 
----
+
 
 ## 🔁 Submission Workflow
 
@@ -36,12 +36,4 @@ Welcome to the **Journal Management System** – a streamlined platform for mana
 4. **Approve:** Admin approves the final version after satisfactory changes.
 5. **Publish:** Paper is published on the platform for public access.
 
----
 
-## 📦 Tech Stack
-
-- **Frontend:** HTML/CSS, JavaScript (React/Bootstrap – optional)
-- **Backend:** Python (Django / Flask)
-- **Database:** PostgreSQL / MySQL
-- **PDF Annotation:** PDF.js or other annotation libraries
-- **Authentication:** JWT / Django Auth
