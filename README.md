@@ -1,4 +1,4 @@
-# 📚 Journal Management System
+#  Journal Management System
 
 Welcome to the **Journal Management System** – a streamlined platform for managing the full lifecycle of academic journal submissions. From manuscript upload to peer review, annotation-based feedback, and final publication, this system provides a complete end-to-end solution for authors, reviewers, and administrators.
 
@@ -6,29 +6,29 @@ Welcome to the **Journal Management System** – a streamlined platform for mana
 
 ## Features
 
-### 🔹 Author Dashboard
+###  Author Dashboard
 - Upload research papers (PDF format)
 - Track submission status (Under Review / Needs Revision / Accepted / Rejected)
 - Receive reviewer feedback directly on the submitted PDF
 
-### 🔹 Reviewer Portal
+### Reviewer Portal
 - View assigned submissions
 - Annotate directly on the PDF (inline comments, highlights, etc.)
 - Submit structured feedback with recommendations (Accept, Minor/Major Revisions, Reject)
 
-### 🔹 Admin Controls
+### Admin Controls
 - Manage user roles (Author, Reviewer, Admin)
 - Assign reviewers to submissions
 - Approve final versions for publication
 
-### 🔹 Publication Workflow
+###  Publication Workflow
 - Accepted papers are automatically published to the public journal site
 - Each paper includes metadata (Title, Author, Abstract, Date)
 - Full-text view and download available for readers
 
 
 
-## 🔁 Submission Workflow
+## Submission Workflow
 
 1. **Submit:** Author uploads a journal paper via the portal.
 2. **Review:** Assigned reviewers provide feedback and annotate the PDF.
